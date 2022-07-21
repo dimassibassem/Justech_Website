@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import { Tab } from '@headlessui/react'
 import { Container } from '@/components/Container'
-import wiley from '@/images/logos/partners/wiley.png'
+// import wiley from '@/images/logos/partners/wiley.png'
 import cairn from '@/images/logos/partners/cairn.png'
 import sage from '@/images/logos/partners/sage.png'
 import emeraldinsight from '@/images/logos/partners/emeraldinsight.png'
@@ -18,40 +18,40 @@ import Feature from '@/components/Feature'
 
 
 const features = [
-  {
-    name: 'Reporting',
-    summary: 'WILEY ONLINE LIBRARY.',
-    description:
-      'A Global Research business is a provider of content-enabled solutions to improve outcomes in research, education and professional practice with online tools, journals, books, databases, reference works and laboratory protocols. With strengths in every major academic, scientific and professional field, and strong brands including Wiley Blackwell and Wiley VCH, Wiley proudly partners with over 800 prestigious societies representing two million members.',
-    image: wiley,
-    icon: function ReportingIcon() {
-      let id = useId()
-      return (
-        <>
-          <defs>
-            <linearGradient
-              id={id}
-              x1='11.5'
-              y1={18}
-              x2={36}
-              y2='15.5'
-              gradientUnits='userSpaceOnUse'
-            >
-              <stop offset='.194' stopColor='#fff' />
-              <stop offset={1} stopColor='#6692F1' />
-            </linearGradient>
-          </defs>
-          <path
-            d='m30 15-4 5-4-11-4 18-4-11-4 7-4-5'
-            stroke={`url(#${id})`}
-            strokeWidth={2}
-            strokeLinecap='round'
-            strokeLinejoin='round'
-          />
-        </>
-      )
-    }
-  },
+  // {
+  //   name: 'Reporting',
+  //   summary: 'WILEY ONLINE LIBRARY.',
+  //   description:
+  //     'A Global Research business is a provider of content-enabled solutions to improve outcomes in research, education and professional practice with online tools, journals, books, databases, reference works and laboratory protocols. With strengths in every major academic, scientific and professional field, and strong brands including Wiley Blackwell and Wiley VCH, Wiley proudly partners with over 800 prestigious societies representing two million members.',
+  //   image: wiley,
+  //   icon: function ReportingIcon() {
+  //     let id = useId()
+  //     return (
+  //       <>
+  //         <defs>
+  //           <linearGradient
+  //             id={id}
+  //             x1='11.5'
+  //             y1={18}
+  //             x2={36}
+  //             y2='15.5'
+  //             gradientUnits='userSpaceOnUse'
+  //           >
+  //             <stop offset='.194' stopColor='#fff' />
+  //             <stop offset={1} stopColor='#6692F1' />
+  //           </linearGradient>
+  //         </defs>
+  //         <path
+  //           d='m30 15-4 5-4-11-4 18-4-11-4 7-4-5'
+  //           stroke={`url(#${id})`}
+  //           strokeWidth={2}
+  //           strokeLinecap='round'
+  //           strokeLinejoin='round'
+  //         />
+  //       </>
+  //     )
+  //   }
+  // },
   {
     name: 'Cairn',
     summary:
