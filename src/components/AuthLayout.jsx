@@ -16,6 +16,7 @@ export function AuthLayout({ children }) {
             className="absolute inset-0 h-full w-full object-cover"
             src={backgroundImage}
             alt=""
+            priority
             unoptimized
           />
         </div>

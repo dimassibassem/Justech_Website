@@ -8,7 +8,7 @@ import Feature from '@/components/Feature'
 
 import { Autoplay } from 'swiper'
 
-export function SwiperGallery({ features, selectedIndex }) {
+export function SwiperGallery({ partners, selectedIndex }) {
 
   return (
     <Swiper
@@ -20,7 +20,7 @@ export function SwiperGallery({ features, selectedIndex }) {
       autoplay
     >
 
-      {features?.map((feature, featureIndex) => (
+      {partners?.map((feature, featureIndex) => (
         <SwiperSlide key={featureIndex}>
           <Feature
             key={feature.name}

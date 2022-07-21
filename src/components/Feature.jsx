@@ -17,7 +17,7 @@ function Feature({ feature, isActive, className, ...props }) {
       >
         {/*<svg aria-hidden='true' className='h-9 w-9' fill='none'>*/}
           {/*<feature.icon />*/}
-          <Image src={feature.image} alt='' width={250} height={200} />
+          <Image src={feature.image} alt='' />
         {/*</svg>*/}
       </div>
       {/*<h3*/}

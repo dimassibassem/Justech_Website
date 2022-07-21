@@ -94,7 +94,7 @@ export function Testimonials() {
       <Image
         className='absolute h-full w-full top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2'
         src={backgroundImage}
-
+        priority
         alt=''
         unoptimized
       />
