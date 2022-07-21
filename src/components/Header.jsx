@@ -112,7 +112,7 @@ export function Header() {
               <NavLink href={'/references'}>References</NavLink>
               <NavLink href='#pricing'>News</NavLink>
               <NavLink href='#pricing'>Gallery</NavLink>
-              <NavLink href='#pricing'>Contact</NavLink>
+              <NavLink href={'/contactus'}>Contact</NavLink>
 
             </div>
           </div>
