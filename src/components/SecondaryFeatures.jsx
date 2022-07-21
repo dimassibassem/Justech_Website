@@ -19,6 +19,8 @@ import ebsco from '@/images/logos/partners/ebsco.png'
 import cenage from '@/images/logos/partners/cenage.png'
 import bmj from '@/images/logos/partners/bmj.jpg'
 import almanhal from '@/images/logos/partners/almanhal.png'
+import { SwiperGallery } from '@/components/SwiperGallery'
+import Feature from '@/components/Feature'
 
 
 
@@ -321,37 +323,7 @@ const features = [
   },
 ]
 
-function Feature({ feature, isActive, className, ...props }) {
-  return (
-    <div
-      className={clsx(className, !isActive && 'opacity-75 hover:opacity-100')}
-      {...props}
-    >
-      <div
-        className={clsx(
-          'w-9 rounded-lg',
-          isActive ? 'bg-blue-600' : 'bg-slate-500'
-        )}
-      >
-        <svg aria-hidden="true" className="h-9 w-9" fill="none">
-          <feature.icon />
-        </svg>
-      </div>
-      <h3
-        className={clsx(
-          'mt-6 text-sm font-medium',
-          isActive ? 'text-blue-600' : 'text-slate-600'
-        )}
-      >
-        {feature.name}
-      </h3>
-      <p className="mt-2 font-display text-xl text-slate-900">
-        {feature.summary}
-      </p>
-      <p className="mt-4 text-sm text-slate-600">{feature.description}</p>
-    </div>
-  )
-}
+
 
 function FeaturesMobile() {
   return (
@@ -377,28 +349,30 @@ function FeaturesMobile() {
 }
 
 function FeaturesDesktop() {
-  return (
+  return (<>
+    <SwiperGallery />
     <Tab.Group as="div" className="hidden lg:mt-20 lg:block">
       {({ selectedIndex }) => (
         <>
-          <Tab.List className="grid grid-cols-4 gap-12">
-            {features.map((feature, featureIndex) => (
-              <Feature
-                key={feature.name}
-                feature={{
-                  ...feature,
-                  name: (
-                    <Tab className="[&:not(:focus-visible)]:focus:outline-none">
-                      <span className="absolute inset-0" />
-                      {feature.name}
-                    </Tab>
-                  ),
-                }}
-                isActive={featureIndex === selectedIndex}
-                className="relative"
-              />
-            ))}
-          </Tab.List>
+          {/*<Tab.List className="grid grid-cols-4 gap-12">*/}
+            {/*{features.map((feature, featureIndex) => (*/}
+            {/*  <Feature*/}
+            {/*    key={feature.name}*/}
+            {/*    feature={{*/}
+            {/*      ...feature,*/}
+            {/*      name: (*/}
+            {/*        <Tab className="[&:not(:focus-visible)]:focus:outline-none">*/}
+            {/*          <span className="absolute inset-0" />*/}
+            {/*          {feature.name}*/}
+            {/*        </Tab>*/}
+            {/*      ),*/}
+            {/*    }}*/}
+            {/*    isActive={featureIndex === selectedIndex}*/}
+            {/*    className="relative"*/}
+            {/*  />*/}
+            {/*))}*/}
+            <SwiperGallery features={features} selectedIndex={selectedIndex}/>
+          {/*</Tab.List>*/}
           <Tab.Panels className="relative mt-20 overflow-hidden rounded-4xl bg-slate-200 px-14 py-16 xl:px-16">
             <div className="-mx-5 flex">
               {features.map((feature, featureIndex) => (
@@ -428,6 +402,7 @@ function FeaturesDesktop() {
         </>
       )}
     </Tab.Group>
+    </>
   )
 }
 
