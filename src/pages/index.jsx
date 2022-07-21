@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div className="bg-gray-200">
       <Head>
-        <title>TaxPal - Accounting made simple for small businesses</title>
+        <title>Justech</title>
         <meta
           name="description"
           content="Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and hope you don’t get audited."
