@@ -400,12 +400,12 @@ export function SecondaryFeatures() {
       aria-label='Features for simplifying everyday business tasks'
       className='pt-20 pb-14 sm:pb-20 sm:pt-32 lg:pb-32'
     >
-      <Container>
+      <Container className="py-24">
         <div className='mx-auto max-w-2xl md:text-center'>
           <h2 className='font-display text-3xl tracking-tight text-slate-900 sm:text-4xl'>
             Simplify everyday business tasks.
           </h2>
-          <p className='mt-4 text-lg tracking-tight text-slate-700'>
+          <p className='mt-4 pb-4  text-lg tracking-tight text-slate-700'>
             Because you’d probably be a little confused if we suggested you
             complicate your everyday business tasks instead.
           </p>
