@@ -1,13 +1,16 @@
 import Image from 'next/future/image'
 import logo from '@/images/logos/logo.png'
+import Link from 'next/link'
 
 export function Logo(props) {
   return (
-    <Image
-      className="h-20 w-auto"
+    <Link href={'/'}>
+      <Image
+      className='h-20 w-auto'
       src={logo}
-      alt=""
+      alt=''
       unoptimized
     />
+    </Link>
   )
 }

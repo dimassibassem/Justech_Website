@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 
-import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { NavLink } from '@/components/NavLink'
@@ -81,8 +80,8 @@ function MobileNavigation() {
             <MobileNavLink href='#features'>Justech</MobileNavLink>
             <MobileNavLink href='#testimonials'>E-Education solutions</MobileNavLink>
             <MobileNavLink href='#pricing'>E-Business solutions</MobileNavLink>
-            <MobileNavLink href='#pricing'>Partners</MobileNavLink>
-            <MobileNavLink href='#pricing'>References</MobileNavLink>
+            <MobileNavLink href={'/partners'}>Partners</MobileNavLink>
+            <MobileNavLink href={'/references'}>References</MobileNavLink>
             <MobileNavLink href='#pricing'>News</MobileNavLink>
             <MobileNavLink href='#pricing'>Gallery</MobileNavLink>
             <hr className='m-2 border-slate-300/40' />
@@ -101,11 +100,9 @@ export function Header() {
       <Container>
         <nav className='relative z-50 flex justify-between'>
           <div className='flex items-center md:gap-x-12'>
-            <Link href='#' aria-label='Home'>
               <Logo className='h-10 w-auto' />
-            </Link>
             <div className='hidden md:flex md:gap-x-5'>
-              <NavLink href='#features'>Justech</NavLink>
+              <NavLink href={'/about'}>Justech</NavLink>
               <NavLink href='#testimonials'>E-Education solutions</NavLink>
               <NavLink href='#pricing'>E-Business solutions</NavLink>
               <NavLink href={'/partners'}>Partners</NavLink>

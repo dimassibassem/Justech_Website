@@ -8,12 +8,12 @@ export function Footer() {
   return (
     <footer className=' bg-auto'>
       <Container>
-        <div className='py-16'>
+        <div className='flex gap-x-20 py-16'>
           <Logo className='mx-auto h-10 w-auto' />
           <nav className='mt-10 text-sm' aria-label='quick links'>
             <div className='-my-1 flex justify-center gap-x-6'>
               <div className='hidden md:flex md:gap-x-5'>
-                <NavLink href='#features'>Justech</NavLink>
+                <NavLink href={'/about'}>Justech</NavLink>
                 <NavLink href='#testimonials'>E-Education solutions</NavLink>
                 <NavLink href='#pricing'>E-Business solutions</NavLink>
                 <NavLink href={'/partners'}>Partners</NavLink>
