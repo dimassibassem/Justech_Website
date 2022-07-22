@@ -1,5 +1,5 @@
 import Image from 'next/future/image'
-import backgroundImage from '@/images/background-auth.webp'
+import authBackgroundImage from '@/images/authBackground.webp'
 
 export function AuthLayout({ children }) {
   return (
@@ -13,9 +13,8 @@ export function AuthLayout({ children }) {
       <div className='hidden sm:contents lg:relative lg:block lg:flex-1'>
         <Image
           className='absolute inset-0 h-full w-full object-cover'
-          src={backgroundImage}
+          src={authBackgroundImage}
           alt=''
-          wi
           priority
           unoptimized
         />
