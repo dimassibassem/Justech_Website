@@ -1,8 +1,6 @@
 import clsx from 'clsx'
-
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
-import { partners } from '@/utils'
 
 function SwirlyDoodle({ className }) {
   return (
@@ -74,7 +72,7 @@ function Plan({ name, price, description, href, features, featured = false }) {
           featured ? 'text-white' : 'text-slate-200'
         )}
       >
-        {partners.map((feature) => (
+        {features.map((feature) => (
           <li key={feature} className='flex'>
             <CheckIcon className={featured ? 'text-white' : 'text-slate-400'} />
             <span className='ml-4'>{feature}</span>

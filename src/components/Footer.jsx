@@ -1,5 +1,4 @@
 import Link from 'next/link'
-
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { NavLink } from '@/components/NavLink'
@@ -13,14 +12,14 @@ export function Footer() {
           <nav className='mt-10 text-sm' aria-label='quick links'>
             <div className='-my-1 flex justify-center gap-x-6'>
               <div className='hidden md:flex md:gap-x-5'>
-                <NavLink href={'/about'}>Justech</NavLink>
+                <NavLink href='/about'>Justech</NavLink>
                 <NavLink href='#testimonials'>E-Education solutions</NavLink>
                 <NavLink href='#pricing'>E-Business solutions</NavLink>
-                <NavLink href={'/partners'}>Partners</NavLink>
-                <NavLink href={'/references'}>References</NavLink>
+                <NavLink href='/partners'>Partners</NavLink>
+                <NavLink href='/references'>References</NavLink>
                 <NavLink href='#pricing'>News</NavLink>
                 <NavLink href='#pricing'>Gallery</NavLink>
-                <NavLink href={'/contactus'}>Contact</NavLink>
+                <NavLink href='/contact'>Contact</NavLink>
               </div>
             </div>
           </nav>

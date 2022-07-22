@@ -2,12 +2,10 @@ import { Tab } from '@headlessui/react'
 import { Container } from '@/components/Container'
 import { SwiperGallery } from '@/components/SwiperGallery'
 import Feature from '@/components/Feature'
-
-
 import { partners } from '@/utils'
 
 
-function FeaturesMobile() {
+function PartnersMobile() {
   return (
     <div className='-mx-4 mt-20 grid grid-cols-2 items-center gap-x-6 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden'>
       {partners.map((feature) => (
@@ -22,20 +20,16 @@ function FeaturesMobile() {
   )
 }
 
-function FeaturesDesktop() {
-  return (<>
-      <Tab.Group as='div' className='hidden lg:mt-20 lg:block'>
-        {({ selectedIndex }) => (
-          <>
-            <SwiperGallery partners={partners} selectedIndex={selectedIndex} />
-          </>
-        )}
-      </Tab.Group>
-    </>
+function PartnersDesktop() {
+  return (<Tab.Group as='div' className='hidden lg:mt-20 lg:block'>
+      {({ selectedIndex }) => (
+        <SwiperGallery partners={partners} selectedIndex={selectedIndex} />
+      )}
+    </Tab.Group>
   )
 }
 
-export function SecondaryFeatures() {
+export function Partners() {
   return (
     <section
       id='secondary-features'
@@ -52,8 +46,8 @@ export function SecondaryFeatures() {
             complicate your everyday business tasks instead.
           </p>
         </div>
-        <FeaturesMobile />
-        <FeaturesDesktop />
+        <PartnersMobile />
+        <PartnersDesktop />
       </Container>
     </section>
   )

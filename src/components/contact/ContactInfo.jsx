@@ -1,7 +1,8 @@
 import React from 'react'
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline'
+import Link from 'next/link'
 
-const ContactInfo = () => {
+function ContactInfo() {
   return (
     <div className='relative overflow-hidden py-10 px-6 bg-[#013888] sm:px-10 xl:p-12'>
       <div className='absolute inset-0 pointer-events-none sm:hidden' aria-hidden='true'>
@@ -123,7 +124,7 @@ const ContactInfo = () => {
       </dl>
       <ul role='list' className='mt-8 flex space-x-12'>
         <li>
-          <a className='text-indigo-200 hover:text-indigo-100' href='#'>
+          <Link className='text-indigo-200 hover:text-indigo-100' href='/'>
             <span className='sr-only'>Facebook</span>
             <svg
               width={24}
@@ -139,10 +140,10 @@ const ContactInfo = () => {
                 fill='currentColor'
               />
             </svg>
-          </a>
+          </Link>
         </li>
         <li>
-          <a className='text-indigo-200 hover:text-indigo-100' href='#'>
+          <Link className='text-indigo-200 hover:text-indigo-100' href='/'>
             <span className='sr-only'>GitHub</span>
             <svg
               width={24}
@@ -158,10 +159,10 @@ const ContactInfo = () => {
                 fill='currentColor'
               />
             </svg>
-          </a>
+          </Link>
         </li>
         <li>
-          <a className='text-indigo-200 hover:text-indigo-100' href='#'>
+          <Link className='text-indigo-200 hover:text-indigo-100' href='/'>
             <span className='sr-only'>Twitter</span>
             <svg
               width={24}
@@ -177,7 +178,7 @@ const ContactInfo = () => {
                 fill='currentColor'
               />
             </svg>
-          </a>
+          </Link>
         </li>
       </ul>
     </div>

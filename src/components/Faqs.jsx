@@ -1,5 +1,5 @@
 import Image from 'next/future/image'
-
+import { useId } from 'react'
 import { Container } from '@/components/Container'
 import backgroundImage from '@/images/background-faqs.jpg'
 
@@ -58,6 +58,7 @@ const faqs = [
 ]
 
 export function Faqs() {
+  const id = useId()
   return (
     <section
       id='faq'
@@ -88,11 +89,11 @@ export function Faqs() {
           role='list'
           className='mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-3'
         >
-          {faqs.map((column, columnIndex) => (
-            <li key={columnIndex}>
+          {faqs.map((column) => (
+            <li key={id}>
               <ul role='list' className='flex flex-col gap-y-8'>
-                {column.map((faq, faqIndex) => (
-                  <li key={faqIndex}>
+                {column.map((faq) => (
+                  <li key={`li${id}`}>
                     <h3 className='font-display text-lg leading-7 text-slate-900'>
                       {faq.question}
                     </h3>

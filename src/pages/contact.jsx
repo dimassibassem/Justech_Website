@@ -4,7 +4,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import ContactSection from '@/components/ContactSection'
 
-const Contactus = () => {
+function Contact() {
   return (
     <div className='bg-white'>
       <Head>
@@ -29,7 +29,7 @@ const Contactus = () => {
   )
 }
 
-export default Contactus
+export default Contact
 
 
 

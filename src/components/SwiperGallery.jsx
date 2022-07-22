@@ -1,27 +1,24 @@
-import React from 'react'
+import React, { useId } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Tab } from '@headlessui/react'
 import 'swiper/css'
 import 'swiper/css/autoplay'
-
+import { Autoplay } from 'swiper'
 import Feature from '@/components/Feature'
 
-import { Autoplay } from 'swiper'
 
 export function SwiperGallery({ partners, selectedIndex }) {
-
+  const id = useId()
   return (
     <Swiper
       spaceBetween={50}
       slidesPerView={5}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
       modules={[Autoplay]}
       autoplay
     >
 
       {partners?.map((feature, featureIndex) => (
-        <SwiperSlide key={featureIndex}>
+        <SwiperSlide key={id}>
           <Feature
             key={feature.name}
             feature={{

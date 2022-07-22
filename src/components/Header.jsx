@@ -80,12 +80,12 @@ function MobileNavigation() {
             <MobileNavLink href='#features'>Justech</MobileNavLink>
             <MobileNavLink href='#testimonials'>E-Education solutions</MobileNavLink>
             <MobileNavLink href='#pricing'>E-Business solutions</MobileNavLink>
-            <MobileNavLink href={'/partners'}>Partners</MobileNavLink>
-            <MobileNavLink href={'/references'}>References</MobileNavLink>
+            <MobileNavLink href="/partners">Partners</MobileNavLink>
+            <MobileNavLink href="/references">References</MobileNavLink>
             <MobileNavLink href='#pricing'>News</MobileNavLink>
             <MobileNavLink href='#pricing'>Gallery</MobileNavLink>
             <hr className='m-2 border-slate-300/40' />
-            <MobileNavLink href='/login'>Contact</MobileNavLink>
+            <MobileNavLink href='/contact'>Contact</MobileNavLink>
           </Popover.Panel>
         </Transition.Child>
       </Transition.Root>
@@ -102,14 +102,14 @@ export function Header() {
           <div className='flex items-center md:gap-x-12'>
             <Logo className='h-10 w-auto' />
             <div className='hidden md:flex md:gap-x-5'>
-              <NavLink href={'/about'}>Justech</NavLink>
+              <NavLink href="/about">Justech</NavLink>
               <NavLink href='#testimonials'>E-Education solutions</NavLink>
               <NavLink href='#pricing'>E-Business solutions</NavLink>
-              <NavLink href={'/partners'}>Partners</NavLink>
-              <NavLink href={'/references'}>References</NavLink>
+              <NavLink href="/partners">Partners</NavLink>
+              <NavLink href="/references">References</NavLink>
               <NavLink href='#pricing'>News</NavLink>
               <NavLink href='#pricing'>Gallery</NavLink>
-              <NavLink href={'/contactus'}>Contact</NavLink>
+              <NavLink href="/contact">Contact</NavLink>
 
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ContactForm = () => {
+function ContactForm() {
   return (
     <div className='py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12'>
       <h3 className='text-lg font-medium text-gray-900'>Send us a message</h3>
@@ -125,7 +125,7 @@ const ContactForm = () => {
                       rows={4}
                       className='py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md'
                       aria-describedby='message-max'
-                      defaultValue={''}
+                      defaultValue=''
                     />
           </div>
         </div>

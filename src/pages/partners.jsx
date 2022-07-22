@@ -1,11 +1,11 @@
-import React, { useId } from 'react'
+import React from 'react'
 import Head from 'next/head'
-import { Header } from '@/components/Header'
 import Image from 'next/future/image'
+import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { partners } from '@/utils'
 
-const Partners = () => {
+function Partners() {
   return (
     <div className='bg-white'>
       <Head>

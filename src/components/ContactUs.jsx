@@ -1,6 +1,7 @@
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline'
-import backgroundImage from '@/images/background-night.jpeg'
 import Image from 'next/future/image'
+import Link from 'next/link'
+import backgroundImage from '@/images/background-night.jpeg'
 import { Container } from '@/components/Container'
 
 function SwirlyDoodle({ className }) {
@@ -19,6 +20,7 @@ function SwirlyDoodle({ className }) {
     </svg>
   )
 }
+
 
 export function ContactUs() {
   return (
@@ -45,15 +47,13 @@ export function ContactUs() {
             </span>{' '}
             for everyone.
           </h2>
-          <p className='mt-10 text-lg text-slate-400'>
-
-          </p>
+          <p className='mt-10 text-lg text-slate-400' />
         </div>
         <div className='relative py-16 max-w-7xl mx-auto lg:grid lg:grid-cols-5'>
           <div className='bg-gray-50 py-12 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-16 xl:pr-12'>
             <div className='max-w-lg mx-auto'>
               <h2 className='text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl'>
-                {/*Get in touch*/}
+                {/* Get in touch */}
               </h2>
               <p className='mt-10 text-lg leading-6 text-gray-500'>
                 Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst amet. Sapien tortor
@@ -85,81 +85,17 @@ export function ContactUs() {
               </dl>
               <p className='mt-6 text-base text-gray-500'>
                 Looking for careers?{' '}
-                <a href='#' className='font-medium text-gray-700 underline'>
+                <Link href='/' className='font-medium text-gray-700 underline'>
                   View all job openings
-                </a>
+                </Link>
                 .
               </p>
             </div>
           </div>
           <div className='bg-white py-6 px-2 sm:px-3 lg:col-span-3 lg:py-14 lg:px-4 xl:pl-8'>
-            {/*<div className='max-w-lg mx-auto lg:max-w-none'>*/}
-            {/*  <form action='#' method='POST' className='grid grid-cols-1 gap-y-6'>*/}
-            {/*    <div>*/}
-            {/*      <label htmlFor='full-name' className='sr-only'>*/}
-            {/*        Full name*/}
-            {/*      </label>*/}
-            {/*      <input*/}
-            {/*        type='text'*/}
-            {/*        name='full-name'*/}
-            {/*        id='full-name'*/}
-            {/*        autoComplete='name'*/}
-            {/*        className='block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md'*/}
-            {/*        placeholder='Full name'*/}
-            {/*      />*/}
-            {/*    </div>*/}
-            {/*    <div>*/}
-            {/*      <label htmlFor='email' className='sr-only'>*/}
-            {/*        Email*/}
-            {/*      </label>*/}
-            {/*      <input*/}
-            {/*        id='email'*/}
-            {/*        name='email'*/}
-            {/*        type='email'*/}
-            {/*        autoComplete='email'*/}
-            {/*        className='block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md'*/}
-            {/*        placeholder='Email'*/}
-            {/*      />*/}
-            {/*    </div>*/}
-            {/*    <div>*/}
-            {/*      <label htmlFor='phone' className='sr-only'>*/}
-            {/*        Phone*/}
-            {/*      </label>*/}
-            {/*      <input*/}
-            {/*        type='text'*/}
-            {/*        name='phone'*/}
-            {/*        id='phone'*/}
-            {/*        autoComplete='tel'*/}
-            {/*        className='block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md'*/}
-            {/*        placeholder='Phone'*/}
-            {/*      />*/}
-            {/*    </div>*/}
-            {/*    <div>*/}
-            {/*      <label htmlFor='message' className='sr-only'>*/}
-            {/*        Message*/}
-            {/*      </label>*/}
-            {/*      <textarea*/}
-            {/*        id='message'*/}
-            {/*        name='message'*/}
-            {/*        rows={4}*/}
-            {/*        className='block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md'*/}
-            {/*        placeholder='Message'*/}
-            {/*        defaultValue={''}*/}
-            {/*      />*/}
-            {/*    </div>*/}
-            {/*    <div>*/}
-            {/*      <button*/}
-            {/*        type='submit'*/}
-            {/*        className='inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'*/}
-            {/*      >*/}
-            {/*        Submit*/}
-            {/*      </button>*/}
-            {/*    </div>*/}
-            {/*  </form>*/}
-            {/*</div>*/}
-            <iframe
-              src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9030.09529836839!2d10.196873752926768!3d36.85155647963583!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x21efe47d471f6bb1!2sJustech!5e0!3m2!1sfr!2stn!4v1465373613655&amp;z=20'
-              width='100%' height='500' frameBorder='0' allowFullScreen=''></iframe>
+            <iframe title='map'
+                    src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9030.09529836839!2d10.196873752926768!3d36.85155647963583!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x21efe47d471f6bb1!2sJustech!5e0!3m2!1sfr!2stn!4v1465373613655&amp;z=20'
+                    width='100%' height='500' allowFullScreen='' />
           </div>
         </div>
       </Container>

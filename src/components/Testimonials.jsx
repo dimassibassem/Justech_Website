@@ -1,4 +1,5 @@
 import Image from 'next/future/image'
+import { useId } from 'react'
 import { Container } from '@/components/Container'
 import avatarImage1 from '@/images/avatars/avatar-1.png'
 import avatarImage2 from '@/images/avatars/avatar-2.png'
@@ -80,6 +81,7 @@ function QuoteIcon(props) {
 }
 
 export function Testimonials() {
+  const id = useId()
   return (
     <section
       id='get-started-today'
@@ -111,11 +113,11 @@ export function Testimonials() {
           role='list'
           className='mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3'
         >
-          {testimonials.map((column, columnIndex) => (
-            <li key={columnIndex}>
+          {testimonials.map((column) => (
+            <li key={id}>
               <ul role='list' className='flex flex-col gap-y-6 sm:gap-y-8'>
-                {column.map((testimonial, testimonialIndex) => (
-                  <li key={testimonialIndex}>
+                {column.map((testimonial) => (
+                  <li key={`testimonialIndex${id}`}>
                     <figure className='relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10'>
                       <QuoteIcon className='absolute top-6 left-6 fill-slate-100' />
                       <blockquote className='relative'>

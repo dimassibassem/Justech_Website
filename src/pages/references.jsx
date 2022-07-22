@@ -1,8 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
+import Image from 'next/future/image'
 import { Header } from '@/components/Header'
-import { Hero } from '@/components/Hero'
-import { ContactUs } from '@/components/ContactUs'
 import { Footer } from '@/components/Footer'
 import bnt from '@/images/references/BNT.jpg'
 import eniso from '@/images/references/eniso.jpg'
@@ -13,9 +12,6 @@ import FSEGM from '@/images/references/FSEGM.jpg'
 import ministryOfEducation from '@/images/references/ministryOfEducation.jpg'
 import MinistryOfReaserches from '@/images/references/MinistryOfReaserches.jpg'
 import theAfricanDevelopmentBank from '@/images/references/The African Development Bank.jpg'
-import Image from 'next/future/image'
-import backgroundImage from '@/images/background-night.jpeg'
-
 
 const references = [
   {
@@ -57,7 +53,7 @@ const references = [
 ]
 
 
-const References = () => {
+function References() {
   return (
     <div className='bg-white'>
       <Head>
