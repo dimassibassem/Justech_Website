@@ -64,6 +64,7 @@ export function PrimaryFeatures() {
       <Image
         className='absolute top-1/2 left-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]'
         src={backgroundImage}
+        priority
         alt=''
         unoptimized
       />
