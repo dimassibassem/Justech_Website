@@ -4,12 +4,11 @@ import logo from '@/images/logos/logo.png'
 
 export function Logo() {
   return (
-    <Link href="/">
+    <Link name="logo" href="/">
       <Image
         className='h-20 w-auto'
         src={logo}
         alt=''
-        unoptimized
       />
     </Link>
   )

@@ -1,7 +1,7 @@
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline'
 import Image from 'next/future/image'
 import Link from 'next/link'
-import backgroundImage from '@/images/background-night.jpeg'
+import backgroundImage from '@/images/background-night.webp'
 import { Container } from '@/components/Container'
 
 function SwirlyDoodle({ className }) {

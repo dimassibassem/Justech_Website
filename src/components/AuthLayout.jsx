@@ -1,5 +1,5 @@
 import Image from 'next/future/image'
-import backgroundImage from '@/images/background-auth.jpg'
+import backgroundImage from '@/images/background-auth.webp'
 
 export function AuthLayout({ children }) {
   return (
@@ -15,6 +15,7 @@ export function AuthLayout({ children }) {
           className='absolute inset-0 h-full w-full object-cover'
           src={backgroundImage}
           alt=''
+          wi
           priority
           unoptimized
         />

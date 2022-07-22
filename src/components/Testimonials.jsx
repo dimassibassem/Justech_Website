@@ -6,7 +6,7 @@ import avatarImage2 from '@/images/avatars/avatar-2.png'
 import avatarImage3 from '@/images/avatars/avatar-3.png'
 import avatarImage4 from '@/images/avatars/avatar-4.png'
 import avatarImage5 from '@/images/avatars/avatar-5.png'
-import backgroundImage from '@/images/background-night.jpeg'
+import backgroundImage from '@/images/background-night.webp'
 
 const testimonials = [
   [
@@ -90,6 +90,8 @@ export function Testimonials() {
       <Image
         className='absolute h-full w-full top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2'
         src={backgroundImage}
+        width="100%"
+        height="100%"
         priority
         alt=''
         unoptimized

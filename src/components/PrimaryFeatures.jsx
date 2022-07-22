@@ -4,7 +4,7 @@ import { Tab } from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import backgroundImage from '@/images/background.jpeg'
+import backgroundImage from '@/images/background.webp'
 import welcome from '@/images/welcome.jpg'
 import slide1 from '@/images/slide1.jpg'
 import slide2 from '@/images/slide2.jpg'
@@ -64,7 +64,6 @@ export function PrimaryFeatures() {
       <Image
         className='absolute top-1/2 left-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]'
         src={backgroundImage}
-        priority
         alt=''
         unoptimized
       />
