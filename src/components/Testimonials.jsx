@@ -1,5 +1,4 @@
 import Image from 'next/future/image'
-
 import { Container } from '@/components/Container'
 import avatarImage1 from '@/images/avatars/avatar-1.png'
 import avatarImage2 from '@/images/avatars/avatar-2.png'
@@ -86,11 +85,6 @@ export function Testimonials() {
       id='get-started-today'
       className='relative py-20 sm:py-32'
     >
-      {/*<section*/}
-      {/*   id="testimonials"*/}
-      {/*   aria-label="What our customers are saying"*/}
-      {/*   className="relative py-20 sm:py-32"*/}
-      {/* >*/}
       <Image
         className='absolute h-full w-full top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2'
         src={backgroundImage}
@@ -99,17 +93,6 @@ export function Testimonials() {
         unoptimized
       />
       <Container className='relative'>
-        {/*<div className="mx-auto max-w-2xl md:text-center">*/}
-        {/*  <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">*/}
-        {/*    Loved by businesses worldwide.*/}
-        {/*  </h2>*/}
-        {/*  <p className="mt-4 text-lg tracking-tight text-slate-700">*/}
-        {/*    Our software is so simple that people can’t help but fall in love*/}
-        {/*    with it. Simplicity is easy when you just skip tons of*/}
-        {/*    mission-critical features.*/}
-        {/*  </p>*/}
-        {/*</div>*/}
-
 
         <div className='mx-auto max-w-xl text-center'>
           <h2 className='font-display text-3xl tracking-tight text-slate-100 sm:text-4xl'>

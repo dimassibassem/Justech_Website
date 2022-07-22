@@ -6,8 +6,6 @@ import { Footer } from '@/components/Footer'
 import { partners } from '@/utils'
 
 const Partners = () => {
-
-
   return (
     <div className='bg-white'>
       <Head>

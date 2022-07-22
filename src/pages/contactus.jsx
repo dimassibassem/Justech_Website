@@ -1,7 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
 import { Header } from '@/components/Header'
-import Image from 'next/future/image'
 import { Footer } from '@/components/Footer'
 import ContactSection from '@/components/ContactSection'
 

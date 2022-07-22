@@ -45,10 +45,10 @@ const About = () => {
           A Tunisian company specializing in the field of technological innovation and in particular digital content,
           e-Learning, virtual reference libraries and e-business solutions.
         </p>
-          <p
-            className='sm:leading-loose md:leading-loose lg:leading-loose tracking-wide px-20 pb-16 font-medium text-xl text-black sm:text-2xl md:text-3xl '>
-            Justech is distinguished not only by solid partners and high-level services but also by a multilingual,
-            dynamic and qualified team.</p>
+        <p
+          className='sm:leading-loose md:leading-loose lg:leading-loose tracking-wide px-20 pb-16 font-medium text-xl text-black sm:text-2xl md:text-3xl '>
+          Justech is distinguished not only by solid partners and high-level services but also by a multilingual,
+          dynamic and qualified team.</p>
 
       </main>
       <div className='bg-gray-100'><Footer /></div>

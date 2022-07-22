@@ -7,7 +7,7 @@ function Label({ id, children }) {
   return (
     <label
       htmlFor={id}
-      className="mb-3 block text-sm font-medium text-gray-700"
+      className='mb-3 block text-sm font-medium text-gray-700'
     >
       {children}
     </label>
@@ -15,12 +15,12 @@ function Label({ id, children }) {
 }
 
 export function TextField({
-  id,
-  label,
-  type = 'text',
-  className = '',
-  ...props
-}) {
+                            id,
+                            label,
+                            type = 'text',
+                            className = '',
+                            ...props
+                          }) {
   return (
     <div className={className}>
       {label && <Label id={id}>{label}</Label>}
