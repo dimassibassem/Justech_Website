@@ -9,10 +9,9 @@ e-Learning, virtual reference libraries and e-business solutions.
 Justech is distinguished not only by solid partners and high-level services but also by a multilingual,
 dynamic and qualified team.
 
-### Technologies
+### This Website is developed with
 - ⚡ Next.js
 - 🎨 TailwindCSS
-- 🧙 ESLint + Prettier
 
 
 
