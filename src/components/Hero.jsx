@@ -68,15 +68,15 @@ export function Hero() {
               { name: 'Laravel', logo: logoLaravel },
               { name: 'Statamic', logo: logoStatamic }
             ]
-          ].map((group) => (
-            <li key={id}>
+          ].map((group,i) => (
+            <li key={`${i+id}`}>
               <ul
                 role='list'
                 className='flex flex-col items-center gap-y-8 sm:flex-row sm:gap-x-12 sm:gap-y-0'
               >
                 {group.map((company) => (
                   <li key={company.name} className='flex'>
-                    <Image src={company.logo} alt={company.name} unoptimized />
+                    <Image src={company.logo} alt={company.name} priority unoptimized />
                   </li>
                 ))}
               </ul>

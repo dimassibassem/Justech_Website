@@ -89,11 +89,11 @@ export function Faqs() {
           role='list'
           className='mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-3'
         >
-          {faqs.map((column) => (
-            <li key={id}>
+          {faqs.map((column, i) => (
+            <li key={`${i + id}`}>
               <ul role='list' className='flex flex-col gap-y-8'>
-                {column.map((faq) => (
-                  <li key={`li${id}`}>
+                {column.map((faq, j) => (
+                  <li key={`${j + id}`}>
                     <h3 className='font-display text-lg leading-7 text-slate-900'>
                       {faq.question}
                     </h3>

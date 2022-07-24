@@ -18,7 +18,7 @@ export function SwiperGallery({ partners, selectedIndex }) {
     >
 
       {partners?.map((feature, featureIndex) => (
-        <SwiperSlide key={id}>
+        <SwiperSlide key={`${featureIndex + id}`}>
           <Feature
             key={feature.name}
             feature={{

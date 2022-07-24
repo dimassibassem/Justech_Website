@@ -6,6 +6,7 @@ export function Logo() {
   return (
     <Link name="logo" href="/">
       <Image
+        priority
         className='h-20 w-auto'
         src={logo}
         alt=''

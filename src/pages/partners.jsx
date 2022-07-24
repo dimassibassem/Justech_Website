@@ -25,7 +25,7 @@ function Partners() {
           {partners.map(({ name, summary, description, image }) => (
             <div key={name} className='grid grid-cols-2'>
               <div key={name} className='flex flex-col items-center justify-center'>
-                <Image src={image} alt={name} />
+                <Image src={image} alt={name} priority />
                 <h2 className='text-center font-semibold bold pt-3'>{summary}</h2>
               </div>
               <div>

@@ -10,7 +10,7 @@ function Feature({ feature, isActive, className, ...props }) {
       {...props}
     >
       <div>
-        <Image src={feature.image} alt='' />
+        <Image priority src={feature.image} alt='' />
       </div>
       <p className='mt-2 font-display text-md text-slate-800'>
         {feature.summary}

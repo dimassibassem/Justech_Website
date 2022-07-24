@@ -70,7 +70,7 @@ function References() {
         <div className='grid grid-cols-3 py-20 gap-20 px-10'>
           {references.map(({ name, image }) => (
             <div key={name} className='flex flex-col items-center justify-center'>
-              <Image src={image} alt={name} />
+              <Image priority src={image} alt={name} />
               <h2 className='text-center pt-3 font-semibold'>{name}</h2>
             </div>
           ))}
