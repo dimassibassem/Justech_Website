@@ -12,8 +12,9 @@ dynamic and qualified team.
 ### This Website is developed with
 - ⚡ Next.js
 - 🎨 TailwindCSS
-- 📦 MongoDB
-- 📝 Prisma
+- 🌐 ASP.NET
+- 🗃️ MSSQL
+
 
 
 
