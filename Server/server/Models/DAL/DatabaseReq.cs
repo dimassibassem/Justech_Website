@@ -8,7 +8,7 @@ public class DatabaseReq
     {
         try
         {
-            SqlConnection cnn = DbConnection.GetConnection();
+            SqlConnection cnn = DbConnection.GetUserConnection();
             cnn.Open();
             string sql =
                 @"IF NOT EXISTS (SELECT * from sys.databases  WHERE name = 'Justech' ) CREATE DATABASE Justech ;";
@@ -28,7 +28,7 @@ public class DatabaseReq
     {
         try
         {
-            SqlConnection cnn = DbConnection.GetConnection();
+            SqlConnection cnn = DbConnection.GetUserConnection();
             cnn.Open();
             string sql = @"IF NOT EXISTS (  SELECT * 
                                                 FROM Justech 

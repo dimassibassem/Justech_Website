@@ -4,7 +4,7 @@ using server.Models.Entity;
 
 namespace server.Models.BLL
 {
-    public class BllUser
+    public static class BllUser
     {
         public static User GetUserBy(string field, string fieldValue)
         {
