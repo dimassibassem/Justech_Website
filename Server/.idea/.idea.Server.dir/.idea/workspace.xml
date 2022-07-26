@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="519ed3ac-74d6-4967-960d-80ac6421e404" name="Changes" comment="" />
+    <list default="true" id="927a90b6-59b9-44e4-8c7a-aaeb5a195323" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Server.dir/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Server.dir/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Server.dir/.idea/projectSettingsUpdater.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Server.dir/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Server.dir/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/.idea.server/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/.idea.server/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/.idea.server/.idea/projectSettingsUpdater.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/.idea.server/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.sln" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/Controllers/WeatherForecastController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/Properties/launchSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/WeatherForecast.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/appsettings.Development.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/appsettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/Debug/net6.0/server.AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/Debug/net6.0/server.AssemblyInfoInputs.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/Debug/net6.0/server.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/Debug/net6.0/server.GlobalUsings.g.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/Debug/net6.0/server.csproj.AssemblyReference.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/project.assets.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/project.nuget.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/project.packagespec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/rider.project.restore.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/server.csproj.nuget.dgspec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/server.csproj.nuget.g.props" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/obj/server.csproj.nuget.g.targets" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/server.csproj" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectId" id="2CTYyzXQalWHGw3pH2Wn5vMtVdi" />
+  <component name="ProjectId" id="2CTa4jOc2ThbRkwF6HL45tQBUiG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -23,12 +54,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="519ed3ac-74d6-4967-960d-80ac6421e404" name="Changes" comment="" />
-      <created>1658828321103</created>
+      <created>1658828858919</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1658828321103</updated>
-      <workItem from="1658828321106" duration="198000" />
+      <updated>1658828858919</updated>
+      <workItem from="1658828858922" duration="26000" />
     </task>
     <servers />
   </component>
