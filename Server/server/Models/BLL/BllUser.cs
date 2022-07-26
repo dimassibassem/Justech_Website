@@ -62,57 +62,6 @@ namespace server.Models.BLL
         }
 
         #endregion
-
-        #region OPERATIONS
-
-        public static JsonResponse GenerateConfirmationCode(User user)
-        {
-            JsonResponse generateConfirmationCode = new JsonResponse();
-            generateConfirmationCode.Success = false;
-            generateConfirmationCode.Message = "Une erreur est survenue, veuillez réessayer plus tard";
-            Random Alea = new Random();
-            user.EmailConfirmationCode = Alea.Next(100000, 999999).ToString();
-            user.CodeExpirationDate = DateTime.Now.AddHours(1);
-            if (UpsertApi(user).Success)
-            {
-                //
-            }
-
-            return generateConfirmationCode;
-        }
-
-        public static JsonResponse CopyFilesToServer(User user, IWebHostEnvironment hostingEnvironment)
-        {
-            JsonResponse copyFilesToServer = new JsonResponse
-            {
-                Success = false,
-                Message = "l'opération n'a pas réussi"
-            };
-
-            try
-            {
-                if (user.Photo != null)
-                {
-                    var uploads = Path.Combine(hostingEnvironment.WebRootPath, "Styles/img/users");
-                    if (!Directory.Exists(uploads))
-                    {
-                        Directory.CreateDirectory(uploads);
-                    }
-
-                    var filePath = Path.Combine(uploads, user.PhotoFileName);
-                    user.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
-                    copyFilesToServer.Success = true;
-                    copyFilesToServer.Message = "Opération réussie";
-                }
-            }
-            catch (Exception ex)
-            {
-                copyFilesToServer.Message = "échec de l'opération : " + ex.Message;
-            }
-
-            return copyFilesToServer;
-        }
-
-        #endregion
+        
     }
 }
