@@ -11,7 +11,7 @@ public class DalUser
     {
         try
         {
-            using SqlConnection cnn = DbConnection.GetUserConnection();
+            using SqlConnection cnn = DbConnection.GetConnection();
             cnn.Open();
             string strSql = @"  SELECT TOP 1 * 
                                         FROM [User] 
@@ -45,7 +45,7 @@ public class DalUser
         JsonResponse jsonResponse = new JsonResponse();
         try
         {
-            using SqlConnection connection = DbConnection.GetUserConnection();
+            using SqlConnection connection = DbConnection.GetConnection();
             if (CheckUserUnicityBy("Email", user.Email))
             {
                 connection.Open();
@@ -106,7 +106,7 @@ public class DalUser
         JsonResponse jsonResponse = new JsonResponse();
         try
         {
-            using SqlConnection connection = DbConnection.GetUserConnection();
+            using SqlConnection connection = DbConnection.GetConnection();
             connection.Open();
 
             string sql = @" UPDATE [User] 
@@ -172,7 +172,7 @@ public class DalUser
         List<User> lstUser = new List<User>();
         try
         {
-            using SqlConnection connection = DbConnection.GetUserConnection();
+            using SqlConnection connection = DbConnection.GetConnection();
             connection.Open();
             string sql = @" SELECT * 
                                     FROM [User] 
@@ -215,7 +215,7 @@ public class DalUser
         User user = new User();
         try
         {
-            using SqlConnection connection = DbConnection.GetUserConnection();
+            using SqlConnection connection = DbConnection.GetConnection();
             connection.Open();
             string sql = @" SELECT TOP 1 * 
                                     FROM [User] 
@@ -255,7 +255,7 @@ public class DalUser
         List<User> lstUser = new List<User>();
         try
         {
-            using SqlConnection connection = DbConnection.GetUserConnection();
+            using SqlConnection connection = DbConnection.GetConnection();
             connection.Open();
             string sql = @" SELECT * 
                                     FROM [User] 
@@ -299,7 +299,7 @@ public class DalUser
 
         try
         {
-            using (SqlConnection connection = DbConnection.GetUserConnection())
+            using (SqlConnection connection = DbConnection.GetConnection())
             {
                 connection.Open();
                 string sql = @" DELETE 

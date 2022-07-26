@@ -11,7 +11,7 @@ public class DalPartner
     {
         try
         {
-            using SqlConnection cnn = DbConnection.GetPartnerConnection();
+            using SqlConnection cnn = DbConnection.GetConnection();
             cnn.Open();
             string strSql = @"  SELECT TOP 1 * 
                                         FROM [Partner] 
@@ -43,7 +43,7 @@ public class DalPartner
         JsonResponse jsonResponse = new JsonResponse();
         try
         {
-            using SqlConnection connection = DbConnection.GetPartnerConnection();
+            using SqlConnection connection = DbConnection.GetConnection();
             if (partner.CompanyName != null && CheckPartnerUnicityBy("CompanyName", partner.CompanyName))
             {
             connection.Open();
@@ -100,7 +100,7 @@ public class DalPartner
         JsonResponse jsonResponse = new JsonResponse();
         try
         {
-            using SqlConnection connection = DbConnection.GetPartnerConnection();
+            using SqlConnection connection = DbConnection.GetConnection();
             connection.Open();
 
             string sql = @" UPDATE [Partner] 
@@ -160,7 +160,7 @@ public class DalPartner
         List<Partner> lstPartner = new List<Partner>();
         try
         {
-            using SqlConnection connection = DbConnection.GetPartnerConnection();
+            using SqlConnection connection = DbConnection.GetConnection();
             connection.Open();
             string sql = @" SELECT * 
                                     FROM [Partner] 
@@ -202,7 +202,7 @@ public class DalPartner
         Partner partner = new Partner();
         try
         {
-            using SqlConnection connection = DbConnection.GetPartnerConnection();
+            using SqlConnection connection = DbConnection.GetConnection();
             connection.Open();
             string sql = @" SELECT TOP 1 * 
                                     FROM [Partner] 
@@ -241,7 +241,7 @@ public class DalPartner
         List<Partner> lstPartner = new List<Partner>();
         try
         {
-            using SqlConnection connection = DbConnection.GetPartnerConnection();
+            using SqlConnection connection = DbConnection.GetConnection();
             connection.Open();
             string sql = @" SELECT * 
                                     FROM [Partner] 
@@ -284,7 +284,7 @@ public class DalPartner
 
         try
         {
-            using SqlConnection connection = DbConnection.GetPartnerConnection();
+            using SqlConnection connection = DbConnection.GetConnection();
             connection.Open();
             string sql = @" DELETE 
                                     FROM [Partner] 
