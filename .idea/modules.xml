@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/starter-next.iml" filepath="$PROJECT_DIR$/.idea/starter-next.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Justech.iml" filepath="$PROJECT_DIR$/.idea/Justech.iml" />
     </modules>
   </component>
 </project>
