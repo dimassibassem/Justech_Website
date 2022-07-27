@@ -29,45 +29,39 @@ const subNavigation = [
     {
         name: 'Users',
         description: 'Enim, nullam mi vel et libero urna lectus enim. Et sed in maecenas tellus.',
-        href: '#',
+        href: '/dashboard/users',
         icon: AdjustmentsIcon,
         current: false,
     },
     {
         name: 'Partners',
         description: 'Semper accumsan massa vel volutpat massa. Non turpis ut nulla aliquet turpis.',
-        href: '#',
+        href: '/dashboard/partners',
         icon: UserGroupIcon,
         current: false,
     },
     {
         name: 'Events',
         description: 'Magna nulla id sed ornare ipsum eget. Massa eget porttitor suscipit consequat.',
-        href: '#',
+        href: '/dashboard/events',
         icon: CalendarIcon,
         current: false,
     },
 
 ]
-// todo : work to do here
 
 const createStateSlice = (set, get) => ({
     subNavigation,
     navigation,
-    setCurrentSubNavigation: (newCurrent) => {
-        subNavigation.map((elem)=> elem.current = false )
-        // find index of newCurrent in subNavigation
-        const index = subNavigation.findIndex(item => item.name === newCurrent.name);
-        // set current subNavigation to newCurrent
-        set(state => ({
-            ...state,
-            subNavigation: [...state.subNavigation.slice(0, index),
-                {...state.subNavigation[index], current: true},
-                ...state.subNavigation.slice(index + 1)]
-        }))
-        },
     mobileMenuOpen: false,
     setMobileMenuOpen: (bool) => set({mobileMenuOpen: bool}, null, "setMobileMenuOpen"),
+    resetSubNavigation: () => set({
+        subNavigation: subNavigation.map((elem) => {
+                elem.current = false;
+                return elem;
+            }
+        )
+    }, null, "resetSubNavigation"),
 })
 // const createTokenSlice = (set, get) => ({
 //     token: null,

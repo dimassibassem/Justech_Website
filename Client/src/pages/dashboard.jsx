@@ -3,11 +3,11 @@ import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesk
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import ForMobile from "@/components/dashboard/ForMobile";
+import {useStore} from "@/store";
 
 
-export default function Account() {
-
-
+export default function Dashboard() {
+    const subNavigation = useStore(state => state.subNavigation);
     return (
         <div className="h-full flex bg-blue-gray-50">
             {/* Adding this component ti simplify code */}
@@ -26,7 +26,7 @@ export default function Account() {
 
                         <div className="flex-1 flex xl:overflow-hidden">
                             {/* Secondary sidebar */}
-                            <SecondarySidebar/>
+                            <SecondarySidebar subNavigation={subNavigation}/>
 
                             {/* Main content */}
                             {/* <MainContent/> */}

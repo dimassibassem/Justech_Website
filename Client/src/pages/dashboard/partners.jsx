@@ -1,23 +1,20 @@
-import {useEffect} from "react";
-import Breadcrumb from "@/components/dashboard/Breadcrumb";
-import MainContent from "@/components/dashboard/MainContent";
+import React, {useEffect} from 'react';
+import {useStore} from "@/store";
+import ForMobile from "@/components/dashboard/ForMobile";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
+import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
-import ForMobile from "@/components/dashboard/ForMobile";
-import {useStore} from "@/store";
 
-
-export default function Account() {
-const resetSubNavigation = useStore(state => state.resetSubNavigation);
+function Partners() {
     const subNavigation = useStore(state => state.subNavigation);
-    const index = subNavigation.findIndex(item => item.name === "Account");
-
+    const resetSubNavigation = useStore(state => state.resetSubNavigation);
+    const index = subNavigation.findIndex(item => item.name === "Partners");
+    subNavigation[index].current = true;
     useEffect(() => {
         resetSubNavigation();
         subNavigation[index].current = true;
     }, []);
-
     return (
         <div className="h-full flex bg-blue-gray-50">
             {/* Adding this component ti simplify code */}
@@ -40,7 +37,7 @@ const resetSubNavigation = useStore(state => state.resetSubNavigation);
                             <SecondarySidebar subNavigation={subNavigation}/>
 
                             {/* Main content */}
-                            <MainContent/>
+                            {/* <MainContent/> */}
                         </div>
                     </div>
                 </main>
@@ -48,3 +45,5 @@ const resetSubNavigation = useStore(state => state.resetSubNavigation);
         </div>
     )
 }
+
+export default Partners;

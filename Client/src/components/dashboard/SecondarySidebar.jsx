@@ -6,9 +6,8 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-function SecondarySidebar() {
-    const subNavigation = useStore(state => state.subNavigation);
-    const setCurrentSubNavigation = useStore(state => state.setCurrentSubNavigation);
+function SecondarySidebar({subNavigation}) {
+    const resetSubNavigation = useStore(state => state.resetSubNavigation);
     return (
         <nav
             aria-label="Sections"
@@ -28,7 +27,10 @@ function SecondarySidebar() {
                             'flex p-6 border-b border-blue-gray-200'
                         )}
                         aria-current={item.current ? 'page' : undefined}
-                        onClick={() => setCurrentSubNavigation(item)}
+                        onClick={() => {
+                            resetSubNavigation();
+                        }
+                        }
                     >
                         <item.icon className="flex-shrink-0 -mt-0.5 h-6 w-6 text-blue-gray-400"
                                    aria-hidden="true"/>
