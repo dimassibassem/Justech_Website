@@ -5,7 +5,7 @@ import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesk
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
-import MainContent from "@/components/dashboard/MainContent";
+
 
 function Users() {
     const subNavigation = useStore(state => state.subNavigation);
