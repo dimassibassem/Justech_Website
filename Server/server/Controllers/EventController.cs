@@ -10,9 +10,9 @@ namespace server.Controllers
     public class EventController : Controller
     {
         [HttpPost("UpsertEvent")]
-        public JsonResult UpsertEvent([FromForm] Event partner)
+        public JsonResult UpsertEvent([FromForm] Event even)
         {
-            return Json(BllEvent.UpsertApi(partner));
+            return Json(BllEvent.UpsertApi(even));
         }
 
         [HttpGet("all")]
@@ -40,11 +40,11 @@ namespace server.Controllers
         {
             if (string.IsNullOrEmpty(value))
             {
-                Event partner = BllEvent.GetEventBy(field, value);
+                Event even = BllEvent.GetEventBy(field, value);
 
-                if (partner.Id != 0)
+                if (even.Id != 0)
                 {
-                    return partner;
+                    return even;
                 }
                 else
                 {
