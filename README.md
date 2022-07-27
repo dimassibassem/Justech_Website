@@ -11,6 +11,7 @@ dynamic and qualified team.
 ## Development 
 ### This Website is developed with
 - ⚡ Next.js
+- 🐻 Zustand
 - 🎨 TailwindCSS
 - 🌐 ASP.NET
 - 🗃️ MSSQL
