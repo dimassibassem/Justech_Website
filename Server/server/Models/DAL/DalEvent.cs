@@ -49,8 +49,9 @@ public class DalEvent
             {
                 connection.Open();
 
-                string sql = @" INSERT INTO [Event] ( EventName, Description,Thumbnail) OUTPUT INSERTED.Id 
-                                        VALUES (@EventName, @Description, @Thumbnail)";
+                string sql =
+                    @" INSERT INTO [Event] ( EventName, Description,Thumbnail,Date,Location) OUTPUT INSERTED.Id 
+                                        VALUES (@EventName, @Description, @Thumbnail, @Date, @Location) ";
 
                 using SqlCommand command = new SqlCommand(sql, connection);
 
@@ -68,6 +69,14 @@ public class DalEvent
                     command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
                 else
                     command.Parameters.AddWithValue("@Thumbnail", even.Thumbnail);
+                if (String.IsNullOrEmpty(even.Date))
+                    command.Parameters.AddWithValue("@Date", DBNull.Value);
+                else
+                    command.Parameters.AddWithValue("@Date", even.Date);
+                if (String.IsNullOrEmpty(even.Location))
+                    command.Parameters.AddWithValue("@Location", DBNull.Value);
+                else
+                    command.Parameters.AddWithValue("@Location", even.Location);
 
                 long id = (long) command.ExecuteScalar();
 
@@ -89,7 +98,7 @@ public class DalEvent
         catch (Exception e)
         {
             jsonResponse.Success = false;
-            jsonResponse.Message = "ERREUR INSERTION PARTNER !!";
+            jsonResponse.Message = "ERREUR INSERTION Event !!";
         }
 
         return jsonResponse;
@@ -109,6 +118,8 @@ public class DalEvent
                                         EventName=@EventName,
                                         Description=@Description,
                                         Thumbnail=@Thumbnail,
+                                        Date=@Date,
+                                        Location=@Location
                                     WHERE Id=@Id";
 
             using (SqlCommand command = new SqlCommand(sql, connection))
@@ -130,17 +141,28 @@ public class DalEvent
                     command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
                 else
                     command.Parameters.AddWithValue("@Thumbnail", even.Thumbnail);
+
+                if (String.IsNullOrEmpty(even.Date))
+                    command.Parameters.AddWithValue("@Date", DBNull.Value);
+                else
+                    command.Parameters.AddWithValue("@Date", even.Date);
+
+                if (String.IsNullOrEmpty(even.Location))
+                    command.Parameters.AddWithValue("@Location", DBNull.Value);
+                else
+                    command.Parameters.AddWithValue("@Location", even.Location);
+
                 command.Parameters.AddWithValue("@Id", even.Id);
 
                 if (command.ExecuteNonQuery() == 1)
                 {
                     jsonResponse.Success = true;
-                    jsonResponse.Message = "La mise à jour de l'utilisateur est réussie !";
+                    jsonResponse.Message = "La mise à jour de l'event est réussie !";
                 }
                 else
                 {
                     jsonResponse.Success = false;
-                    jsonResponse.Message = "Échec de la mise à jour de l'utilisateur !";
+                    jsonResponse.Message = "Échec de la mise à jour de l'event !";
                 }
             }
 
@@ -179,7 +201,9 @@ public class DalEvent
                             Id = long.Parse(dataReader["Id"].ToString()!),
                             EventName = dataReader["EventName"].ToString()!,
                             Description = dataReader["Description"].ToString()!,
-                            Thumbnail = dataReader["Thumbnail"].ToString()!
+                            Thumbnail = dataReader["Thumbnail"].ToString()!,
+                            Date = dataReader["Date"].ToString()!,
+                            Location = dataReader["Location"].ToString()!
                         };
 
                         lstEvent.Add(even);
@@ -222,6 +246,8 @@ public class DalEvent
                         even.EventName = dataReader["EventName"].ToString()!;
                         even.Description = dataReader["Description"].ToString()!;
                         even.Thumbnail = dataReader["Thumbnail"].ToString()!;
+                        even.Location = dataReader["Location"].ToString()!;
+                        even.Date = dataReader["Date"].ToString()!;
                     }
                 }
             }
@@ -257,12 +283,16 @@ public class DalEvent
                 {
                     while (dataReader.Read())
                     {
-                        Event even = new Event();
+                        Event even = new Event
+                        {
+                            Id = long.Parse(dataReader["Id"].ToString()!),
+                            EventName = dataReader["EventName"].ToString()!,
+                            Description = dataReader["Description"].ToString()!,
+                            Thumbnail = dataReader["Thumbnail"].ToString()!,
+                            Date = dataReader["Date"].ToString()!,
+                            Location = dataReader["Location"].ToString()!
+                        };
 
-                        even.Id = long.Parse(dataReader["Id"].ToString()!);
-                        even.EventName = dataReader["EventName"].ToString()!;
-                        even.Description = dataReader["Description"].ToString()!;
-                        even.Thumbnail = dataReader["Thumbnail"].ToString()!;
                         lstEvent.Add(even);
                     }
                 }

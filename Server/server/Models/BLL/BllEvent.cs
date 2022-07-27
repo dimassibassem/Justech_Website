@@ -11,9 +11,9 @@ public class BllEvent
         return DalEvent.GetEventBy(field, fieldValue);
     }
 
-    public static JsonResponse AddEvent(Event partner)
+    public static JsonResponse AddEvent(Event even)
     {
-        return DalEvent.AddEvent(partner);
+        return DalEvent.AddEvent(even);
     }
 
     public static List<Event> GetAllEvents()
@@ -28,17 +28,17 @@ public class BllEvent
 
     #region API Calls
 
-    public static JsonResponse UpsertApi(Event partner)
+    public static JsonResponse UpsertApi(Event even)
     {
         JsonResponse jr;
 
-        if (partner.Id == 0)
+        if (even.Id == 0)
         {
-            jr = DalEvent.AddEvent(partner);
+            jr = DalEvent.AddEvent(even);
         }
         else
         {
-            jr = DalEvent.UpdateEvent(partner);
+            jr = DalEvent.UpdateEvent(even);
         }
 
         return jr;
@@ -47,15 +47,15 @@ public class BllEvent
     public static JsonResponse DeleteApi(string field, string fieldValue)
     {
         JsonResponse jr = new JsonResponse();
-        var partnerFromDb = GetEventBy(field, fieldValue);
-        if (partnerFromDb.Id == 0)
+        var eventFromDb = GetEventBy(field, fieldValue);
+        if (eventFromDb.Id == 0)
         {
             jr.Success = false;
             jr.Message = "Utilisateur n'exitse pas !";
         }
         else
         {
-            jr = DalEvent.DeleteEventBy("Id", partnerFromDb.Id.ToString());
+            jr = DalEvent.DeleteEventBy("Id", eventFromDb.Id.ToString());
         }
 
         return jr;
