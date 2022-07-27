@@ -1,23 +1,21 @@
 import {Fragment, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {
-    BellIcon,
     BookmarkAltIcon,
-    CashIcon,
     CogIcon,
     FireIcon,
     HomeIcon,
     InboxIcon,
-    KeyIcon,
-    PhotographIcon,
-    SearchCircleIcon,
     UserIcon,
-    ViewGridAddIcon,
     XIcon,
+    CalendarIcon,
+    UserGroupIcon,
+    AdjustmentsIcon
 } from '@heroicons/react/outline'
 import Link from "next/link";
 import Image from "next/future/image";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
+import MainContent from "@/components/dashboard/MainContent";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
@@ -41,45 +39,25 @@ const subNavigation = [
     {
         name: 'Users',
         description: 'Enim, nullam mi vel et libero urna lectus enim. Et sed in maecenas tellus.',
-        href: '#',
-        icon: BellIcon,
+        href: '/dashboard/users',
+        icon: AdjustmentsIcon,
         current: false,
     },
     {
-        name: 'Security',
+        name: 'Partners',
         description: 'Semper accumsan massa vel volutpat massa. Non turpis ut nulla aliquet turpis.',
-        href: '#',
-        icon: KeyIcon,
+        href: '/dashboard/partners',
+        icon: UserGroupIcon,
         current: false,
     },
     {
-        name: 'Appearance',
+        name: 'Events',
         description: 'Magna nulla id sed ornare ipsum eget. Massa eget porttitor suscipit consequat.',
-        href: '#',
-        icon: PhotographIcon,
+        href: '/dashboard/events',
+        icon: CalendarIcon,
         current: false,
     },
-    {
-        name: 'Billing',
-        description: 'Orci aliquam arcu egestas turpis cursus. Lectus faucibus netus dui auctor mauris.',
-        href: '#',
-        icon: CashIcon,
-        current: false,
-    },
-    {
-        name: 'Integrations',
-        description: 'Nisi, elit volutpat odio urna quis arcu faucibus dui. Mauris adipiscing pellentesque.',
-        href: '#',
-        icon: ViewGridAddIcon,
-        current: false,
-    },
-    {
-        name: 'Additional Resources',
-        description: 'Quis viverra netus donec ut auctor fringilla facilisis. Nunc sit donec cursus sit quis et.',
-        href: '#',
-        icon: SearchCircleIcon,
-        current: false,
-    },
+
 ]
 
 
@@ -208,7 +186,7 @@ export default function Account() {
                             <SecondarySidebar subNavigation={subNavigation}/>
 
                             {/* Main content */}
-                            {/* <MainContent/> */}
+                            <MainContent/>
                         </div>
                     </div>
                 </main>

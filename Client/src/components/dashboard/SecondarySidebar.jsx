@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -16,7 +17,7 @@ function SecondarySidebar({subNavigation}) {
             </div>
             <div className="flex-1 min-h-0 overflow-y-auto">
                 {subNavigation.map((item) => (
-                    <a
+                    <Link
                         key={item.name}
                         href={item.href}
                         className={classNames(
@@ -31,7 +32,7 @@ function SecondarySidebar({subNavigation}) {
                             <p className="font-medium text-blue-gray-900">{item.name}</p>
                             <p className="mt-1 text-blue-gray-500">{item.description}</p>
                         </div>
-                    </a>
+                    </Link>
                 ))}
             </div>
         </nav>

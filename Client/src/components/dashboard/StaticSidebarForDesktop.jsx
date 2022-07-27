@@ -22,7 +22,7 @@ function StaticSidebarForDesktop({navigation}) {
                         </nav>
                     </div>
                     <div className="flex-shrink-0 flex pb-5 ">
-                        <Link href="/dashboard" className="flex-shrink-0 w-full">
+                        <Link href="/dashboard/account" className="flex-shrink-0 w-full">
                             <div className="sr-only">
                                 <p>Lisa Marie</p>
                                 <p>Account settings</p>
