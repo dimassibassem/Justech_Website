@@ -1,13 +1,15 @@
 import React from 'react';
 import Link from "next/link";
+import {useStore} from "@/store";
 
-function StaticSidebarForDesktop({navigation}) {
+function StaticSidebarForDesktop() {
+    const navigation = useStore(state => state.navigation);
     return (
         <div className="hidden lg:flex lg:flex-shrink-0">
             <div className="flex flex-col w-[5rem] ">
                 <div className="flex-1 flex flex-col min-h-0 overflow-y-auto bg-[#05358c]">
                     <div className="flex-1">
-                        <div className=" py-4 px-2 flex items-center justify-center" />
+                        <div className=" py-4 px-2 flex items-center justify-center"/>
                         <nav aria-label="Sidebar" className="py-6 flex flex-col items-center space-y-3">
                             {navigation.map((item) => (
                                 <a
