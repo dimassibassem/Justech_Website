@@ -31,9 +31,10 @@ module.exports = {
         '2xl': '40rem',
       },
       colors: {
-        'blue-gray': colors.blueGray,
+        'blue-gray': colors.slate,
       }
     },
   },
+  // eslint-disable-next-line global-require
   plugins: [require('@tailwindcss/forms')],
 }

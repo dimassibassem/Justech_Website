@@ -16,11 +16,13 @@ import {
     XIcon,
 } from '@heroicons/react/outline'
 import Link from "next/link";
+import Image from "next/future/image";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import MainContent from "@/components/dashboard/MainContent";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
+import justech from "@/images/logos/logo.png";
 
 const navigation = [
     {name: 'Home', href: '#', icon: HomeIcon},
@@ -142,9 +144,9 @@ export default function Dashboard() {
                                     </Transition.Child>
                                     <div className="pt-5 pb-4">
                                         <div className="flex-shrink-0 flex items-center px-4">
-                                            <img
+                                            <Image
                                                 className="h-8 w-auto"
-                                                src="https://tailwindui.com/img/logos/workflow-mark.svg?color=blue&shade=600"
+                                                src={justech}
                                                 alt="Workflow"
                                             />
                                         </div>
@@ -169,13 +171,7 @@ export default function Dashboard() {
                                     <div className="flex-shrink-0 flex border-t border-blue-gray-200 p-4">
                                         <Link href="/dashboard" className="flex-shrink-0 group block">
                                             <div className="flex items-center">
-                                                <div>
-                                                    <img
-                                                        className="inline-block h-10 w-10 rounded-full"
-                                                        src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80"
-                                                        alt=""
-                                                    />
-                                                </div>
+                                                <div />
                                                 <div className="ml-3">
                                                     <p className="text-base font-medium text-blue-gray-700 group-hover:text-blue-gray-900">
                                                         Lisa Marie
