@@ -51,7 +51,7 @@ public class BllPartner
         if (partnerFromDb.Id == 0)
         {
             jr.Success = false;
-            jr.Message = "Utilisateur n'exitse pas !";
+            jr.Message = "Partner n'exitse pas !";
         }
         else
         {
