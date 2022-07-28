@@ -191,7 +191,6 @@ public class DalUser
                             FirstName = dataReader["FirstName"].ToString()!,
                             LastName = dataReader["LastName"].ToString()!,
                             Email = dataReader["Email"].ToString()!,
-                            Password = dataReader["Password"].ToString()!
                         };
 
                         lstUser.Add(user);
@@ -234,7 +233,6 @@ public class DalUser
                         user.FirstName = dataReader["FirstName"].ToString()!;
                         user.LastName = dataReader["LastName"].ToString()!;
                         user.Email = dataReader["Email"].ToString()!;
-                        user.Password = dataReader["Password"].ToString()!;
                     }
                 }
             }
@@ -276,7 +274,6 @@ public class DalUser
                         user.FirstName = dataReader["FirstName"].ToString();
                         user.LastName = dataReader["LastName"].ToString()!;
                         user.Email = dataReader["Email"].ToString()!;
-                        user.Password = dataReader["Password"].ToString()!;
                         lstUser.Add(user);
                     }
                 }

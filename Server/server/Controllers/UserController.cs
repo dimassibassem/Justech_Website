@@ -66,7 +66,7 @@ namespace server.Controllers
                 JsonResponse jsonResponse = new JsonResponse
                 {
                     Success = false,
-                    Message = "Les paramétres ne sont pas valide"
+                    Message = "The parameters are invalid"
                 };
 
                 return Json(jsonResponse);
