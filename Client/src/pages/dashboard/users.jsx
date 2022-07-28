@@ -5,6 +5,7 @@ import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesk
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
+import UsersMainContent from "@/components/dashboard/Users/UsersMainContent";
 
 
 function Users() {
@@ -37,8 +38,7 @@ function Users() {
                             {/* Secondary sidebar */}
                             <SecondarySidebar subNavigation={subNavigation}/>
 
-                            {/* Main content */}
-                            {/* <MainContent/> */}
+                           <UsersMainContent />
                         </div>
                     </div>
                 </main>

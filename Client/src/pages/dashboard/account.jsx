@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
-import MainContent from "@/components/dashboard/MainContent";
+import MainContent from "@/components/dashboard/Account/MainContent";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";

@@ -5,6 +5,7 @@ import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesk
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
+import EventsMainContent from "@/components/dashboard/Events/EventsMainContent";
 
 function Events() {
     const subNavigation = useStore(state => state.subNavigation);
@@ -36,8 +37,7 @@ function Events() {
                             {/* Secondary sidebar */}
                             <SecondarySidebar subNavigation={subNavigation}/>
 
-                            {/* Main content */}
-                            {/* <MainContent/> */}
+                            <EventsMainContent/>
                         </div>
                     </div>
                 </main>

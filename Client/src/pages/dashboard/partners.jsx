@@ -5,6 +5,7 @@ import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesk
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
+import PartnersMainContent from "@/components/dashboard/Partners/PartnersMainContent";
 
 function Partners() {
     const subNavigation = useStore(state => state.subNavigation);
@@ -37,7 +38,7 @@ function Partners() {
                             <SecondarySidebar subNavigation={subNavigation}/>
 
                             {/* Main content */}
-                            {/* <MainContent/> */}
+                            <PartnersMainContent />
                         </div>
                     </div>
                 </main>
