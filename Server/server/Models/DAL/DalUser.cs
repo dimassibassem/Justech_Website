@@ -86,7 +86,7 @@ public class DalUser
             else
             {
                 jsonResponse.Success = false;
-                jsonResponse.Message = "L'utilisateur existe déjà avec la même adresse e-mail";
+                jsonResponse.Message = "User already exists with the same email address";
             }
 
             connection.Close();
@@ -94,7 +94,7 @@ public class DalUser
         catch (Exception e)
         {
             jsonResponse.Success = false;
-            jsonResponse.Message = "ERREUR INSERTION USER !!";
+            jsonResponse.Message = "INSERT USER ERROR !!";
         }
 
         return jsonResponse;
@@ -146,12 +146,12 @@ public class DalUser
                 if (command.ExecuteNonQuery() == 1)
                 {
                     jsonResponse.Success = true;
-                    jsonResponse.Message = "La mise à jour de l'utilisateur est réussie !";
+                    jsonResponse.Message = "User successful updated !";
                 }
                 else
                 {
                     jsonResponse.Success = false;
-                    jsonResponse.Message = "Échec de la mise à jour de l'utilisateur !";
+                    jsonResponse.Message = "Failed to update user !";
                 }
             }
 
@@ -299,32 +299,30 @@ public class DalUser
 
         try
         {
-            using (SqlConnection connection = DbConnection.GetConnection())
-            {
-                connection.Open();
-                string sql = @" DELETE 
+            using SqlConnection connection = DbConnection.GetConnection();
+            connection.Open();
+            string sql = @" DELETE 
                                     FROM [User] 
                                     WHERE [User].[" + field + "]=@FieldValue";
 
-                using (SqlCommand command = new SqlCommand(sql, connection))
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.CommandType = CommandType.Text;
+                command.Parameters.AddWithValue("@FieldValue", fieldValue);
+
+                if (command.ExecuteNonQuery() == 1)
                 {
-                    command.CommandType = CommandType.Text;
-                    command.Parameters.AddWithValue("@FieldValue", fieldValue);
-
-                    if (command.ExecuteNonQuery() == 1)
-                    {
-                        jsonResponse.Success = true;
-                        jsonResponse.Message = "Suppression réussie !";
-                    }
-                    else
-                    {
-                        jsonResponse.Success = false;
-                        jsonResponse.Message = "Échec de la suppression !";
-                    }
+                    jsonResponse.Success = true;
+                    jsonResponse.Message = "User deleted successfully! !";
                 }
-
-                connection.Close();
+                else
+                {
+                    jsonResponse.Success = false;
+                    jsonResponse.Message = "Failed to delete User !";
+                }
             }
+
+            connection.Close();
         }
         catch (Exception e)
         {

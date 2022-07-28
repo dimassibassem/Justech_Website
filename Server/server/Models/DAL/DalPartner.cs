@@ -87,7 +87,7 @@ public class DalPartner
                 else
                 {
                     jsonResponse.Success = false;
-                    jsonResponse.Message = "Partner existe déjà avec le nom";
+                    jsonResponse.Message = "Partner already exists with the name";
                 }
 
                 connection.Close();
@@ -96,7 +96,7 @@ public class DalPartner
         catch (Exception e)
         {
             jsonResponse.Success = false;
-            jsonResponse.Message = "ERREUR INSERTION PARTNER !!";
+            jsonResponse.Message = "ERROR INSERT PARTNER !!";
         }
 
         return jsonResponse;
@@ -149,12 +149,12 @@ public class DalPartner
                 if (command.ExecuteNonQuery() == 1)
                 {
                     jsonResponse.Success = true;
-                    jsonResponse.Message = "La mise à jour de Partner est réussie !";
+                    jsonResponse.Message = "Partner successfully updated !";
                 }
                 else
                 {
                     jsonResponse.Success = false;
-                    jsonResponse.Message = "Échec de la mise à jour de partner !";
+                    jsonResponse.Message = "Partner failed to updated !";
                 }
             }
 
@@ -316,12 +316,12 @@ public class DalPartner
                 if (command.ExecuteNonQuery() == 1)
                 {
                     jsonResponse.Success = true;
-                    jsonResponse.Message = "Suppression réussie !";
+                    jsonResponse.Message = "Successfully deleted !";
                 }
                 else
                 {
                     jsonResponse.Success = false;
-                    jsonResponse.Message = "Échec de la suppression !";
+                    jsonResponse.Message = "Delete Failed !";
                 }
             }
 

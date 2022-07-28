@@ -89,7 +89,7 @@ public class DalEvent
                 else
                 {
                     jsonResponse.Success = false;
-                    jsonResponse.Message = "Event existe déjà avec le nom";
+                    jsonResponse.Message = "Event already existed with this name";
                 }
 
                 connection.Close();
@@ -98,7 +98,7 @@ public class DalEvent
         catch (Exception e)
         {
             jsonResponse.Success = false;
-            jsonResponse.Message = "ERREUR INSERTION Event !!";
+            jsonResponse.Message = "ERREUR Inserting Event !!";
         }
 
         return jsonResponse;
@@ -157,12 +157,12 @@ public class DalEvent
                 if (command.ExecuteNonQuery() == 1)
                 {
                     jsonResponse.Success = true;
-                    jsonResponse.Message = "La mise à jour de l'event est réussie !";
+                    jsonResponse.Message = "Event successfully updated !";
                 }
                 else
                 {
                     jsonResponse.Success = false;
-                    jsonResponse.Message = "Échec de la mise à jour de l'event !";
+                    jsonResponse.Message = "Event failed to update !";
                 }
             }
 
@@ -329,12 +329,12 @@ public class DalEvent
                 if (command.ExecuteNonQuery() == 1)
                 {
                     jsonResponse.Success = true;
-                    jsonResponse.Message = "Suppression réussie !";
+                    jsonResponse.Message = "Successfully deleted !";
                 }
                 else
                 {
                     jsonResponse.Success = false;
-                    jsonResponse.Message = "Échec de la suppression !";
+                    jsonResponse.Message = "Delete Failed !";
                 }
             }
 
