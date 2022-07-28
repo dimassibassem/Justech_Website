@@ -1,4 +1,5 @@
-﻿using server.Extensions;
+﻿using Microsoft.AspNetCore.Cors;
+using server.Extensions;
 using server.Models.BLL;
 using server.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
