@@ -84,16 +84,6 @@ function MainContent() {
 
                     </div>
 
-                    <div className="pt-8 grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
-
-                        <p className="text-sm text-blue-gray-500 sm:col-span-6">
-                            This account was created on{' '}
-                            <time dateTime="2017-01-05T20:35:40">January 5, 2017, 8:35:40 PM
-                            </time>
-                            .
-                        </p>
-                    </div>
-
                     <div className="pt-8 flex justify-end">
                         <button
                             type="button"
