@@ -7,7 +7,6 @@ import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import UsersMainContent from "@/components/dashboard/Users/UsersMainContent";
 
-
 function Users() {
     const subNavigation = useStore(state => state.subNavigation);
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
@@ -17,6 +16,7 @@ function Users() {
         resetSubNavigation();
         subNavigation[index].current = true;
     }, []);
+
     return (
         <div className="h-full flex bg-blue-gray-50">
             {/* Adding this component ti simplify code */}
@@ -38,7 +38,7 @@ function Users() {
                             {/* Secondary sidebar */}
                             <SecondarySidebar subNavigation={subNavigation}/>
 
-                           <UsersMainContent />
+                            <UsersMainContent/>
                         </div>
                     </div>
                 </main>

@@ -1,5 +1,5 @@
 import React from 'react';
-import PartnersGrid from "@/components/dashboard/Partners/PartnersGrid";
+import EventsGrid from "@/components/dashboard/Events/EventsGrid";
 
 function EventsMainContent() {
     return (
@@ -17,7 +17,7 @@ function EventsMainContent() {
                     </div>
                 </div>
                 <div className="pb-4">
-                    <PartnersGrid/>
+                    <EventsGrid/>
                 </div>
 
                 <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200">
