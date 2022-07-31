@@ -20,18 +20,31 @@ namespace server.Controllers
         [HttpPost("UpsertPartner")]
         public JsonResult UpsertPartner([FromForm] Partner partner)
         {
-            if (partner.Thumbnail != null && partner.Thumbnail.Length > 0)
+            if (partner.Thumbnail is {Length: > 0})
+            {
+                var fileName = $"{partner.Id}.jpg";
+                var path = Path.Combine(_environment.WebRootPath, "images", "partners", fileName);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    partner.Thumbnail.CopyTo(stream);
+                }
+
+                partner.Thumbnail = null;
+            }
+
             {
                 if (!Directory.Exists(_environment.WebRootPath + "\\Uploads\\Partners"))
                 {
                     Directory.CreateDirectory(_environment.WebRootPath + "\\Uploads\\Partners");
                 }
 
+                var uidFileName = Guid.NewGuid() + "-" + partner.Thumbnail?.FileName;
                 using FileStream fileStream =
                     System.IO.File.Create(_environment.WebRootPath + "\\Uploads\\Partners\\" +
-                                          Guid.NewGuid() + "-" + partner.Thumbnail.FileName);
-                partner.Thumbnail.CopyTo(fileStream);
+                                          uidFileName);
+                partner.Thumbnail?.CopyTo(fileStream);
                 fileStream.Flush();
+                partner.ThumbnailName = uidFileName;
             }
 
             return Json(BllPartner.UpsertApi(partner));

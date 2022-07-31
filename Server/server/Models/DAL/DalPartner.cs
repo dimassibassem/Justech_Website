@@ -67,7 +67,7 @@ public class DalPartner
                 if (partner.Thumbnail == null)
                     command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
                 else
-                    command.Parameters.AddWithValue("@Thumbnail", partner.Thumbnail.FileName);
+                    command.Parameters.AddWithValue("@Thumbnail", partner.ThumbnailName);
 
 
                 if (String.IsNullOrEmpty(partner.Link))
@@ -137,7 +137,7 @@ public class DalPartner
                 if (partner.Thumbnail == null)
                     command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
                 else
-                    command.Parameters.AddWithValue("@Thumbnail", partner.Thumbnail.FileName);
+                    command.Parameters.AddWithValue("@Thumbnail", partner.ThumbnailName);
                 if (String.IsNullOrEmpty(partner.Link))
                     command.Parameters.AddWithValue("@Link", DBNull.Value);
                 else
