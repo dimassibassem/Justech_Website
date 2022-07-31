@@ -1,0 +1,1 @@
+This file is created to maintain the creating of wwwroot in git repo
