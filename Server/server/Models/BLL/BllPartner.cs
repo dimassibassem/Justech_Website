@@ -33,14 +33,7 @@ namespace server.Models.BLL
         {
             JsonResponse jr;
 
-            if (partner.Id == 0)
-            {
-                jr = DalPartner.AddPartner(partner);
-            }
-            else
-            {
-                jr = DalPartner.UpdatePartner(partner);
-            }
+            jr = partner.Id == 0 ? DalPartner.AddPartner(partner) : DalPartner.UpdatePartner(partner);
 
             return jr;
         }
