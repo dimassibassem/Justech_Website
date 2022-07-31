@@ -1,5 +1,4 @@
-﻿
-using server.Extensions;
+﻿using server.Extensions;
 using server.Models.BLL;
 using server.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +9,31 @@ namespace server.Controllers
     [ApiController]
     public class PartnersController : Controller
     {
+        IWebHostEnvironment _environment;
+
+        public PartnersController(IWebHostEnvironment environment)
+        {
+            _environment = environment;
+        }
+
 
         [HttpPost("UpsertPartner")]
         public JsonResult UpsertPartner([FromForm] Partner partner)
         {
+            if (partner.Thumbnail != null && partner.Thumbnail.Length > 0)
+            {
+                if (!Directory.Exists(_environment.WebRootPath + "\\Uploads\\Partners"))
+                {
+                    Directory.CreateDirectory(_environment.WebRootPath + "\\Uploads\\Partners");
+                }
+
+                using FileStream fileStream =
+                    System.IO.File.Create(_environment.WebRootPath + "\\Uploads\\Partners\\" +
+                                          Guid.NewGuid() + "-" + partner.Thumbnail.FileName);
+                partner.Thumbnail.CopyTo(fileStream);
+                fileStream.Flush();
+            }
+
             return Json(BllPartner.UpsertApi(partner));
         }
 
@@ -32,6 +52,7 @@ namespace server.Controllers
             {
                 return new List<Partner>();
             }
+
             return BllPartner.GetAllPartnersBy(field, value);
         }
 
@@ -72,10 +93,8 @@ namespace server.Controllers
 
                 return Json(jsonResponse);
             }
+
             return Json(BllPartner.DeleteApi(field, value));
         }
-
-
     }
 }
-

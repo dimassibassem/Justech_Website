@@ -64,13 +64,13 @@ public class DalPartner
                 else
                     command.Parameters.AddWithValue("@Description", partner.Description);
 
-                if (String.IsNullOrEmpty(partner.Thumbnail))
+                if (partner.Thumbnail == null)
                     command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
                 else
-                    command.Parameters.AddWithValue("@Thumbnail", partner.Thumbnail);
+                    command.Parameters.AddWithValue("@Thumbnail", partner.Thumbnail.FileName);
 
 
-                if (String.IsNullOrEmpty(partner.Thumbnail))
+                if (String.IsNullOrEmpty(partner.Link))
                     command.Parameters.AddWithValue("@Link", DBNull.Value);
                 else
                     command.Parameters.AddWithValue("@Link", partner.Link);
@@ -134,11 +134,11 @@ public class DalPartner
                     command.Parameters.AddWithValue("@Description", partner.Description);
 
 
-                if (String.IsNullOrEmpty(partner.Thumbnail))
+                if (partner.Thumbnail == null)
                     command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
                 else
-                    command.Parameters.AddWithValue("@Thumbnail", partner.Thumbnail);
-                if (String.IsNullOrEmpty(partner.Thumbnail))
+                    command.Parameters.AddWithValue("@Thumbnail", partner.Thumbnail.FileName);
+                if (String.IsNullOrEmpty(partner.Link))
                     command.Parameters.AddWithValue("@Link", DBNull.Value);
                 else
                     command.Parameters.AddWithValue("@Link", partner.Link);
@@ -193,7 +193,7 @@ public class DalPartner
                             Id = long.Parse(dataReader["Id"].ToString()!),
                             CompanyName = dataReader["CompanyName"].ToString()!,
                             Description = dataReader["Description"].ToString()!,
-                            Thumbnail = dataReader["Thumbnail"].ToString()!,
+                            ThumbnailName = dataReader["Thumbnail"].ToString()!,
                             Link = dataReader["Link"].ToString()!
                         };
 
@@ -236,7 +236,7 @@ public class DalPartner
                         partner.Id = long.Parse(dataReader["Id"].ToString()!);
                         partner.CompanyName = dataReader["CompanyName"].ToString()!;
                         partner.Description = dataReader["Description"].ToString()!;
-                        partner.Thumbnail = dataReader["Thumbnail"].ToString()!;
+                        partner.ThumbnailName = dataReader["Thumbnail"].ToString()!;
                         partner.Link = dataReader["Link"].ToString()!;
                     }
                 }
@@ -273,13 +273,15 @@ public class DalPartner
                 {
                     while (dataReader.Read())
                     {
-                        Partner partner = new Partner();
+                        Partner partner = new Partner
+                        {
+                            Id = long.Parse(dataReader["Id"].ToString()!),
+                            CompanyName = dataReader["CompanyName"].ToString()!,
+                            Description = dataReader["Description"].ToString()!,
+                            ThumbnailName = dataReader["Thumbnail"].ToString()!,
+                            Link = dataReader["Link"].ToString()!
+                        };
 
-                        partner.Id = long.Parse(dataReader["Id"].ToString()!);
-                        partner.CompanyName = dataReader["CompanyName"].ToString()!;
-                        partner.Description = dataReader["Description"].ToString()!;
-                        partner.Thumbnail = dataReader["Thumbnail"].ToString()!;
-                        partner.Link = dataReader["Link"].ToString()!;
                         lstPartner.Add(partner);
                     }
                 }
