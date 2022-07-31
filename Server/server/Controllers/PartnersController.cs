@@ -9,7 +9,7 @@ namespace server.Controllers
     [ApiController]
     public class PartnersController : Controller
     {
-        IWebHostEnvironment _environment;
+        readonly IWebHostEnvironment _environment;
 
         public PartnersController(IWebHostEnvironment environment)
         {
@@ -21,18 +21,23 @@ namespace server.Controllers
         public JsonResult UpsertPartner([FromForm] Partner partner)
         {
             if (partner.Thumbnail is not {Length: > 0}) return Json(BllPartner.UpsertApi(partner));
+
             if (!Directory.Exists(_environment.WebRootPath + "\\Uploads\\Partners"))
             {
                 Directory.CreateDirectory(_environment.WebRootPath + "\\Uploads\\Partners");
             }
 
-            var uidFileName = Guid.NewGuid() + "-" + partner.Thumbnail?.FileName;
-            using FileStream fileStream =
-                System.IO.File.Create(_environment.WebRootPath + "\\Uploads\\Partners\\" +
-                                      uidFileName);
-            partner.Thumbnail?.CopyTo(fileStream);
-            fileStream.Flush();
-            partner.ThumbnailName = uidFileName;
+            var isExist = BllPartner.GetPartnerBy("CompanyName", partner.CompanyName);
+            if (isExist.CompanyName == null)
+            {
+                var uidFileName = Guid.NewGuid() + "-" + partner.Thumbnail.FileName;
+                using FileStream fileStream =
+                    System.IO.File.Create(_environment.WebRootPath + "\\Uploads\\Partners\\" +
+                                          uidFileName);
+                partner.Thumbnail?.CopyTo(fileStream);
+                fileStream.Flush();
+                partner.ThumbnailName = uidFileName;
+            }
 
 
             return Json(BllPartner.UpsertApi(partner));
@@ -97,9 +102,10 @@ namespace server.Controllers
             Partner partner = BllPartner.GetPartnerBy(field, value);
             var imageToDelete = partner.ThumbnailName;
             if (!string.IsNullOrEmpty(imageToDelete))
-                {
-                    System.IO.File.Delete(_environment.WebRootPath + "\\Uploads\\Partners\\" + imageToDelete);
-                }
+            {
+                System.IO.File.Delete(_environment.WebRootPath + "\\Uploads\\Partners\\" + imageToDelete);
+            }
+
             return Json(BllPartner.DeleteApi(field, value));
         }
     }

@@ -96,7 +96,7 @@ public class DalPartner
         catch (Exception e)
         {
             jsonResponse.Success = false;
-            jsonResponse.Message = "ERROR INSERT PARTNER !!";
+            jsonResponse.Message = e.Message;
         }
 
         return jsonResponse;

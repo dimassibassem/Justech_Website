@@ -11,11 +11,7 @@ namespace server.Models.BLL
         {
             return DalPartner.GetPartnerBy(field, fieldValue);
         }
-
-        public static JsonResponse AddPartner(Partner partner)
-        {
-            return DalPartner.AddPartner(partner);
-        }
+        
 
         public static List<Partner> GetAllPartners()
         {
@@ -57,22 +53,6 @@ namespace server.Models.BLL
 
         #endregion
 
-        public static string CopyFilesToServer(Partner partner, IWebHostEnvironment hostingEnvironment)
-        {
-           string message = "" ;
-                if (partner.Thumbnail != null)
-                {
-                    var uploadsDir = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
-                    var fileName = Guid.NewGuid().ToString()+"-"+partner.Thumbnail.FileName;
-                    var filePath = Path.Combine(uploadsDir, fileName);
-                    using var stream = new FileStream(filePath, FileMode.Create);
-                    partner.Thumbnail.CopyTo(stream);
-                    message = "Opération réussie";
-                }
-            
-           
 
-            return message;
-        }
     }
 }
