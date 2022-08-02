@@ -41,7 +41,7 @@ namespace server.Models.BLL
             if (partnerFromDb.Id == 0)
             {
                 jr.Success = false;
-                jr.Message = "Partner n'exitse pas !";
+                jr.Message = "Partner does not exist!";
             }
             else
             {

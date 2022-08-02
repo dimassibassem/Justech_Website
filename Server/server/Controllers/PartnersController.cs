@@ -18,26 +18,28 @@ namespace server.Controllers
 
 
         [HttpPost("UpsertPartner")]
-        public JsonResult UpsertPartner([FromForm] Partner partner)
+        public async Task<IActionResult> UpsertPartner([FromForm] Partner partner)
         {
-            if (partner.Thumbnail is not {Length: > 0}) return Json(BllPartner.UpsertApi(partner));
+            if (partner.Thumbnail == null) return Json(BllPartner.UpsertApi(partner));
 
             if (!Directory.Exists(_environment.WebRootPath + "\\Uploads\\Partners"))
             {
                 Directory.CreateDirectory(_environment.WebRootPath + "\\Uploads\\Partners");
             }
 
-            var isExist = BllPartner.GetPartnerBy("CompanyName", partner.CompanyName);
-            if (isExist.CompanyName == null)
+            if (partner.CompanyName != null)
             {
-                var uidFileName = Guid.NewGuid() + "-" + partner.Thumbnail.FileName;
-                using FileStream fileStream =
-                    System.IO.File.Create(_environment.WebRootPath + "\\Uploads\\Partners\\" +
-                                          uidFileName);
-                partner.Thumbnail?.CopyTo(fileStream);
-                fileStream.Flush();
-                partner.ThumbnailName = uidFileName;
+                var isExist = BllPartner.GetPartnerBy("CompanyName", partner.CompanyName);
+                if (isExist.CompanyName != null) return Json(BllPartner.UpsertApi(partner));
             }
+
+            var uidFileName = Guid.NewGuid() + "-" + partner.Thumbnail.FileName;
+            await using FileStream fileStream =
+                System.IO.File.Create(_environment.WebRootPath + "\\Uploads\\Partners\\" +
+                                      uidFileName);
+            await partner.Thumbnail?.CopyToAsync(fileStream)!;
+            fileStream.Flush();
+            partner.ThumbnailName = uidFileName;
 
 
             return Json(BllPartner.UpsertApi(partner));

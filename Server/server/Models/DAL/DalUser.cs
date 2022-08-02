@@ -108,7 +108,6 @@ public class DalUser
         {
             using SqlConnection connection = DbConnection.GetConnection();
             connection.Open();
-
             string sql = @" UPDATE [User] 
                                     SET 
                                         FirstName=@FirstName,
