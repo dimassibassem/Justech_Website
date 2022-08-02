@@ -62,6 +62,8 @@ const createStateSlice = (set, get) => ({
             }
         )
     }, null, "resetSubNavigation"),
+    partners:[],
+    setPartners: (partners) => set({partners}, null, "setPartners"),
 })
 // const createTokenSlice = (set, get) => ({
 //     token: null,

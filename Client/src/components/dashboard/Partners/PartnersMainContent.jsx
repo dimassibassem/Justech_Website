@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import PartnersGrid from "@/components/dashboard/Partners/PartnersGrid";
+import {useStore} from "@/store";
 
 function PartnersMainContent() {
-
+    const setPartners = useStore(store => store.setPartners);
+    const partners = useStore(store => store.partners);
     const [state, setState] = useState({
         CompanyName: "",
         CompanyLogo: "",
@@ -19,12 +21,8 @@ function PartnersMainContent() {
         formData.append('Link', state.Link);
         formData.append('ThumbnailName', " ");
         formData.append('Id', 0);
-
-
         try {
-            const res = await axios.post('https://localhost:7002/api/Partners/UpsertPartner', formData
-            );
-            console.log(res.data);
+            await axios.post('https://localhost:7002/api/Partners/UpsertPartner', formData);
         } catch (err) {
             console.log(err);
         }
@@ -39,8 +37,16 @@ function PartnersMainContent() {
             ...state,
             [e.target.name]: e.target.value,
         })
-        console.log(state)
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await axios.get('https://localhost:7002/api/Partners/all');
+            setPartners(res.data);
+        }
+        fetchData().catch(err => console.log(err));
+    }, [handleSubmit]);
+
     return (
 
         <div className="flex-1 xl:overflow-y-auto">
@@ -56,7 +62,7 @@ function PartnersMainContent() {
                     </div>
                 </div>
                 <div className="pb-4">
-                    <PartnersGrid/>
+                    <PartnersGrid partners={partners}/>
                 </div>
 
                 <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200" onSubmit={handleSubmit}>
