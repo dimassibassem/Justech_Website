@@ -98,7 +98,7 @@ export function ContactUs() {
                 title='map'
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3237.1680107380157!2d10.791056915086388!3d35.7712490801733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x130212ca89dbb27b%3A0x892261dadf82c4e3!2sJUSTECH!5e0!3m2!1sfr!2stn!4v1659343051034!5m2!1sfr!2stn"
                 width="100%" height="500" allowFullScreen="" loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"></iframe>
+                referrerPolicy="no-referrer-when-downgrade" />
           </div>
         </div>
       </Container>

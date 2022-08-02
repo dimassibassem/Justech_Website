@@ -25,8 +25,8 @@ function PartnersMainContent() {
             const res = await axios.post('https://localhost:7002/api/Partners/UpsertPartner', formData
             );
             console.log(res.data);
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            console.log(err);
         }
     }
     const fileSelectedHandler = (event) => {
