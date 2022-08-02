@@ -1,8 +1,15 @@
 import React, {useState} from 'react';
-import PartnersGrid from "@/components/dashboard/Partners/PartnersGrid";
 import axios from "axios";
+import PartnersGrid from "@/components/dashboard/Partners/PartnersGrid";
 
 function PartnersMainContent() {
+
+    const [state, setState] = useState({
+        CompanyName: "",
+        CompanyLogo: "",
+        Description: "",
+        Link: "",
+    });
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData()
@@ -25,12 +32,7 @@ function PartnersMainContent() {
     const fileSelectedHandler = (event) => {
         setState({...state, CompanyLogo: event.target.files[0]});
     }
-    const [state, setState] = useState({
-        CompanyName: "",
-        CompanyLogo: "",
-        Description: "",
-        Link: "",
-    });
+
     const handleChange = e => {
         e.preventDefault();
         setState({
