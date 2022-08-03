@@ -51,7 +51,7 @@ public class BllEvent
         if (eventFromDb.Id == 0)
         {
             jr.Success = false;
-            jr.Message = "Utilisateur n'exitse pas !";
+            jr.Message = "Event Not Found !";
         }
         else
         {

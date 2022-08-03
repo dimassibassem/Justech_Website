@@ -50,8 +50,8 @@ public class DalEvent
                 connection.Open();
 
                 string sql =
-                    @" INSERT INTO [Event] ( EventName, Description,Thumbnail,Date,Location) OUTPUT INSERTED.Id 
-                                        VALUES (@EventName, @Description, @Thumbnail, @Date, @Location) ";
+                    @" INSERT INTO [Event] ( EventName, Description,Date,Location) OUTPUT INSERTED.Id 
+                                        VALUES (@EventName, @Description, @Date, @Location) ";
 
                 using SqlCommand command = new SqlCommand(sql, connection);
 
@@ -65,10 +65,10 @@ public class DalEvent
                 else
                     command.Parameters.AddWithValue("@Description", even.Description);
 
-                if (String.IsNullOrEmpty(even.Thumbnail))
-                    command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
-                else
-                    command.Parameters.AddWithValue("@Thumbnail", even.Thumbnail);
+                // if (even.Images == null)
+                //     command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
+                // else
+                //     command.Parameters.AddWithValue("@Thumbnail", even.Thumbnail);
                 if (String.IsNullOrEmpty(even.Date))
                     command.Parameters.AddWithValue("@Date", DBNull.Value);
                 else
@@ -117,10 +117,10 @@ public class DalEvent
                                     SET 
                                         EventName=@EventName,
                                         Description=@Description,
-                                        Thumbnail=@Thumbnail,
                                         Date=@Date,
                                         Location=@Location
                                     WHERE Id=@Id";
+            // Thumbnail=@Thumbnail,
 
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
@@ -136,11 +136,11 @@ public class DalEvent
                 else
                     command.Parameters.AddWithValue("@Description", even.Description);
 
-
-                if (String.IsNullOrEmpty(even.Thumbnail))
-                    command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
-                else
-                    command.Parameters.AddWithValue("@Thumbnail", even.Thumbnail);
+                //
+                // if (String.IsNullOrEmpty(even.Thumbnail))
+                //     command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
+                // else
+                //     command.Parameters.AddWithValue("@Thumbnail", even.Thumbnail);
 
                 if (String.IsNullOrEmpty(even.Date))
                     command.Parameters.AddWithValue("@Date", DBNull.Value);
@@ -201,7 +201,7 @@ public class DalEvent
                             Id = long.Parse(dataReader["Id"].ToString()!),
                             EventName = dataReader["EventName"].ToString()!,
                             Description = dataReader["Description"].ToString()!,
-                            Thumbnail = dataReader["Thumbnail"].ToString()!,
+                            // Thumbnail = dataReader["Thumbnail"].ToString()!,
                             Date = dataReader["Date"].ToString()!,
                             Location = dataReader["Location"].ToString()!
                         };
@@ -245,7 +245,7 @@ public class DalEvent
                         even.Id = long.Parse(dataReader["Id"].ToString()!);
                         even.EventName = dataReader["EventName"].ToString()!;
                         even.Description = dataReader["Description"].ToString()!;
-                        even.Thumbnail = dataReader["Thumbnail"].ToString()!;
+                        // even.Thumbnail = dataReader["Thumbnail"].ToString()!;
                         even.Location = dataReader["Location"].ToString()!;
                         even.Date = dataReader["Date"].ToString()!;
                     }
@@ -288,7 +288,7 @@ public class DalEvent
                             Id = long.Parse(dataReader["Id"].ToString()!),
                             EventName = dataReader["EventName"].ToString()!,
                             Description = dataReader["Description"].ToString()!,
-                            Thumbnail = dataReader["Thumbnail"].ToString()!,
+                            // Thumbnail = dataReader["Thumbnail"].ToString()!,
                             Date = dataReader["Date"].ToString()!,
                             Location = dataReader["Location"].ToString()!
                         };
@@ -344,6 +344,58 @@ public class DalEvent
         {
             jsonResponse.Success = false;
             jsonResponse.Message = e.Message;
+        }
+
+        return jsonResponse;
+    }
+
+
+    public static JsonResponse AddImageToRelationshipTable(string? eventName, string imageName)
+    {
+        JsonResponse jsonResponse = new JsonResponse();
+        try
+        {
+            using SqlConnection connection = DbConnection.GetConnection();
+            connection.Open();
+
+            string sql =
+                @" INSERT INTO [ImagesToEvent] (EventName, ImageName) 
+                                        VALUES (@EventName, @ImageName) ";
+
+            using SqlCommand command = new SqlCommand(sql, connection);
+
+            if (String.IsNullOrEmpty(eventName))
+                command.Parameters.AddWithValue("@EventName", DBNull.Value);
+            else
+                command.Parameters.AddWithValue("@EventName", eventName);
+
+            if (String.IsNullOrEmpty(imageName))
+                command.Parameters.AddWithValue("@ImageName", DBNull.Value);
+            else
+                command.Parameters.AddWithValue("@ImageName", imageName);
+
+
+            long id = (long) command.ExecuteScalar();
+
+            if (id > 0)
+            {
+                jsonResponse.Success = true;
+                jsonResponse.Message = id.ToString();
+            }
+
+            else
+            {
+                jsonResponse.Success = false;
+                jsonResponse.Message = "Event already existed with this name";
+            }
+
+            connection.Close();
+        }
+
+        catch (Exception e)
+        {
+            jsonResponse.Success = false;
+            jsonResponse.Message = "ERREUR Inserting Event Images !!";
         }
 
         return jsonResponse;

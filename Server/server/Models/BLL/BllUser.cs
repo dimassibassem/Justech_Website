@@ -51,7 +51,7 @@ namespace server.Models.BLL
             if (userFromDb.Id == 0)
             {
                 jr.Success = false;
-                jr.Message = "Utilisateur n'exitse pas !";
+                jr.Message = "User Not Found !";
             }
             else
             {
