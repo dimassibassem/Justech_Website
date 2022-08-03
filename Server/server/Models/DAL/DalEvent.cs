@@ -456,4 +456,48 @@ public class DalEvent
 
         return eventsWithImages;
     }
+    
+    
+    
+    public static JsonResponse DeleteEventImagesBy(string field, string fieldValue)
+    {
+        JsonResponse jsonResponse = new JsonResponse();
+
+        try
+        {
+            using SqlConnection connection = DbConnection.GetConnection();
+            connection.Open();
+            string sql = @" DELETE 
+                                    FROM [ImagesToEvent] 
+                                    WHERE [ImagesToEvent].[" + field + "]=@FieldValue";
+
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.CommandType = CommandType.Text;
+                command.Parameters.AddWithValue("@FieldValue", fieldValue);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    jsonResponse.Success = true;
+                    jsonResponse.Message = "Successfully deleted !";
+                }
+                else
+                {
+                    jsonResponse.Success = false;
+                    jsonResponse.Message = "Delete Failed !";
+                }
+            }
+
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            jsonResponse.Success = false;
+            jsonResponse.Message = e.Message;
+        }
+
+        return jsonResponse;
+    }
+
+    
 }

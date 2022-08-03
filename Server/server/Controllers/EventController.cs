@@ -28,7 +28,6 @@ namespace server.Controllers
                 Directory.CreateDirectory(_environment.WebRootPath + "\\Uploads\\Events");
             }
 
-
             foreach (var image in even.Images)
             {
                 var uidFileName = Guid.NewGuid() + "-" + image.FileName;
@@ -46,10 +45,7 @@ namespace server.Controllers
         [HttpGet("all")]
         public object GetAllEvents()
         {
-            var events = BllEvent.GetAllEvents();
-            
-
-            return events;
+            return BllEvent.GetAllEvents();
         }
 
 
@@ -96,13 +92,27 @@ namespace server.Controllers
                 JsonResponse jsonResponse = new JsonResponse
                 {
                     Success = false,
-                    Message = "Les paramétres ne sont pas valide"
+                    Message = "The parameters are invalid"
                 };
 
                 return Json(jsonResponse);
             }
 
-            return Json(BllEvent.DeleteApi(field, value));
+            Event even = BllEvent.GetEventBy(field, value);
+            var imagesToDelete = DalEvent.GetAllImageByEventName(even.EventName);
+
+            foreach (var image in imagesToDelete.Where(image => !string.IsNullOrEmpty(image)))
+            {
+                System.IO.File.Delete(_environment.WebRootPath + "\\Uploads\\Events\\" + image);
+            }
+
+            BllEvent.DeleteApi(field, value);
+            JsonResponse jsonRes = new JsonResponse
+            {
+                Success = true,
+                Message = "Deleted successfully"
+            };
+            return Json(jsonRes);
         }
     }
 }

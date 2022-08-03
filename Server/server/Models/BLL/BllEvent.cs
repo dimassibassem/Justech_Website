@@ -55,6 +55,7 @@ public class BllEvent
         }
         else
         {
+            DalEvent.DeleteEventImagesBy(field, fieldValue);
             jr = DalEvent.DeleteEventBy("Id", eventFromDb.Id.ToString());
         }
 
