@@ -1,4 +1,6 @@
-﻿namespace server.Models.DAL;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace server.Models.DAL;
 
 using System.Data;
 using System.Data.SqlClient;
@@ -64,11 +66,6 @@ public class DalEvent
                     command.Parameters.AddWithValue("@Description", DBNull.Value);
                 else
                     command.Parameters.AddWithValue("@Description", even.Description);
-
-                // if (even.Images == null)
-                //     command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
-                // else
-                //     command.Parameters.AddWithValue("@Thumbnail", even.Thumbnail);
                 if (String.IsNullOrEmpty(even.Date))
                     command.Parameters.AddWithValue("@Date", DBNull.Value);
                 else
@@ -374,24 +371,14 @@ public class DalEvent
             else
                 command.Parameters.AddWithValue("@ImageName", imageName);
 
-
-            long id = (long) command.ExecuteScalar();
-
-            if (id > 0)
-            {
-                jsonResponse.Success = true;
-                jsonResponse.Message = id.ToString();
-            }
-
-            else
-            {
-                jsonResponse.Success = false;
-                jsonResponse.Message = "Event already existed with this name";
-            }
-
-            connection.Close();
+            
+       
+            command.ExecuteNonQuery();
+            
+            
+            
+                connection.Close();
         }
-
         catch (Exception e)
         {
             Console.WriteLine(e.Message);

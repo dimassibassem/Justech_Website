@@ -19,7 +19,7 @@ namespace server.Controllers
 
 
         [HttpPost("UpsertEvent")]
-        public async Task<JsonResult> UpsertEvent([FromForm] Event even)
+        public async Task<IActionResult> UpsertEvent([FromForm] Event even)
         {
             if (even.Images == null) return Json(BllEvent.UpsertApi(even));
 
