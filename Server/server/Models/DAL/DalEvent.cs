@@ -394,8 +394,8 @@ public class DalEvent
 
         catch (Exception e)
         {
-            jsonResponse.Success = false;
-            jsonResponse.Message = "ERREUR Inserting Event Images !!";
+            
+            Console.WriteLine(e.Message);
         }
 
         return jsonResponse;

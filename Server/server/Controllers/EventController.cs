@@ -37,7 +37,7 @@ namespace server.Controllers
                                           uidFileName);
                 await image.CopyToAsync(fileStream)!;
                 fileStream.Flush();
-                DalEvent.AddImageToRelationshipTable(even.EventName, uidFileName);
+              var res =   DalEvent.AddImageToRelationshipTable(even.EventName, uidFileName);
             }
 
             return Json(BllEvent.UpsertApi(even));
