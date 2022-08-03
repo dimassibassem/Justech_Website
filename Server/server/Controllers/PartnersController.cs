@@ -40,8 +40,6 @@ namespace server.Controllers
             await partner.Thumbnail?.CopyToAsync(fileStream)!;
             fileStream.Flush();
             partner.ThumbnailName = uidFileName;
-
-
             return Json(BllPartner.UpsertApi(partner));
         }
 
@@ -95,7 +93,7 @@ namespace server.Controllers
                 JsonResponse jsonResponse = new JsonResponse
                 {
                     Success = false,
-                    Message = "Les paramétres ne sont pas valide"
+                    Message = "The parameters are invalid"
                 };
 
                 return Json(jsonResponse);

@@ -1,4 +1,6 @@
-﻿namespace server.Models.DAL;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace server.Models.DAL;
 
 using System.Data;
 using System.Data.SqlClient;
@@ -50,8 +52,8 @@ public class DalEvent
                 connection.Open();
 
                 string sql =
-                    @" INSERT INTO [Event] ( EventName, Description,Thumbnail,Date,Location) OUTPUT INSERTED.Id 
-                                        VALUES (@EventName, @Description, @Thumbnail, @Date, @Location) ";
+                    @" INSERT INTO [Event] ( EventName, Description,Date,Location) OUTPUT INSERTED.Id 
+                                        VALUES (@EventName, @Description, @Date, @Location) ";
 
                 using SqlCommand command = new SqlCommand(sql, connection);
 
@@ -64,11 +66,6 @@ public class DalEvent
                     command.Parameters.AddWithValue("@Description", DBNull.Value);
                 else
                     command.Parameters.AddWithValue("@Description", even.Description);
-
-                if (String.IsNullOrEmpty(even.Thumbnail))
-                    command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
-                else
-                    command.Parameters.AddWithValue("@Thumbnail", even.Thumbnail);
                 if (String.IsNullOrEmpty(even.Date))
                     command.Parameters.AddWithValue("@Date", DBNull.Value);
                 else
@@ -117,10 +114,10 @@ public class DalEvent
                                     SET 
                                         EventName=@EventName,
                                         Description=@Description,
-                                        Thumbnail=@Thumbnail,
                                         Date=@Date,
                                         Location=@Location
                                     WHERE Id=@Id";
+            // Thumbnail=@Thumbnail,
 
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
@@ -136,11 +133,11 @@ public class DalEvent
                 else
                     command.Parameters.AddWithValue("@Description", even.Description);
 
-
-                if (String.IsNullOrEmpty(even.Thumbnail))
-                    command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
-                else
-                    command.Parameters.AddWithValue("@Thumbnail", even.Thumbnail);
+                //
+                // if (String.IsNullOrEmpty(even.Thumbnail))
+                //     command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
+                // else
+                //     command.Parameters.AddWithValue("@Thumbnail", even.Thumbnail);
 
                 if (String.IsNullOrEmpty(even.Date))
                     command.Parameters.AddWithValue("@Date", DBNull.Value);
@@ -201,7 +198,7 @@ public class DalEvent
                             Id = long.Parse(dataReader["Id"].ToString()!),
                             EventName = dataReader["EventName"].ToString()!,
                             Description = dataReader["Description"].ToString()!,
-                            Thumbnail = dataReader["Thumbnail"].ToString()!,
+                            // Thumbnail = dataReader["Thumbnail"].ToString()!,
                             Date = dataReader["Date"].ToString()!,
                             Location = dataReader["Location"].ToString()!
                         };
@@ -245,7 +242,7 @@ public class DalEvent
                         even.Id = long.Parse(dataReader["Id"].ToString()!);
                         even.EventName = dataReader["EventName"].ToString()!;
                         even.Description = dataReader["Description"].ToString()!;
-                        even.Thumbnail = dataReader["Thumbnail"].ToString()!;
+                        // even.Thumbnail = dataReader["Thumbnail"].ToString()!;
                         even.Location = dataReader["Location"].ToString()!;
                         even.Date = dataReader["Date"].ToString()!;
                     }
@@ -288,7 +285,7 @@ public class DalEvent
                             Id = long.Parse(dataReader["Id"].ToString()!),
                             EventName = dataReader["EventName"].ToString()!,
                             Description = dataReader["Description"].ToString()!,
-                            Thumbnail = dataReader["Thumbnail"].ToString()!,
+                            // Thumbnail = dataReader["Thumbnail"].ToString()!,
                             Date = dataReader["Date"].ToString()!,
                             Location = dataReader["Location"].ToString()!
                         };
@@ -348,4 +345,146 @@ public class DalEvent
 
         return jsonResponse;
     }
+
+
+    public static void AddImageToRelationshipTable(string? eventName, string imageName)
+    {
+        JsonResponse jsonResponse = new JsonResponse();
+        try
+        {
+            using SqlConnection connection = DbConnection.GetConnection();
+            connection.Open();
+
+            string sql =
+                @" INSERT INTO [ImagesToEvent] (EventName, ImageName) 
+                                        VALUES (@EventName, @ImageName) ";
+
+            using SqlCommand command = new SqlCommand(sql, connection);
+
+            if (String.IsNullOrEmpty(eventName))
+                command.Parameters.AddWithValue("@EventName", DBNull.Value);
+            else
+                command.Parameters.AddWithValue("@EventName", eventName);
+
+            if (String.IsNullOrEmpty(imageName))
+                command.Parameters.AddWithValue("@ImageName", DBNull.Value);
+            else
+                command.Parameters.AddWithValue("@ImageName", imageName);
+
+            
+       
+            command.ExecuteNonQuery();
+            
+            
+            
+                connection.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+    
+
+    public static List<string> GetAllImageByEventName(string? value)
+    {
+        var list = new List<string>();
+        try
+        {
+            using SqlConnection connection = DbConnection.GetConnection();
+            connection.Open();
+            string sql = @" SELECT * 
+                                    FROM [ImagesToEvent] 
+                                    WHERE [ImagesToEvent].[EventName]=@Field";
+
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.CommandType = CommandType.Text;
+                command.Parameters.AddWithValue("@Field", value);
+
+                using (SqlDataReader dataReader = command.ExecuteReader())
+                {
+                    while (dataReader.Read())
+                    {
+                        list.Add(dataReader["ImageName"].ToString()!);
+                    }
+                }
+            }
+
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+
+        return list;
+    }
+
+    public static object GetEventsWithImages()
+    {
+        var events = GetAllEvents();
+        var eventsWithImages = new object[events.Count];
+        var i = 0;
+        foreach (var event1 in events)
+        {
+            var eventWithImages = new
+            {
+                event1.Id,
+                event1.EventName,
+                event1.Description,
+                event1.Date,
+                event1.Location,
+                Images = GetAllImageByEventName(event1.EventName)
+            };
+            eventsWithImages[i] = eventWithImages;
+            i++;
+        }
+
+        return eventsWithImages;
+    }
+    
+    
+    
+    public static JsonResponse DeleteEventImagesBy(string field, string fieldValue)
+    {
+        JsonResponse jsonResponse = new JsonResponse();
+
+        try
+        {
+            using SqlConnection connection = DbConnection.GetConnection();
+            connection.Open();
+            string sql = @" DELETE 
+                                    FROM [ImagesToEvent] 
+                                    WHERE [ImagesToEvent].[" + field + "]=@FieldValue";
+
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.CommandType = CommandType.Text;
+                command.Parameters.AddWithValue("@FieldValue", fieldValue);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    jsonResponse.Success = true;
+                    jsonResponse.Message = "Successfully deleted !";
+                }
+                else
+                {
+                    jsonResponse.Success = false;
+                    jsonResponse.Message = "Delete Failed !";
+                }
+            }
+
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            jsonResponse.Success = false;
+            jsonResponse.Message = e.Message;
+        }
+
+        return jsonResponse;
+    }
+
+    
 }

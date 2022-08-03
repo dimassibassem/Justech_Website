@@ -16,9 +16,9 @@ public class BllEvent
         return DalEvent.AddEvent(even);
     }
 
-    public static List<Event> GetAllEvents()
+    public static object GetAllEvents()
     {
-        return DalEvent.GetAllEvents();
+        return DalEvent.GetEventsWithImages();
     }
 
     public static List<Event> GetAllEventsBy(string field, string value)
@@ -51,10 +51,11 @@ public class BllEvent
         if (eventFromDb.Id == 0)
         {
             jr.Success = false;
-            jr.Message = "Utilisateur n'exitse pas !";
+            jr.Message = "Event Not Found !";
         }
         else
         {
+            DalEvent.DeleteEventImagesBy(field, fieldValue);
             jr = DalEvent.DeleteEventBy("Id", eventFromDb.Id.ToString());
         }
 
