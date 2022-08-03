@@ -350,7 +350,7 @@ public class DalEvent
     }
 
 
-    public static JsonResponse AddImageToRelationshipTable(string? eventName, string imageName)
+    public static void AddImageToRelationshipTable(string? eventName, string imageName)
     {
         JsonResponse jsonResponse = new JsonResponse();
         try
@@ -397,7 +397,6 @@ public class DalEvent
             
             Console.WriteLine(e.Message);
         }
-
-        return jsonResponse;
+        
     }
 }
