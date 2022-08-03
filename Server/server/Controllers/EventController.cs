@@ -44,10 +44,12 @@ namespace server.Controllers
         }
 
         [HttpGet("all")]
-        public List<Event> GetAllEvents()
+        public object GetAllEvents()
         {
-            return BllEvent.GetAllEvents();
-            //return new List<Event>();
+            var events = BllEvent.GetAllEvents();
+            
+
+            return events;
         }
 
 

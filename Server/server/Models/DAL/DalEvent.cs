@@ -394,9 +394,66 @@ public class DalEvent
 
         catch (Exception e)
         {
-            
             Console.WriteLine(e.Message);
         }
-        
+    }
+    
+
+    public static List<string> GetAllImageByEventName(string? value)
+    {
+        var list = new List<string>();
+        try
+        {
+            using SqlConnection connection = DbConnection.GetConnection();
+            connection.Open();
+            string sql = @" SELECT * 
+                                    FROM [ImagesToEvent] 
+                                    WHERE [ImagesToEvent].[EventName]=@Field";
+
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.CommandType = CommandType.Text;
+                command.Parameters.AddWithValue("@Field", value);
+
+                using (SqlDataReader dataReader = command.ExecuteReader())
+                {
+                    while (dataReader.Read())
+                    {
+                        list.Add(dataReader["ImageName"].ToString()!);
+                    }
+                }
+            }
+
+            connection.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+
+        return list;
+    }
+
+    public static object GetEventsWithImages()
+    {
+        var events = GetAllEvents();
+        var eventsWithImages = new object[events.Count];
+        var i = 0;
+        foreach (var event1 in events)
+        {
+            var eventWithImages = new
+            {
+                event1.Id,
+                event1.EventName,
+                event1.Description,
+                event1.Date,
+                event1.Location,
+                Images = GetAllImageByEventName(event1.EventName)
+            };
+            eventsWithImages[i] = eventWithImages;
+            i++;
+        }
+
+        return eventsWithImages;
     }
 }

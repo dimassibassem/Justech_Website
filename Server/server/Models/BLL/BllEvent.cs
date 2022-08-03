@@ -16,9 +16,9 @@ public class BllEvent
         return DalEvent.AddEvent(even);
     }
 
-    public static List<Event> GetAllEvents()
+    public static object GetAllEvents()
     {
-        return DalEvent.GetAllEvents();
+        return DalEvent.GetEventsWithImages();
     }
 
     public static List<Event> GetAllEventsBy(string field, string value)
