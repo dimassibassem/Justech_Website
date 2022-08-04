@@ -32,6 +32,7 @@ export function SwiperGallery({ partners, selectedIndex }) {
             }}
             isActive={featureIndex === selectedIndex}
             className='relative'
+            onClick={() => {console.log(feature.name)}}
           />
         </SwiperSlide>
       ))}
