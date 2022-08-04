@@ -5,9 +5,22 @@ import { Autoplay,Scrollbar } from 'swiper'
 import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import axios from "axios";
+import {Button} from "@/components/Button";
 
-export default function PartnersGrid({partners}) {
+export default function PartnersGrid({partners,setPartners}) {
     const id = useId()
+
+    const handleDelete = async (companyName) => {
+        await axios.delete('https://localhost:7002/api/Partners/DeletePartnerBy', {
+            params: {
+                field: "CompanyName",
+                value: companyName
+            }
+        })
+        const res = await axios.get("https://localhost:7002/api/Partners/all")
+        setPartners(res.data)
+    }
     return (
             <Swiper
                 spaceBetween={50}
@@ -30,7 +43,13 @@ export default function PartnersGrid({partners}) {
 
                     </div>
                     <p className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{partner.companyName}</p>
-                <div className="mb-8" />
+                    <Button
+                        className="mt-5 text-gray-100 bg-red-600 w-full hover:bg-red-900 hover:text-white hover:text-lg"
+                        onClick={() => handleDelete(partner.companyName)}>
+                        Delete Partner
+                    </Button>
+
+                    <div className="mb-8" />
                 </SwiperSlide>
             ))}
             </Swiper>

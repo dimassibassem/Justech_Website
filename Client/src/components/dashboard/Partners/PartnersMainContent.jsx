@@ -67,7 +67,7 @@ function PartnersMainContent() {
                     </div>
                 </div>
                 <div className="pb-4">
-                    <PartnersGrid partners={partners}/>
+                    <PartnersGrid partners={partners} setPartners={setPartners}/>
                 </div>
 
                 <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200" onSubmit={handleSubmit}>
