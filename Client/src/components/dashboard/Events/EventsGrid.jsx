@@ -4,7 +4,8 @@ import "node_modules/react-image-gallery/styles/css/image-gallery.css";
 import {Swiper, SwiperSlide} from "swiper/react";
 import 'swiper/css'
 import 'swiper/css/autoplay'
-import {Autoplay} from 'swiper'
+import {Autoplay, Scrollbar} from 'swiper'
+import "swiper/css/scrollbar";
 
 export default function EventsGrid({events}) {
     const id = useId()
@@ -30,10 +31,13 @@ export default function EventsGrid({events}) {
 
     return (
         <Swiper
-            spaceBetween={20}
+            spaceBetween={60}
             slidesPerView={2}
-            modules={[Autoplay]}
+            modules={[Autoplay, Scrollbar]}
             autoplay
+            scrollbar={{
+                hide: false,
+            }}
         >
             {arr?.map((item, i) => (
 
@@ -46,7 +50,7 @@ export default function EventsGrid({events}) {
                             className="mt-2 block  text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.date}</p>
 
                     </div>
-
+                    <div className="mb-8" />
                 </SwiperSlide>
             ))}
         </Swiper>

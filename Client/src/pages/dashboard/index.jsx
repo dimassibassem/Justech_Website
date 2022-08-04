@@ -7,7 +7,7 @@ import ForMobile from "@/components/dashboard/ForMobile";
 import {useStore} from "@/store";
 
 
-export default function Dashboard() {
+export default function Index() {
     const subNavigation = useStore(state => state.subNavigation);
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
     useEffect(() => {
