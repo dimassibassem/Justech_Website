@@ -12,6 +12,11 @@ function PartnersMainContent() {
         Description: "",
         Link: "",
     });
+
+    const fetchData = async () => {
+        const res = await axios.get('https://localhost:7002/api/Partners/all');
+        setPartners(res.data);
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData()
@@ -23,6 +28,7 @@ function PartnersMainContent() {
         formData.append('Id', 0);
         try {
             await axios.post('https://localhost:7002/api/Partners/UpsertPartner', formData);
+            await fetchData();
         } catch (err) {
             console.log(err);
         }
@@ -40,12 +46,11 @@ function PartnersMainContent() {
     }
 
     useEffect(() => {
-        const fetchData = async () => {
-            const res = await axios.get('https://localhost:7002/api/Partners/all');
-            setPartners(res.data);
-        }
         fetchData().catch(err => console.log(err));
-    }, [handleSubmit]);
+    }, []);
+
+    useEffect(() => {
+    }, [partners]);
 
     return (
 

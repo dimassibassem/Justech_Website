@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import EventsGrid from "@/components/dashboard/Events/EventsGrid";
+import {useStore} from "@/store";
 
 function EventsMainContent() {
-
+    const setEvents = useStore(store => store.setEvents);
+    const events = useStore(store => store.events);
     const [state, setState] = useState({
         eventName: "",
         description: "",
@@ -11,7 +13,10 @@ function EventsMainContent() {
         link: "",
         location: "",
     });
-
+    const fetchEvents = async () => {
+        const result = await axios.get('https://localhost:7002/api/Event/all')
+        setEvents(result.data);
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData()
@@ -26,6 +31,7 @@ function EventsMainContent() {
         formData.append('Date', state.date);
         try {
             await axios.post('https://localhost:7002/api/Event/UpsertEvent', formData);
+            await fetchEvents();
         } catch (err) {
             console.log(err);
         }
@@ -43,6 +49,13 @@ function EventsMainContent() {
         })
     }
 
+    useEffect(() => {
+        fetchEvents().catch(e => console.log(e))
+    }, []);
+
+    useEffect(() => {
+
+    }, [events]);
     return (
 
         <div className="flex-1 xl:overflow-y-auto">
@@ -58,7 +71,7 @@ function EventsMainContent() {
                     </div>
                 </div>
                 <div className="pb-4">
-                    <EventsGrid/>
+                    <EventsGrid events={events}/>
                 </div>
 
                 <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200" onSubmit={handleSubmit}>

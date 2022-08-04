@@ -1,30 +1,37 @@
-import {useEffect, useId} from "react";
-import axios from "axios";
-import {useStore} from "@/store";
+import {useId} from "react";
+import ImageGallery from "react-image-gallery";
+import "node_modules/react-image-gallery/styles/css/image-gallery.css";
 
-export default function EventsGrid() {
-    const events = useStore(store => store.events);
-    const setEvents = useStore(store => store.setEvents);
+export default function EventsGrid({events}) {
     const id = useId()
-    const fetchEvents = async () => {
-        const result = await axios.get('https://localhost:7002/api/Event/all')
-        setEvents(result.data);
+
+
+    for (let i = 0; i < events.length; i += 1) {
+        for (let j = 0; j < events[i].images.length; j += 1) {
+            events[i].images[j] = `${events[i].images[j]}`.indexOf("https://localhost:7002/wwwroot/Uploads/Events/") === -1 ? `https://localhost:7002/wwwroot/Uploads/Events/${events[i].images[j]}` : events[i].images[j];
+        }
     }
-    useEffect(() => {
-        fetchEvents().catch(e => console.log(e))
-    }, []);
+
+    const arr = [];
+    events.map(event =>
+
+        arr?.push({
+            event,
+            images: event.images.map(img => ({
+                original: `${img}`,
+                thumbnail: `${img}`
+            }))
+        })
+    )
+
     return (
         <ul role="list"
-            className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-            {events?.map((event, i) => (
+            className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-2 xl:gap-x-8">
+            {arr?.map((item, i) => (
                 <li key={`${id + i}`} className="relative">
-                    <div
-                        className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
-                        <img src={`https://localhost:7002/wwwroot/Uploads/Events/${event.images[0]}`} alt=""
-                             className="object-cover pointer-events-none group-hover:opacity-75"/>
+                    <ImageGallery items={item.images}/>
+                    <p className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.eventName}</p>
 
-                    </div>
-                    <p className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{event.eventName}</p>
                 </li>
             ))}
         </ul>
