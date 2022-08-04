@@ -62,28 +62,6 @@ namespace server.Controllers
         }
 
 
-        [HttpGet("GetPartnerBy")]
-        public Partner GetPartnerBy(string field, string value)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                Partner partner = BllPartner.GetPartnerBy(field, value);
-
-                if (partner.Id != 0)
-                {
-                    return partner;
-                }
-                else
-                {
-                    return new Partner();
-                }
-            }
-            else
-            {
-                return new Partner();
-            }
-        }
-
 
         [HttpDelete("DeletePartnerBy")]
         public JsonResult DeletePartnerBy(string field, string value)

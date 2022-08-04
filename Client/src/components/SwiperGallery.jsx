@@ -17,22 +17,22 @@ export function SwiperGallery({ partners, selectedIndex }) {
       autoplay
     >
 
-      {partners?.map((feature, featureIndex) => (
-        <SwiperSlide key={`${featureIndex + id}`}>
+      {partners?.map((partner, partnerIndex) => (
+        <SwiperSlide key={`${partnerIndex + id}`}>
           <Feature
-            key={feature.name}
-            feature={{
-              ...feature,
-              name: (
+            key={partner.companyName}
+            partner={{
+              ...partner,
+              companyName: (
                 <Tab className='[&:not(:focus-visible)]:focus:outline-none'>
                   <span className='absolute inset-0' />
-                  {feature.name}
+                  {partner.companyName}
                 </Tab>
               )
             }}
-            isActive={featureIndex === selectedIndex}
+            isActive={partnerIndex === selectedIndex}
             className='relative'
-            onClick={() => {console.log(feature.name)}}
+            onClick={() => {console.log(partner.companyName)}}
           />
         </SwiperSlide>
       ))}

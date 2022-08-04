@@ -1,5 +1,6 @@
 
-import { CameraIcon } from '@heroicons/react/solid'
+import { GlobeAltIcon } from '@heroicons/react/solid'
+
 
 export default function SinglePartner({partner}) {
     console.log(partner);
@@ -51,8 +52,8 @@ export default function SinglePartner({partner}) {
                                     />
                                 </div>
                                 <figcaption className="mt-3 flex text-sm text-gray-500">
-                                    <CameraIcon className="flex-none w-5 h-5 text-gray-400" aria-hidden="true" />
-                                    <a href={partner[0].link} className="ml-2 text-blue-500 hover:text-blue-700">Company website</a>
+                                    <GlobeAltIcon className="ml-1 flex-none w-6 h-6 text-gray-400" aria-hidden="true" />
+                                    <a href={`${partner[0].link}`} className="ml-2 text-base text-blue-600 hover:text-blue-800">Company website</a>
                                 </figcaption>
                             </figure>
                         </div>

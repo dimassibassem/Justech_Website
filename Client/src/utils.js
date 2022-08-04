@@ -1,3 +1,4 @@
+import {useId} from "react";
 import wiley from '@/images/logos/partners/wiley.png'
 import cairn from '@/images/logos/partners/cairn.png'
 import sage from '@/images/logos/partners/sage.png'
@@ -14,12 +15,12 @@ import almanhal from '@/images/logos/partners/almanhal.png'
 export const partners = [
   {
     name: 'Reporting',
-    summary: 'WILEY ONLINE LIBRARY.',
+    companyName: 'WILEY ONLINE LIBRARY.',
     description:
       'A Global Research business is a provider of content-enabled solutions to improve outcomes in research, education and professional practice with online tools, journals, books, databases, reference works and laboratory protocols. With strengths in every major academic, scientific and professional field, and strong brands including Wiley Blackwell and Wiley VCH, Wiley proudly partners with over 800 prestigious societies representing two million members.',
-    image: wiley,
+    thumbnailName: wiley,
     icon: function ReportingIcon() {
-      let id = useId()
+      const id = useId()
       return (
         <>
           <defs>
@@ -48,11 +49,11 @@ export const partners = [
   },
   {
     name: 'Cairn',
-    summary:
+    companyName:
       'CAIRN.INFO',
     description:
       'A major French-language web portal, founded in 2005, containing scholarly materials in the humanities and social sciences. Much of the collection is in French, but it also includes an English-language international interface to facilitate use by non-francophones. Primary research areas include communications, economics, education, geography, history, literature, linguistics, philosophy, political science, law, psychology, sociology, and cultural studies.',
-    image: cairn,
+    thumbnailName: cairn,
     icon: function InventoryIcon() {
       return (
         <>
@@ -76,11 +77,11 @@ export const partners = [
   },
   {
     name: 'Sage',
-    summary:
+    companyName:
       'SAGE PUBLICATION',
     description:
       'Was founded 50 years ago by Sara Miller McCune to support the dissemination of usable knowledge and educate a global community. SAGE now publishes over 800 books a year, over 900 journals – including those of more than 400 learned societies and institutions – across a broad range of subject areas encompassing business, humanities, social sciences, and science, technology, and medicine. Alongside this SAGE has a growing suite of innovative library products such as archives, data, case studies, video and the highly successful online tool SAGE Research Methods. SAGE remains majority-owned by our founder, who has ensured that the company will remain permanently independent.',
-    image: sage,
+    thumbnailName: sage,
     icon: function ContactsIcon() {
       return (
         <>
@@ -99,11 +100,11 @@ export const partners = [
   },
   {
     name: 'EMERALD INSIGHTS ',
-    summary:
+    companyName:
       'EMERALD INSIGHTS',
     description:
       'Emerald Group Publishing Limited is a scholarly publisher of academic journals and books in the fields of management, business, education, library studies, health care, and engineering. It was founded in the United Kingdom in 1967 and has its headquarters in Bingley. The company manages a portfolio of more than 300 journals and over 2650 books and book series volumes. It operates worldwide with offices and associates in Australia, Brazil, China, the Czech Republic, Dubai, India, Indonesia, Japan, Lithuania, Malaysia, Mexico, Singapore, South Africa, South Korea, Turkey, and the United States.',
-    image: emeraldinsight,
+    thumbnailName: emeraldinsight,
     icon: function ContactsIcon() {
       return (
         <>
@@ -122,11 +123,11 @@ export const partners = [
   },
   {
     name: 'NATIONAL GEOGRAPHIC LEARNING',
-    summary:
+    companyName:
       'NATIONAL GEOGRAPHIC LEARNING',
     description:
       'A part of Cengage Learning, is a leading educational publisher of school, higher education, English Language Teaching, library and reference materials. At National Geographic Learning, we believe that an engaged and motivated learner will be a successful one, and we design our materials to motivate. We believe that learning can be exciting, inspiring, and transformational.',
-    image: natgeo,
+    thumbnailName: natgeo,
     icon: function ContactsIcon() {
       return (
         <>
@@ -145,11 +146,11 @@ export const partners = [
   },
   {
     name: 'TAYLOR AND FRANCIS',
-    summary:
+    companyName:
       'TAYLOR AND FRANCIS',
     description:
       'Taylor & Francis Group publishes quality peer-reviewed journals under the Routledge and Taylor & Francis imprints. Our journal content is hosted on Taylor & Francis Online, our content platform, where you can browse by subject, drill down to journal level to find the aims, scope and editorial board for each individual title and benefit from saved searching functionality.',
-    image: taylor,
+    thumbnailName: taylor,
     icon: function ContactsIcon() {
       return (
         <>
@@ -168,11 +169,11 @@ export const partners = [
   },
   {
     name: 'SAE',
-    summary:
+    companyName:
       'SAE International',
     description:
       'A global association of engineers and related technical experts in the automotive, aerospace and commercial-vehicle industries. SAE’s core competencies are standards development and life-long learning, and through its charitable arm, the SAE Foundation, programs including A World in Motion® and the Collegiate Design Series are supported.',
-    image: sae,
+    thumbnailName: sae,
     icon: function ContactsIcon() {
       return (
         <>
@@ -191,14 +192,14 @@ export const partners = [
   },
   {
     name: 'ELTEACH',
-    summary:
+    companyName:
       'ELTEACH.',
     description:
       'An online, integrated Professional Development, Assessment, and Certificate program supporting teachers of English through coursework and assessments in:' +
       +' English-for-Teaching,' +
       ' Professional Knowledge for ELT' +
       'ELTeach is designed to ensure that teachers of English have the language and professional knowledge necessary to implement their national English curriculum successfully and confidently.',
-    image: eltech,
+    thumbnailName: eltech,
     icon: function ContactsIcon() {
       return (
         <>
@@ -217,11 +218,11 @@ export const partners = [
   },
   {
     name: 'EBSCO',
-    summary:
+    companyName:
       'EBSCO',
     description:
       'EBSCO Information Services is a part of the information technology community, our needs are those of our customers. We’re dedicated to developing customizable services, supporting the technology needs of our customers and creating strong user experiences to help libraries and other institutions support their end users and improve access to information',
-    image: ebsco,
+    thumbnailName: ebsco,
     icon: function ContactsIcon() {
       return (
         <>
@@ -240,11 +241,11 @@ export const partners = [
   },
   {
     name: 'CENGAGE',
-    summary:
+    companyName:
       'CENGAGE',
     description:
       'For more than 60 years, Gale, a Cengage company has partnered with libraries around the world to empower the discovery of knowledge and insights by all people, for all purposes. Knowledge is power, and the act of learning is empowering. Access to knowledge offers learners an opportunity to discover the motivation and inspiration vital to making a positive contribution in not only their own lives, but the rest of the world. That’s why Gale provides libraries with original and curated content, as well as the modern research tools that are crucial in connecting libraries to learning, and learners to libraries.',
-    image: cenage,
+    thumbnailName: cenage,
     icon: function ContactsIcon() {
       return (
         <>
@@ -263,12 +264,12 @@ export const partners = [
   },
   {
     name: 'British Medical Journal',
-    summary:
+    companyName:
       'British Medical Journal',
     description:
       'Started out over 170 years ago as a medical journal, publishing our first research paper on the treatment of squinting.\n' +
       'Now, as a global brand with a worldwide audience, we help medical organizations and clinicians tackle today’s most critical healthcare challenges. We do this by publishing the newest, cutting edge academic research, providing professional development solutions and creating clinical decision support tools.',
-    image: bmj,
+    thumbnailName: bmj,
     icon: function ContactsIcon() {
       return (
         <>
@@ -287,11 +288,11 @@ export const partners = [
   },
   {
     name: 'Al MANHAL',
-    summary:
+    companyName:
       'Al MANHAL',
     description:
       'the leading Arabic electronic information provider. We are the world’s only provider of full-text searchable databases of scholarly and scientific publications from the Middle East, Africa & Asia’s. Al Manhal combines deep publishing and library expertise with best-in-class technology to enable university, government, corporate, school and public library users to efficiently discover and access thousands of eBooks, eJournals, eTheses, intelligence reports, and conference proceedings from the Middle East, Africa & Asia’s leading publishers and research institutes.',
-    image: almanhal,
+    thumbnailName: almanhal,
     icon: function ContactsIcon() {
       return (
         <>
