@@ -1,6 +1,10 @@
 import {useId} from "react";
 import ImageGallery from "react-image-gallery";
 import "node_modules/react-image-gallery/styles/css/image-gallery.css";
+import {Swiper, SwiperSlide} from "swiper/react";
+import 'swiper/css'
+import 'swiper/css/autoplay'
+import {Autoplay} from 'swiper'
 
 export default function EventsGrid({events}) {
     const id = useId()
@@ -25,15 +29,27 @@ export default function EventsGrid({events}) {
     )
 
     return (
-        <ul role="list"
-            className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-2 xl:gap-x-8">
+        <Swiper
+            spaceBetween={20}
+            slidesPerView={2}
+            modules={[Autoplay]}
+            autoplay
+        >
             {arr?.map((item, i) => (
-                <li key={`${id + i}`} className="relative">
-                    <ImageGallery items={item.images}/>
-                    <p className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.eventName}</p>
 
-                </li>
+                <SwiperSlide key={`${id + i}`}>
+                    <ImageGallery items={item.images} thumbnailPosition="left"/>
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <p
+                            className="mt-2 block  text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.eventName}</p>
+                        <p
+                            className="mt-2 block  text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.date}</p>
+
+                    </div>
+
+                </SwiperSlide>
             ))}
-        </ul>
+        </Swiper>
+        // </ul>
     )
 }
