@@ -3,7 +3,6 @@ import { GlobeAltIcon } from '@heroicons/react/solid'
 
 
 export default function SinglePartner({partner}) {
-    console.log(partner);
     return (
         <div className="bg-white overflow-hidden">
             <div className="relative max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
