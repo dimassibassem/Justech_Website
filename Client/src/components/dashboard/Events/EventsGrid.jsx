@@ -6,8 +6,10 @@ import 'swiper/css'
 import 'swiper/css/autoplay'
 import {Autoplay, Scrollbar} from 'swiper'
 import "swiper/css/scrollbar";
+import axios from "axios";
+import {Button} from "@/components/Button";
 
-export default function EventsGrid({events}) {
+export default function EventsGrid({events, setEvents}) {
     const id = useId()
 
 
@@ -29,6 +31,16 @@ export default function EventsGrid({events}) {
         })
     )
 
+    const handleDelete = async (eventName) => {
+        await axios.delete('https://localhost:7002/api/Event/DeleteEventBy', {
+            params: {
+               field: "eventName",
+               value: eventName
+            }
+        })
+        const res = await axios.get("https://localhost:7002/api/Event/all")
+        setEvents(res.data)
+    }
     return (
         <Swiper
             spaceBetween={60}
@@ -50,7 +62,14 @@ export default function EventsGrid({events}) {
                             className="mt-2 block  text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.date}</p>
 
                     </div>
-                    <div className="mb-8" />
+
+                    <Button
+                        className="mt-5 text-gray-100 bg-red-600 w-full hover:bg-red-900 hover:text-white hover:text-lg"
+                        onClick={() => handleDelete(item.event.eventName)}>
+                        Delete Event
+                    </Button>
+
+                    <div className="mb-8"/>
                 </SwiperSlide>
             ))}
         </Swiper>

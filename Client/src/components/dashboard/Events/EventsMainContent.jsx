@@ -71,7 +71,7 @@ function EventsMainContent() {
                     </div>
                 </div>
                 <div className="pb-4">
-                    <EventsGrid events={events}/>
+                    <EventsGrid events={events} setEvents={setEvents}/>
                 </div>
 
                 <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200" onSubmit={handleSubmit}>
