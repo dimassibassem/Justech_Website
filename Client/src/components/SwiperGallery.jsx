@@ -33,7 +33,7 @@ export function SwiperGallery({partners, selectedIndex}) {
                             )
                         }}
                         isActive={partnerIndex === selectedIndex}
-                        className='relative'
+                        className='relative hover:opacity-75'
                         onClick={async () => {
                             await router.push(`/partners/${partner.companyName}`)
                         }}

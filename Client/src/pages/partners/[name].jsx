@@ -20,29 +20,34 @@ const partner = () => {
         fetchPartner().catch(err => console.log(err));
     }, [name]);
 
-    if (desiredPartner?.length > 0)
-        return (
-            <div className='bg-white'>
-                <Head>
-                    <title>Justech - Partners</title>
-                    <meta
-                        name='description'
-                        content='Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and hope you don’t get audited.'
-                    />
-                </Head>
+    return (
+        <div className='bg-white'>
+            <Head>
+                <title>Justech - Partners</title>
+                <meta
+                    name='description'
+                    content='Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and hope you don’t get audited.'
+                />
+            </Head>
 
-                <div className='bg-gray-100'>
-                    <Header/>
-                </div>
-
-                <main>
-                    <SinglePartner partner={desiredPartner}/>
-                </main>
-                <div className='bg-gray-100'><Footer/></div>
-
+            <div className='bg-gray-100'>
+                <Header/>
             </div>
-        );
-    return <div>Loading...</div>
+
+
+            {desiredPartner?.length > 0 ?
+                <>
+                    <main>
+                        <SinglePartner partner={desiredPartner}/>
+                    </main>
+                    <div className='bg-gray-100'>
+                        <Footer/>
+                    </div>
+                </> : <div/>
+            }
+
+        </div>
+    );
 
 
 };
