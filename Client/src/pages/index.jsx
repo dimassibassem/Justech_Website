@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import {useEffect} from "react";
+import axios from "axios";
 import {Faqs} from '@/components/Faqs'
 import {Footer} from '@/components/Footer'
 import {Header} from '@/components/Header'
@@ -7,8 +9,18 @@ import {PrimaryFeatures} from '@/components/PrimaryFeatures'
 import {Partners} from '@/components/Partners'
 import {Testimonials} from '@/components/Testimonials'
 import {ContactUs} from '@/components/ContactUs'
+import {useStore} from "@/store";
 
 export default function Home() {
+
+    const setPartners = useStore(state => state.setPartners)
+    const fetchPartners = async () => {
+        const res = await axios.get('https://localhost:7002/api/Partners/all')
+        setPartners(res.data)
+    }
+    useEffect(() => {
+        fetchPartners().catch(err => console.log(err))
+    }, [])
     return (
         <div className='bg-gray-200'>
 
