@@ -66,7 +66,7 @@ export default function EventsGrid({events, setEvents}) {
                 <SwiperSlide key={`${id + i}`}>
 
                     <ImageGallery items={item.images} thumbnailPosition="bottom"
-                                  additionalClass={`h-[${maxHeight}px]`}/>
+                                  additionalClass={`h-[${maxHeight-50}px]`}/>
                     <div className="grid grid-cols-2 gap-x-4">
                         <p
                             className="mt-2 block  text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.eventName}</p>
