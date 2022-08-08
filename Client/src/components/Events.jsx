@@ -72,7 +72,7 @@ function Events() {
 
                 <div className='mx-auto max-w-xl text-center pb-10'>
                     <h2 className='font-display text-3xl tracking-tight text-gray-700  sm:text-4xl'>
-                       Events
+                        Events
                     </h2>
                     <p className='mt-4 text-lg tracking-tight text-black '>
                         lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -98,12 +98,17 @@ function Events() {
 
                             <ImageGallery items={item.images} thumbnailPosition="left"
                                           additionalClass={`h-[${maxHeight - 50}px]`}/>
-                            <div className="pt-5  grid grid-cols-2 gap-x-4 place-items-center ">
+                            <div className="pt-5 grid grid-cols-2 gap-x-4 place-items-center ">
                                 <p
                                     className=" mt-2 block text-md font-medium text-gray-700 truncate pointer-events-none">{item.event.eventName}</p>
                                 <p
-                                    className="mt-2 block align-middle text-md font-medium text-gray-700  truncate pointer-events-none">{item.event.date}</p>
+                                    className="mt-2 block align-middle text-md font-medium text-gray-700 truncate pointer-events-none">{item.event.date}</p>
+                            </div>
+                            <div className="pt-5 grid grid-cols-1 place-items-center">
 
+                                <p className="mt-2 block align-middle text-md font-medium text-gray-700 truncate pointer-events-none">
+                                    {item.event.description}
+                                </p>
                             </div>
 
 
