@@ -13,7 +13,7 @@ export function Footer() {
             <div className='-my-1 flex justify-center gap-x-6'>
               <div className='hidden md:flex md:gap-x-5'>
                 <NavLink href='/about'>Justech</NavLink>
-                <NavLink href='#testimonials'>E-Education solutions</NavLink>
+                <NavLink href='/educationSolution'>E-Education solutions</NavLink>
                 <NavLink href='#pricing'>E-Business solutions</NavLink>
                 <NavLink href='/partners'>Partners</NavLink>
                 <NavLink href='/references'>References</NavLink>

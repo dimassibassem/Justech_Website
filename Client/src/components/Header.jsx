@@ -76,8 +76,8 @@ function MobileNavigation() {
             as='div'
             className='absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5'
           >
-            <MobileNavLink href='#features'>Justech</MobileNavLink>
-            <MobileNavLink href='#testimonials'>E-Education solutions</MobileNavLink>
+            <MobileNavLink href='/about'>Justech</MobileNavLink>
+            <MobileNavLink href='/educationSolution'>E-Education solutions</MobileNavLink>
             <MobileNavLink href='#pricing'>E-Business solutions</MobileNavLink>
             <MobileNavLink href="/partners">Partners</MobileNavLink>
             <MobileNavLink href="/references">References</MobileNavLink>
@@ -102,7 +102,7 @@ export function Header() {
             <Logo className='h-10 w-auto' />
             <div className='hidden md:flex md:gap-x-5'>
               <NavLink href="/about">Justech</NavLink>
-              <NavLink href='#testimonials'>E-Education solutions</NavLink>
+              <NavLink href='/educationSolution'>E-Education solutions</NavLink>
               <NavLink href='#pricing'>E-Business solutions</NavLink>
               <NavLink href="/partners">Partners</NavLink>
               <NavLink href="/references">References</NavLink>
