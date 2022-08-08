@@ -58,6 +58,7 @@ export default function EventsGrid({events, setEvents}) {
             autoplay
             scrollbar={{
                 hide: false,
+                draggable: true,
             }}
         >
 

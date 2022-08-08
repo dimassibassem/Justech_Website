@@ -29,6 +29,7 @@ export default function PartnersGrid({partners,setPartners}) {
                 autoplay
                 scrollbar={{
                     hide: false,
+                    draggable: true,
                 }}
             >
             {partners?.map((partner, i) => (

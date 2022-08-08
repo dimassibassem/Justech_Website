@@ -15,6 +15,26 @@
 
     <ItemGroup>
       <Folder Include="wwwroot\Uploads" />
+      <Folder Include="wwwroot\Uploads\Partners" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Events\65c6a139-5efa-4157-8360-edd8e53ebc2c-145186600_3990940174329251_4405400198952132295_n (1).jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Events\7af81374-eba3-4bb7-997f-5f0fc21a1485-java.jpeg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Events\9070ad45-1d7e-40d2-af9b-c784311596f6-IMG_0127~2.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Events\badb1d88-c1b3-4f52-8f53-70f69b9c145f-avatar.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Partners\16a2817a-4b60-4b36-baac-f695a2e560d5-id_2.jpeg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Partners\2d0e79c2-b0f6-4905-88c6-853fd6553a1b-thumbpng~3.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Partners\363368c2-2368-4d2c-b64e-bb9ec8f60086-id_2.jpeg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Partners\37fb3f1e-d19d-4d4b-b47b-33448f4a6d6b-IMG_0127~2.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Partners\4e2cd9b9-e08e-4999-a6c2-4cde56e94202-IMG_0127~2.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Partners\6565323e-cad7-481f-80d7-2f14a38e7822-id_2.jpeg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Partners\87465f58-a646-40ec-833c-11f9084900de-IMG_0127~2.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Partners\8c0e7d4d-e41f-4da9-9497-d2127cfd2ece-id_1.jpeg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Partners\930af788-f2c0-43ae-8044-cdf617678fe1-id_2.jpeg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Partners\99510897-3f8c-4c10-a70e-fc6ac01cdae0-IMG_0127~2.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Partners\b3eef071-1018-411a-a1ef-1a83564a2695-IMG_0127~2.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Uploads\Partners\d7946139-2c6f-4b50-88e2-c9135bcd78be-thumbpng~3.jpg" />
     </ItemGroup>
 
 </Project>

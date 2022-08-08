@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import {useEffect} from "react";
 import axios from "axios";
-import {Faqs} from '@/components/Faqs'
 import {Footer} from '@/components/Footer'
 import {Header} from '@/components/Header'
 import {Hero} from '@/components/Hero'
@@ -10,6 +9,7 @@ import {Partners} from '@/components/Partners'
 import {Testimonials} from '@/components/Testimonials'
 import {ContactUs} from '@/components/ContactUs'
 import {useStore} from "@/store";
+import Events from "@/components/Events";
 
 export default function Home() {
 
@@ -37,7 +37,7 @@ export default function Home() {
                 <PrimaryFeatures/>
                 <Partners/>
                 <Testimonials/>
-                <Faqs/>
+                <Events />
             </main>
             <ContactUs/>
             <Footer/>
