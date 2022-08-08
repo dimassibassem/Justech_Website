@@ -37,7 +37,7 @@ export default function Home() {
                 <PrimaryFeatures/>
                 <Partners/>
                 <Testimonials/>
-                <Events />
+                <Events/>
             </main>
             <ContactUs/>
             <Footer/>

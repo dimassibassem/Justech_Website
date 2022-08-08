@@ -6,7 +6,7 @@ import JustechInfo from "@/components/JustechInfo";
 
 function About() {
     return (
-        <div className='bg-white'>
+        <div>
             <Head>
                 <title>Justech - About Us</title>
                 <meta
