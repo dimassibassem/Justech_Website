@@ -1,4 +1,4 @@
-import {useId} from "react";
+import {useEffect, useId, useState} from "react";
 import ImageGallery from "react-image-gallery";
 import "node_modules/react-image-gallery/styles/css/image-gallery.css";
 import {Swiper, SwiperSlide} from "swiper/react";
@@ -34,13 +34,22 @@ export default function EventsGrid({events, setEvents}) {
     const handleDelete = async (eventName) => {
         await axios.delete('https://localhost:7002/api/Event/DeleteEventBy', {
             params: {
-               field: "eventName",
-               value: eventName
+                field: "eventName",
+                value: eventName
             }
         })
         const res = await axios.get("https://localhost:7002/api/Event/all")
         setEvents(res.data)
     }
+    const [maxHeight, setMaxHeight] = useState(0);
+    useEffect(() => {
+        if (arr.length > 0) {
+            const mHeight = arr.reduce((acc, curr) => acc > curr.images.length ? acc : curr.images.length
+                , 0)
+            setMaxHeight(mHeight * 100)
+        }
+    }, [events]);
+
     return (
         <Swiper
             spaceBetween={60}
@@ -51,10 +60,13 @@ export default function EventsGrid({events, setEvents}) {
                 hide: false,
             }}
         >
+
             {arr?.map((item, i) => (
 
                 <SwiperSlide key={`${id + i}`}>
-                    <ImageGallery items={item.images} thumbnailPosition="left"/>
+
+                    <ImageGallery items={item.images} thumbnailPosition="bottom"
+                                  additionalClass={`h-[${maxHeight}px]`}/>
                     <div className="grid grid-cols-2 gap-x-4">
                         <p
                             className="mt-2 block  text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.eventName}</p>
