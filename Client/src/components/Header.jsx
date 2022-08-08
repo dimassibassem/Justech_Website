@@ -78,7 +78,7 @@ function MobileNavigation() {
           >
             <MobileNavLink href='/about'>Justech</MobileNavLink>
             <MobileNavLink href='/educationSolution'>E-Education solutions</MobileNavLink>
-            <MobileNavLink href='#pricing'>E-Business solutions</MobileNavLink>
+            <MobileNavLink href='/businessSolution'>E-Business solutions</MobileNavLink>
             <MobileNavLink href="/partners">Partners</MobileNavLink>
             <MobileNavLink href="/references">References</MobileNavLink>
             <MobileNavLink href='#pricing'>News</MobileNavLink>
@@ -103,7 +103,7 @@ export function Header() {
             <div className='hidden md:flex md:gap-x-5'>
               <NavLink href="/about">Justech</NavLink>
               <NavLink href='/educationSolution'>E-Education solutions</NavLink>
-              <NavLink href='#pricing'>E-Business solutions</NavLink>
+              <NavLink href='/businessSolution'>E-Business solutions</NavLink>
               <NavLink href="/partners">Partners</NavLink>
               <NavLink href="/references">References</NavLink>
               <NavLink href='#pricing'>News</NavLink>

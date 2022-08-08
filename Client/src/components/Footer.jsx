@@ -14,7 +14,7 @@ export function Footer() {
               <div className='hidden md:flex md:gap-x-5'>
                 <NavLink href='/about'>Justech</NavLink>
                 <NavLink href='/educationSolution'>E-Education solutions</NavLink>
-                <NavLink href='#pricing'>E-Business solutions</NavLink>
+                <NavLink href='/businessSolution'>E-Business solutions</NavLink>
                 <NavLink href='/partners'>Partners</NavLink>
                 <NavLink href='/references'>References</NavLink>
                 <NavLink href='#pricing'>News</NavLink>
