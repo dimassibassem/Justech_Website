@@ -8,7 +8,7 @@ export default function UsersGrid() {
     const [usersFromDb, setUsersFromDb] = useState();
 
     const fetchUsers = async () => {
-        const result = await axios.get('https://localhost:7002/api/User/all')
+        const result = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/User/all`)
 
         setUsersFromDb(result.data);
     }

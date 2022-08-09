@@ -44,7 +44,7 @@ export default function SinglePartner({partner}) {
                                 <div className="aspect-w-12 aspect-h-7 lg:aspect-none">
                                     <img
                                         className="rounded-lg shadow-lg object-cover object-center"
-                                        src={`https://localhost:7002/wwwroot/Uploads/Partners/${partner[0].thumbnailName}`}
+                                        src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}/wwwroot/Uploads/Partners/${partner[0].thumbnailName}`}
                                         alt="Whitney leaning against a railing on a downtown street"
                                         width={1184}
                                         height={1376}

@@ -14,7 +14,7 @@ function PartnersMainContent() {
     });
 
     const fetchData = async () => {
-        const res = await axios.get('https://localhost:7002/api/Partners/all');
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/all`);
         setPartners(res.data);
     }
     const handleSubmit = async (e) => {
@@ -27,7 +27,7 @@ function PartnersMainContent() {
         formData.append('ThumbnailName', " ");
         formData.append('Id', 0);
         try {
-            await axios.post('https://localhost:7002/api/Partners/UpsertPartner', formData);
+            await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/UpsertPartner`, formData);
             await fetchData();
         } catch (err) {
             console.log(err);

@@ -11,7 +11,7 @@ function Index() {
     const setPartners = useStore(state => state.setPartners)
     const partners = useStore(state => state.partners)
     const fetchPartners = async () => {
-        const res = await axios.get('https://localhost:7002/api/Partners/all')
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/all`)
         setPartners(res.data)
     }
     useEffect(() => {

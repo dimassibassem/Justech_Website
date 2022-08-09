@@ -19,7 +19,7 @@ export default function Blog({partners}) {
                         <div key={id + partner.companyName} className="flex flex-col rounded-lg shadow-lg overflow-hidden">
                             <div className="flex-shrink-0">
                                 <a href={partner.link} >
-                                <img className="h-48 w-full p-6" src={`https://localhost:7002/Uploads/Partners/${partner.thumbnailName}`} alt="" />
+                                <img className="h-48 w-full p-6" src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}/Uploads/Partners/${partner.thumbnailName}`} alt="" />
                                 </a>
                                 </div>
                             <div className="flex-1 bg-white p-6 flex flex-col justify-between">

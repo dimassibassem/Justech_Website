@@ -12,13 +12,13 @@ export default function PartnersGrid({partners,setPartners}) {
     const id = useId()
 
     const handleDelete = async (companyName) => {
-        await axios.delete('https://localhost:7002/api/Partners/DeletePartnerBy', {
+        await axios.delete(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/DeletePartnerBy`, {
             params: {
                 field: "CompanyName",
                 value: companyName
             }
         })
-        const res = await axios.get("https://localhost:7002/api/Partners/all")
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/all`)
         setPartners(res.data)
     }
     return (
@@ -38,7 +38,7 @@ export default function PartnersGrid({partners,setPartners}) {
                     <div
                         className="shadow-md group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
                         <img
-                            src={`https://localhost:7002/wwwroot/Uploads/Partners/${partner.thumbnailName}`}
+                            src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}/wwwroot/Uploads/Partners/${partner.thumbnailName}`}
                             alt=""
                             className=" pointer-events-none group-hover:opacity-75"/>
 

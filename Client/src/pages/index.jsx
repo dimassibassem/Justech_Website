@@ -15,7 +15,7 @@ export default function Home() {
 
     const setPartners = useStore(state => state.setPartners)
     const fetchPartners = async () => {
-        const res = await axios.get('https://localhost:7002/api/Partners/all')
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/all`)
         setPartners(res.data)
     }
     useEffect(() => {

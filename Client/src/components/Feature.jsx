@@ -9,7 +9,7 @@ function Feature({ partner, isActive, className, ...props }) {
       {...props}
     >
       <div>
-        <img src={`https://localhost:7002/wwwroot/Uploads/Partners/${partner?.thumbnailName}`} alt='' />
+        <img src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}/wwwroot/Uploads/Partners/${partner?.thumbnailName}`} alt='' />
       </div>
       <p className='mt-2 font-display text-md text-slate-800'>
         {partner?.companyName}

@@ -15,7 +15,7 @@ export default function EventsGrid({events, setEvents}) {
 
     for (let i = 0; i < events.length; i += 1) {
         for (let j = 0; j < events[i].images.length; j += 1) {
-            events[i].images[j] = `${events[i].images[j]}`.indexOf("https://localhost:7002/wwwroot/Uploads/Events/") === -1 ? `https://localhost:7002/wwwroot/Uploads/Events/${events[i].images[j]}` : events[i].images[j];
+            events[i].images[j] = `${events[i].images[j]}`.indexOf(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/wwwroot/Uploads/Events/`) === -1 ? `${process.env.NEXT_PUBLIC_API_ENDPOINT}/wwwroot/Uploads/Events/${events[i].images[j]}` : events[i].images[j];
         }
     }
 
@@ -32,13 +32,13 @@ export default function EventsGrid({events, setEvents}) {
     )
 
     const handleDelete = async (eventName) => {
-        await axios.delete('https://localhost:7002/api/Event/DeleteEventBy', {
+        await axios.delete(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/DeleteEventBy`, {
             params: {
                 field: "eventName",
                 value: eventName
             }
         })
-        const res = await axios.get("https://localhost:7002/api/Event/all")
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
         setEvents(res.data)
     }
     const [maxHeight, setMaxHeight] = useState(0);

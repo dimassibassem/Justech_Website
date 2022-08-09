@@ -14,7 +14,7 @@ function EventsMainContent() {
         location: "",
     });
     const fetchEvents = async () => {
-        const result = await axios.get('https://localhost:7002/api/Event/all')
+        const result = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
         setEvents(result.data);
     }
     const handleSubmit = async (e) => {
@@ -30,7 +30,7 @@ function EventsMainContent() {
         formData.append('Id', 0);
         formData.append('Date', state.date);
         try {
-            await axios.post('https://localhost:7002/api/Event/UpsertEvent', formData);
+            await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/UpsertEvent`, formData);
             await fetchEvents();
         } catch (err) {
             console.log(err);
