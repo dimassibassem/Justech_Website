@@ -4,8 +4,9 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import ContactSection from '@/components/ContactSection'
 
+
 function Contact() {
-  return (
+    return (
     <div className='bg-white'>
       <Head>
         <title>Justech - Contact Us</title>
