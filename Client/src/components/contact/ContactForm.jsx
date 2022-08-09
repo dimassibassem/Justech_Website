@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import axios from "axios";
+import SuccessModal from "@/components/contact/SuccessModal";
 
 function ContactForm() {
+    const [showModal, setShowModal] = useState(false);
     const [state, setState] = useState({
         Id: 0,
         FirstName: '',
@@ -34,7 +36,9 @@ function ContactForm() {
         formData.append('Subject', state.Subject);
         formData.append('Message', state.Message);
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Contact/UpsertContact`, formData)
-        console.log(res.data)
+        if (res.data.success) {
+            setShowModal(true)
+        }
     }
 
     return (
@@ -180,6 +184,7 @@ function ContactForm() {
                     </button>
                 </div>
             </form>
+            <SuccessModal open={showModal} setOpen={setShowModal}/>
         </div>
     )
 }
