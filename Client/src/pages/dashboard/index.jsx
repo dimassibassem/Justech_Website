@@ -5,6 +5,7 @@ import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import ForMobile from "@/components/dashboard/ForMobile";
 import {useStore} from "@/store";
+import ProfileIMainContent from "@/components/dashboard/ProfileIMainContent";
 
 
 export default function Index() {
@@ -34,7 +35,7 @@ export default function Index() {
                             <SecondarySidebar subNavigation={subNavigation}/>
 
                             {/* Main content */}
-                            {/* <MainContent/> */}
+                            <ProfileIMainContent />
 
                         </div>
                     </div>
