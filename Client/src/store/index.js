@@ -15,7 +15,7 @@ const navigation = [
     {name: 'Trending', href: '#', icon: FireIcon},
     {name: 'Bookmarks', href: '#', icon: BookmarkAltIcon},
     {name: 'Messages', href: '/dashboard/contact', icon: InboxIcon},
-    {name: 'Profile', href: '#', icon: UserIcon},
+    {name: 'Profile', href: '/dashboard', icon: UserIcon},
 ]
 
 const subNavigation = [
