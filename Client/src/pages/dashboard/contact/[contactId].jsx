@@ -16,8 +16,10 @@ export default function ContactId() {
     const router = useRouter();
     const {contactId} = router.query;
     const fetechMessage = async () => {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Contact/GetContactBy?field=id&value=${contactId}`)
-        setCurrentMessage(res.data)
+        if (contactId) {
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Contact/GetContactBy?field=id&value=${contactId}`)
+            setCurrentMessage(res.data)
+        }
     }
     useEffect(() => {
         fetechMessage().catch(err => console.log(err))
@@ -45,7 +47,7 @@ export default function ContactId() {
                             <MessagesSidebar/>
 
                             {/* Main content */}
-                            <MessageDetails contact={currentMessage}/>
+                            <MessageDetails contact={currentMessage} current={contactId}/>
 
                         </div>
                     </div>
