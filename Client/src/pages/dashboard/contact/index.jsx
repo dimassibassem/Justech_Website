@@ -3,6 +3,7 @@ import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesk
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import ForMobile from "@/components/dashboard/ForMobile";
 import MessagesSidebar from "@/components/dashboard/Contact/MessagesSidebar";
+import ContactMainIndex from "@/components/dashboard/Contact/ContactMainIndex";
 
 
 export default function Messages() {
@@ -28,7 +29,7 @@ export default function Messages() {
                             <MessagesSidebar/>
 
                             {/* Main content */}
-                            {/* <MainContent/> */}
+                            <ContactMainIndex />
 
                         </div>
                     </div>
