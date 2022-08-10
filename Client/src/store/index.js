@@ -11,10 +11,10 @@ import {
 } from "@heroicons/react/outline";
 
 const navigation = [
-    {name: 'Home', href: '#', icon: HomeIcon},
+    {name: 'Home', href: '/', icon: HomeIcon},
     {name: 'Trending', href: '#', icon: FireIcon},
     {name: 'Bookmarks', href: '#', icon: BookmarkAltIcon},
-    {name: 'Messages', href: '#', icon: InboxIcon},
+    {name: 'Messages', href: '/dashboard/contact', icon: InboxIcon},
     {name: 'Profile', href: '#', icon: UserIcon},
 ]
 
@@ -62,10 +62,15 @@ const createStateSlice = (set, get) => ({
             }
         )
     }, null, "resetSubNavigation"),
-    partners:[],
+    partners: [],
     setPartners: (partners) => set({partners}, null, "setPartners"),
-    events:[],
+    events: [],
     setEvents: (events) => set({events}, null, "setEvents"),
+    messages: [],
+    setMessages: (messages) => set({messages}, null, "setMessages"),
+    currentMessage: {},
+    setCurrentMessage: (message) => set({currentMessage: message}, null, "setCurrentMessage"),
+
 })
 // const createTokenSlice = (set, get) => ({
 //     token: null,
