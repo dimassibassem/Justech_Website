@@ -10,9 +10,9 @@ function ChatBox({messages, receiver}) {
         await messagesRef.add({
             text: formValue,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            displayName: "",
+            displayName: process.env.NEXT_PUBLIC_ADMIN_DISPLAY_NAME,
             uid: Math.floor(Math.random() * 100000),
-            photoURL: "",
+            photoURL: process.env.NEXT_PUBLIC_ADMIN_PHOTO_URL,
             from: process.env.NEXT_PUBLIC_ADMIN_EMAIL,
             to: receiver
         })
