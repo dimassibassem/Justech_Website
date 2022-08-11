@@ -7,7 +7,8 @@ import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesk
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import ChatSidebar from "@/components/dashboard/chat/ChatSidebar";
-import ChatBox from "@/components/ChatTesting";
+import ChatBox from "@/components/ChatBox";
+
 
 function PrivateChatRoom() {
     const router = useRouter();

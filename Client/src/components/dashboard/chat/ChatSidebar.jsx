@@ -3,10 +3,6 @@ import Link from "next/link";
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import {firebase} from '@/config.js'
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
 const firestore = firebase.firestore();
 
 function ChatSidebar() {
@@ -14,8 +10,7 @@ function ChatSidebar() {
     const query = messagesRef.orderBy('createdAt', 'desc')
     const [messages] = useCollectionData(query, {idField: 'id'});
     const filtredSender = messages?.filter((message, index) =>
-        messages.findIndex(m => m.from === message.from) === index);
-
+        messages.findIndex(m => (m.from === message.from && m.from !== process.env.NEXT_PUBLIC_ADMIN_EMAIL)) === index);
 
     return (
         <nav
@@ -31,10 +26,7 @@ function ChatSidebar() {
                     <Link
                         key={item.uid}
                         href={`/dashboard/chat/${item.from}`}
-                        className={classNames(
-                            item.current ? 'bg-blue-50 bg-opacity-50' : 'hover:bg-blue-50 hover:bg-opacity-50',
-                            'flex p-6 border-b border-blue-gray-200'
-                        )}
+                        className='hover:bg-blue-50 hover:bg-opacity-50 flex p-6 border-b border-blue-gray-200'
                         aria-current={item.current ? 'page' : undefined}
                     >
                         <div className="grid grid-cols-2 gap-4 ml-3 text-sm">

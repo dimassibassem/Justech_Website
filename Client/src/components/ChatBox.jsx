@@ -7,39 +7,37 @@ function ChatBox({messages}) {
                 <div className="relative flex items-center space-x-4">
                     <div className="relative">
                         <img
-                            src={messages[0].photoURL}
+                            src={messages ? messages[0].photoURL : ""}
                             alt="" className="w-10 sm:w-16 h-10 sm:h-16 rounded-full shadow-xl"/>
                     </div>
                     <div className="flex flex-col leading-tight">
                         <div className="text-2xl mt-1 flex items-center">
-                            <span className="text-gray-700 mr-3">{messages[0].displayName}</span>
+                            <span
+                                className="text-gray-700 mr-3">{messages ? messages[0].displayName : ""}</span>
                         </div>
                     </div>
                 </div>
             </div>
-
-            {messages.map((message) => {
+            {messages?.map((message) => {
                 if (message.from !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
                     return (
-                        <div>
-                            <div className="flex items-end">
-                                <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                    <div>
+                        <div key={message.createdAt} className="flex items-end">
+                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
+                                <div>
                                     <span
                                         className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
                                         {message.text}
                                     </span>
-                                    </div>
                                 </div>
-                                <img
-                                    src={message.photoURL}
-                                    alt="My profile" className="w-6 h-6 rounded-full order-1"/>
                             </div>
+                            <img
+                                src={message.photoURL}
+                                alt="My profile" className="w-6 h-6 rounded-full order-1"/>
                         </div>
                     )
                 }
                 return (
-                    <div className="flex items-end justify-end">
+                    <div key={message.createdAt} className="flex items-end justify-end">
                         <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
                             <div>
                                     <span

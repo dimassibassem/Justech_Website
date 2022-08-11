@@ -17,7 +17,7 @@ function SignOut() {
 
 
 function SignIn() {
-const router = useRouter()
+    const router = useRouter()
     const signInWithGoogle = async () => {
         const provider = new firebase.auth.GoogleAuthProvider();
         await auth.signInWithPopup(provider)
