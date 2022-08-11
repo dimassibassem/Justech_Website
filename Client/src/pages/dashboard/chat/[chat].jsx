@@ -41,10 +41,8 @@ function PrivateChatRoom() {
 
                                 {/* Main content */}
 
-                                <ChatBox messages={filteredMessages}/>
+                                <ChatBox messages={filteredMessages} receiver={chat}/>
                             </div>
-
-
 
                         </div>
                     </main>
