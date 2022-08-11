@@ -12,7 +12,6 @@ const firestore = firebase.firestore();
 function ChatSidebar() {
     const messagesRef = firestore.collection('messages');
     const query = messagesRef.orderBy('createdAt', 'desc')
-
     const [messages] = useCollectionData(query, {idField: 'id'});
     const filtredSender = messages?.filter((message, index) =>
         messages.findIndex(m => m.from === message.from) === index);
@@ -31,19 +30,15 @@ function ChatSidebar() {
                 {filtredSender?.map((item) => (
                     <Link
                         key={item.uid}
-                        href='/'
+                        href={`/dashboard/chat/${item.from}`}
                         className={classNames(
                             item.current ? 'bg-blue-50 bg-opacity-50' : 'hover:bg-blue-50 hover:bg-opacity-50',
                             'flex p-6 border-b border-blue-gray-200'
                         )}
                         aria-current={item.current ? 'page' : undefined}
-                        onClick={() => {
-
-                        }
-                        }
                     >
-                        <div className=" grid grid-cols-2 gap-4 ml-3 text-sm">
-                            <img className="rounded-full shadow-xl w-16 h-16"  src={item.photoURL} alt=""/>
+                        <div className="grid grid-cols-2 gap-4 ml-3 text-sm">
+                            <img className="rounded-full shadow-xl w-16 h-16" src={item.photoURL} alt=""/>
                             <div className>
                                 <p className="font-medium text-blue-gray-900">{item.displayName}</p>
                                 <p className="mt-1 text-blue-gray-500">{item.text}</p>
