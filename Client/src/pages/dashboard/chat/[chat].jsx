@@ -16,7 +16,7 @@ function PrivateChatRoom() {
     const messagesRef = firestore.collection('messages');
     const query = messagesRef.orderBy('createdAt')
     const [messages] = useCollectionData(query, {idField: 'id'});
-    const filtredMessages = messages?.filter((msg) => msg.to === chat || msg.from === chat);
+    const filteredMessages = messages?.filter((msg) => msg.to === chat || msg.from === chat);
 
     if (chat) {
         return (
@@ -41,7 +41,7 @@ function PrivateChatRoom() {
 
                                 {/* Main content */}
 
-                                <ChatBox messages={filtredMessages}/>
+                                <ChatBox messages={filteredMessages}/>
                             </div>
 
 
