@@ -51,7 +51,7 @@ function ChatRoom() {
 
     const [messages] = useCollectionData(query, {idField: 'id'});
 
-    const filtredMessages = messages?.filter((msg) => msg.to === auth.currentUser.email || msg.from === auth.currentUser.email);
+    const filteredMessages = messages?.filter((msg) => msg.to === auth.currentUser.email || msg.from === auth.currentUser.email);
 
 
     const [formValue, setFormValue] = useState('');
@@ -79,7 +79,7 @@ function ChatRoom() {
     return (<>
         <main>
 
-            {filtredMessages && filtredMessages.map((msg, index) => <ChatMessage key={`${index + id}`} message={msg}/>)}
+            {filteredMessages && filteredMessages.map((msg, index) => <ChatMessage key={`${index + id}`} message={msg}/>)}
 
             <span ref={dummy}/>
 
