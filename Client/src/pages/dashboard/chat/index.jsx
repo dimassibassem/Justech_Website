@@ -1,19 +1,13 @@
-import {useEffect} from "react";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
-import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import ForMobile from "@/components/dashboard/ForMobile";
-import {useStore} from "@/store";
 import ChatMainContent from "@/components/dashboard/chat/ChatMainContent";
+import ChatSidebar from "@/components/dashboard/chat/ChatSidebar";
 
 
 export default function Index() {
-    const subNavigation = useStore(state => state.subNavigation);
-    const resetSubNavigation = useStore(state => state.resetSubNavigation);
-    useEffect(() => {
-        resetSubNavigation();
-    }, []);
+
     return (
         <div className="h-full flex bg-blue-gray-50">
             {/* Adding this component ti simplify code */}
@@ -32,7 +26,7 @@ export default function Index() {
 
                         <div className="flex-1 flex xl:overflow-hidden">
                             {/* Secondary sidebar */}
-                            <SecondarySidebar subNavigation={subNavigation}/>
+                            <ChatSidebar />
 
                             {/* Main content */}
                         <ChatMainContent />

@@ -1,34 +1,11 @@
 import React, {useId, useRef, useState} from 'react';
-// import firebase from 'firebase/app';
-// import 'firebase/auth';
-// import 'firebase/firestore';
-//
-// import 'firebase/compat/analytics';
-//
-//
-//
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+
 import {useAuthState} from 'react-firebase-hooks/auth';
 import {useCollectionData} from 'react-firebase-hooks/firestore';
-
-
-firebase.initializeApp({
-    apiKey: process.env.NEXT_PUBLIC_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-    projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-    storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_APP_ID,
-})
-
-const auth = firebase.auth();
-const firestore = firebase.firestore();
+import {firestore, auth,firebase} from '@/config.js'
 
 function Chat() {
     const [user] = useAuthState(auth);
-    console.log(user);
     return (
         <div className="App">
             <header>
@@ -74,7 +51,7 @@ function ChatRoom() {
 
     const [messages] = useCollectionData(query, {idField: 'id'});
 
-   const filtredMessages = messages?.filter((msg) => msg.to === auth.currentUser.email || msg.from === auth.currentUser.email);
+    const filtredMessages = messages?.filter((msg) => msg.to === auth.currentUser.email || msg.from === auth.currentUser.email);
 
     console.log(messages);
 
