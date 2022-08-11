@@ -2,7 +2,7 @@ import React, {useId, useRef, useState} from 'react';
 
 import {useAuthState} from 'react-firebase-hooks/auth';
 import {useCollectionData} from 'react-firebase-hooks/firestore';
-import {firestore, auth,firebase} from '@/config.js'
+import {firestore, auth, firebase} from '@/config.js'
 
 function Chat() {
     const [user] = useAuthState(auth);
@@ -47,13 +47,12 @@ function SignOut() {
 function ChatRoom() {
     const dummy = useRef();
     const messagesRef = firestore.collection('messages');
-    const query = messagesRef.orderBy('createdAt').limit(50);
+    const query = messagesRef.orderBy('createdAt').limit(300);
 
     const [messages] = useCollectionData(query, {idField: 'id'});
 
     const filtredMessages = messages?.filter((msg) => msg.to === auth.currentUser.email || msg.from === auth.currentUser.email);
 
-    console.log(messages);
 
     const [formValue, setFormValue] = useState('');
 

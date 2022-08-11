@@ -7,6 +7,7 @@ import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesk
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import ChatSidebar from "@/components/dashboard/chat/ChatSidebar";
+import ChatBox from "@/components/ChatTesting";
 
 function PrivateChatRoom() {
     const router = useRouter();
@@ -15,7 +16,7 @@ function PrivateChatRoom() {
     const query = messagesRef.orderBy('createdAt')
     const [messages] = useCollectionData(query, {idField: 'id'});
     const filtredMessages = messages?.filter((msg) => msg.to === chat || msg.from === chat);
-    console.log(filtredMessages);
+
     if (chat) {
         return (
             <div className="h-full flex bg-blue-gray-50">
@@ -38,12 +39,12 @@ function PrivateChatRoom() {
                                 <ChatSidebar/>
 
                                 {/* Main content */}
-                                {filtredMessages?.map((msg) => <div>
-                                    <div>{msg.displayName}</div>
-                                    <div>{msg.text}</div>
-                                </div>)}
 
+                                <ChatBox messages={filtredMessages}/>
                             </div>
+
+
+
                         </div>
                     </main>
                 </div>

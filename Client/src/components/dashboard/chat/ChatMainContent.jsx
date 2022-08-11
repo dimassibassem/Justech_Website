@@ -1,4 +1,41 @@
+import React from "react";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {useRouter} from "next/router";
+import {auth, firebase} from "@/config";
+
+
+function SignOut() {
+    return auth.currentUser && (
+        <button type="button"
+                className="bg-red-700 rounded-2xl shadow-2xl text-white hover:bg-red-800 p-2 hover:text-gray-300"
+                onClick={async () => {
+                    await auth.signOut()
+
+                }}>Sign Out</button>
+    )
+}
+
+
+function SignIn() {
+const router = useRouter()
+    const signInWithGoogle = async () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        await auth.signInWithPopup(provider)
+        await router.reload()
+    }
+
+    return (
+        <button type="button"
+                className="bg-blue-900 rounded-2xl shadow-2xl text-white hover:bg-blue-800 p-2 hover:text-gray-300"
+                onClick={signInWithGoogle}>Sign in with Google
+        </button>
+    )
+
+}
+
 export default function ChatMainContent() {
+    const [user] = useAuthState(auth);
+
     return (
         <div className="relative w-full py-16 bg-white overflow-hidden bg-blue-gray-50">
             <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
@@ -82,9 +119,7 @@ export default function ChatMainContent() {
                     <p className="mt-8 text-xl text-gray-500 leading-8">
                         You can read all messages from chat here.
                     </p>
-                    <p className="mt-8 text-xl text-gray-500 leading-8">
-                        All messages are shown in the left sidebar.
-                    </p>
+                    {user ? <SignOut/> : <SignIn/>}
                 </div>
                 <div className="h-full prose prose-indigo prose-lg text-gray-500 mx-auto"/>
             </div>

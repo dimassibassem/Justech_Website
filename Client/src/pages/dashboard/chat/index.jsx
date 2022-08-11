@@ -26,10 +26,10 @@ export default function Index() {
 
                         <div className="flex-1 flex xl:overflow-hidden">
                             {/* Secondary sidebar */}
-                            <ChatSidebar />
+                            <ChatSidebar/>
 
                             {/* Main content */}
-                        <ChatMainContent />
+                            <ChatMainContent/>
 
                         </div>
                     </div>
