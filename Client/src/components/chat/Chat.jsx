@@ -28,7 +28,7 @@ const firestore = firebase.firestore();
 
 function Chat() {
     const [user] = useAuthState(auth);
-
+    console.log(user);
     return (
         <div className="App">
             <header>
@@ -70,9 +70,13 @@ function SignOut() {
 function ChatRoom() {
     const dummy = useRef();
     const messagesRef = firestore.collection('messages');
-    const query = messagesRef.orderBy('createdAt').limit(25);
+    const query = messagesRef.orderBy('createdAt').limit(50);
 
     const [messages] = useCollectionData(query, {idField: 'id'});
+
+   const filtredMessages = messages?.filter((msg) => msg.to === auth.currentUser.email || msg.from === auth.currentUser.email);
+
+    console.log(messages);
 
     const [formValue, setFormValue] = useState('');
 
@@ -80,13 +84,16 @@ function ChatRoom() {
     const sendMessage = async (e) => {
         e.preventDefault();
 
-        const {uid, photoURL} = auth.currentUser;
+        const {uid, photoURL, email, displayName} = auth.currentUser;
 
         await messagesRef.add({
             text: formValue,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            displayName,
             uid,
-            photoURL
+            photoURL,
+            from: email,
+            to: process.env.NEXT_PUBLIC_ADMIN_EMAIL
         })
 
         setFormValue('');
@@ -96,7 +103,7 @@ function ChatRoom() {
     return (<>
         <main>
 
-            {messages && messages.map((msg, index) => <ChatMessage key={`${index + id}`} message={msg}/>)}
+            {filtredMessages && filtredMessages.map((msg, index) => <ChatMessage key={`${index + id}`} message={msg}/>)}
 
             <span ref={dummy}/>
 
@@ -119,7 +126,7 @@ function ChatMessage({message}) {
     const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
 
     return (<div className={`message ${messageClass}`}>
-        <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} alt=""/>
+        <img src={photoURL} alt=""/>
         <p>{text}</p>
     </div>)
 }
