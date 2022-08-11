@@ -4,17 +4,17 @@ import {
     AdjustmentsIcon,
     BookmarkAltIcon, CalendarIcon,
     CogIcon,
-    FireIcon,
+   ChatIcon,
     HomeIcon,
-    InboxIcon, UserGroupIcon,
+    InboxInIcon, UserGroupIcon,
     UserIcon
 } from "@heroicons/react/outline";
 
 const navigation = [
     {name: 'Home', href: '/', icon: HomeIcon},
-    {name: 'Trending', href: '#', icon: FireIcon},
+    {name: 'Chat', href: '/dashboard/chat', icon: ChatIcon},
     {name: 'Bookmarks', href: '#', icon: BookmarkAltIcon},
-    {name: 'Messages', href: '/dashboard/contact', icon: InboxIcon},
+    {name: 'Messages', href: '/dashboard/contact', icon: InboxInIcon},
     {name: 'Profile', href: '/dashboard', icon: UserIcon},
 ]
 
