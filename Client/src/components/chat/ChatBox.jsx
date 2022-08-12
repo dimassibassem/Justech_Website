@@ -21,7 +21,7 @@ function ChatBox({messages, receiver}) {
         dummy.current.scrollIntoView({behavior: 'smooth'});
     }
     return (
-        <div className=" relative flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
+        <div className=" relative flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen ">
             <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
                 <div className="relative flex items-center space-x-4">
                     <div className="relative">
@@ -37,11 +37,12 @@ function ChatBox({messages, receiver}) {
                     </div>
                 </div>
             </div>
-            {messages?.map((message) => {
+            <div className=" overflow-y-scroll">
+                {messages?.map((message) => {
                 if (message.from !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
                     return (
                         <div key={message.createdAt} className="flex items-end">
-                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
+                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start py-1">
                                 <div>
                                     <span
                                         className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
@@ -56,7 +57,7 @@ function ChatBox({messages, receiver}) {
                     )
                 }
                 return (
-                    <div key={message.createdAt} className="flex items-end justify-end">
+                    <div key={message.createdAt} className="flex items-end justify-end py-1">
                         <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
                             <div>
                                     <span
@@ -69,6 +70,7 @@ function ChatBox({messages, receiver}) {
                 )
 
             })}
+            </div>
             <span ref={dummy}/>
             <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
                 <div className="relative flex">
