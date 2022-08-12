@@ -10,7 +10,7 @@ import {Testimonials} from '@/components/Testimonials'
 import {ContactUs} from '@/components/ContactUs'
 import {useStore} from "@/store";
 import Events from "@/components/Events";
-import StickyButton from "@/components/StickyButton";
+import StickyButton from "@/components/vistorChat/StickyButton";
 
 export default function Home() {
 

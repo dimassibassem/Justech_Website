@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatBox from "@/components/ChatBox";
+import ChatBox from "@/components/chat/ChatBox";
 
 function Test2() {
     return <ChatBox/>

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {ChatIcon} from "@heroicons/react/outline";
-import SlideOverChat from "@/components/SlideOverChat";
+import SlideOverChat from "@/components/vistorChat/SlideOverChat";
 
 function StickyButton() {
     const [open, setOpen] = useState(false)
