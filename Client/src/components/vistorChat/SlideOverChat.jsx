@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import React, {Fragment, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import {useAuthState} from "react-firebase-hooks/auth";
@@ -25,7 +25,8 @@ function SignIn() {
 
 function SignOut() {
     return auth.currentUser && (
-        <button type="button" className="rounded-full hover:bg-red-700 p-1 hover:text-white" onClick={() => auth.signOut()}>Sign Out</button>
+        <button type="button" className="rounded-full hover:bg-red-700 p-1 hover:text-white"
+                onClick={() => auth.signOut()}>Sign Out</button>
     )
 }
 
@@ -74,6 +75,7 @@ export default function SlideOverChat({open, setOpen}) {
 function VisitorChat() {
     const [formValue, setFormValue] = useState('');
     const dummy = useRef();
+
     const messagesRef = firestore.collection('messages');
     const sendMessage = async (e) => {
         e.preventDefault();
@@ -88,7 +90,6 @@ function VisitorChat() {
         })
 
         setFormValue('');
-        dummy.current.scrollIntoView({behavior: 'smooth'});
     }
 
     const query = messagesRef.orderBy('createdAt').limit(300);
@@ -97,6 +98,9 @@ function VisitorChat() {
 
     const filteredMessages = messages?.filter((msg) => msg.to === auth.currentUser.email || msg.from === auth.currentUser.email);
 
+    useEffect(() => {
+        dummy?.current?.scrollIntoView({behavior: 'smooth'});
+    }, [filteredMessages]);
     return (
         <div className=" relative flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
             <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
@@ -117,44 +121,46 @@ function VisitorChat() {
             </div>
             <div className=" overflow-y-scroll">
                 {filteredMessages?.map((message) => {
-                if (message.from !== auth.currentUser.email) {
-                    return (
-                        <div key={message.createdAt} className="flex items-end py-1">
-                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                <div>
+                    if (message.from !== auth.currentUser.email) {
+                        return (
+                            <div key={message.createdAt} className="flex items-end py-1">
+                                <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
+                                    <div>
                                     <span
                                         className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
                                         {message.text}
                                     </span>
+                                    </div>
                                 </div>
+                                <Image
+                                    src={logo}
+                                    alt="My profile" className="w-6 h-6 rounded-full order-1"/>
+                                <span ref={dummy}/>
                             </div>
-                            <Image
-                                src={logo}
-                                alt="My profile" className="w-6 h-6 rounded-full order-1"/>
-                        </div>
-                    )
-                }
-                return (
-                    <div key={message.createdAt} className="flex items-end justify-end py-1">
-                        <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                            <div>
+                        )
+                    }
+                    return (
+                        <div key={message.createdAt} className="flex items-end justify-end py-1">
+                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
+                                <div>
                                     <span
                                         className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
                                         {message.text}
                                     </span>
+                                </div>
                             </div>
+                            <span ref={dummy}/>
                         </div>
-                    </div>
-                )
+                    )
 
-            })}
+                })}
             </div>
-            <span ref={dummy}/>
+
             <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
-                <div className="relative flex">
+                <div className="relative ">
                     <form onSubmit={sendMessage}>
                         <input type="text" value={formValue}
-                               className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 bg-gray-200 rounded-md py-3"
+                               className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 bg-gray-200 rounded-lg py-3"
                                placeholder="Write your message!"
                                onChange={(e) => setFormValue(e.target.value)}
                         />

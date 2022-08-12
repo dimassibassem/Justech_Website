@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {firebase, firestore} from "@/config";
 
 function ChatBox({messages, receiver}) {
@@ -18,8 +18,11 @@ function ChatBox({messages, receiver}) {
         })
 
         setFormValue('');
-        dummy.current.scrollIntoView({behavior: 'smooth'});
+
     }
+    useEffect(() => {
+        dummy?.current?.scrollIntoView({behavior: 'smooth'});
+    }, [messages]);
     return (
         <div className=" relative flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen ">
             <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
@@ -39,44 +42,46 @@ function ChatBox({messages, receiver}) {
             </div>
             <div className=" overflow-y-scroll">
                 {messages?.map((message) => {
-                if (message.from !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
-                    return (
-                        <div key={message.createdAt} className="flex items-end">
-                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start py-1">
-                                <div>
+                    if (message.from !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+                        return (
+                            <div key={message.createdAt} className="flex items-end">
+                                <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start py-1">
+                                    <div>
                                     <span
                                         className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
                                         {message.text}
                                     </span>
+                                    </div>
                                 </div>
+                                <img
+                                    src={message.photoURL}
+                                    alt="My profile" className="w-6 h-6 rounded-full order-1"/>
+                                <span ref={dummy}/>
                             </div>
-                            <img
-                                src={message.photoURL}
-                                alt="My profile" className="w-6 h-6 rounded-full order-1"/>
-                        </div>
-                    )
-                }
-                return (
-                    <div key={message.createdAt} className="flex items-end justify-end py-1">
-                        <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                            <div>
+                        )
+                    }
+                    return (
+                        <div key={message.createdAt} className="flex items-end justify-end py-1">
+                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
+                                <div>
                                     <span
                                         className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
                                         {message.text}
                                     </span>
+                                </div>
                             </div>
+                            <span ref={dummy}/>
                         </div>
-                    </div>
-                )
+                    )
 
-            })}
+                })}
             </div>
-            <span ref={dummy}/>
+
             <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
-                <div className="relative flex">
+                <div className="relative ">
                     <form onSubmit={sendMessage}>
                         <input type="text" value={formValue}
-                               className=" w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 bg-gray-200 rounded-md py-3"
+                               className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 bg-gray-200 rounded-lg py-3"
                                placeholder="Write your message!"
                                onChange={(e) => setFormValue(e.target.value)}
                         />
