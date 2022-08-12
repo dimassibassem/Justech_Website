@@ -10,6 +10,7 @@ import {Testimonials} from '@/components/Testimonials'
 import {ContactUs} from '@/components/ContactUs'
 import {useStore} from "@/store";
 import Events from "@/components/Events";
+import StickyButton from "@/components/StickyButton";
 
 export default function Home() {
 
@@ -22,7 +23,7 @@ export default function Home() {
         fetchPartners().catch(err => console.log(err))
     }, [])
     return (
-        <div className='bg-gray-200'>
+        <div className='relative bg-gray-200'>
 
             <Head>
                 <title>Justech</title>
@@ -34,6 +35,7 @@ export default function Home() {
             <Header/>
             <main>
                 <Hero/>
+                <StickyButton />
                 <PrimaryFeatures/>
                 <Partners/>
                 <Testimonials/>
