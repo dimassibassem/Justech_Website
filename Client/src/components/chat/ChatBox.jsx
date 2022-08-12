@@ -74,7 +74,7 @@ function ChatBox({messages, receiver}) {
                 <div className="relative flex">
                     <form onSubmit={sendMessage}>
                         <input type="text" value={formValue}
-                               className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
+                               className=" w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 bg-gray-200 rounded-md py-3"
                                placeholder="Write your message!"
                                onChange={(e) => setFormValue(e.target.value)}
                         />

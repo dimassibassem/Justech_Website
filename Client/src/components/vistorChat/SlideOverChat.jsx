@@ -1,7 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import React, {Fragment, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
-import {XIcon} from '@heroicons/react/outline'
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import {useAuthState} from "react-firebase-hooks/auth";
 import Image from "next/future/image";
@@ -26,7 +25,7 @@ function SignIn() {
 
 function SignOut() {
     return auth.currentUser && (
-        <button type="button" className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
+        <button type="button" className="rounded-full hover:bg-red-700 p-1 hover:text-white" onClick={() => auth.signOut()}>Sign Out</button>
     )
 }
 
@@ -35,7 +34,7 @@ export default function SlideOverChat({open, setOpen}) {
     const [user] = useAuthState(auth);
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={setOpen}>
+            <Dialog as="div" className="relative z-40" onClose={setOpen}>
                 <div className="fixed inset-0"/>
 
                 <div className="fixed inset-0 overflow-hidden">
@@ -51,28 +50,11 @@ export default function SlideOverChat({open, setOpen}) {
                                 leaveTo="translate-x-full"
                             >
                                 <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                                    <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                                        <div className="px-4 sm:px-6">
-                                            <div className="flex items-start justify-between">
-                                                <Dialog.Title className="text-lg font-medium text-gray-900"> Panel
-                                                    title </Dialog.Title>
-                                                <div className="ml-3 flex h-7 items-center">
-                                                    <button
-                                                        type="button"
-                                                        className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                                        onClick={() => setOpen(false)}
-                                                    >
-                                                        <span className="sr-only">Close panel</span>
-                                                        <XIcon className="h-6 w-6" aria-hidden="true"/>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="relative mt-6 flex-1 px-4 sm:px-6">
+                                    <div className="flex flex-col bg-white shadow-xl">
+                                        <div className="relative flex-1 pl-2 sm:pl-2">
                                             {/* Replace with your content */}
 
                                             <div>
-                                                <SignOut/>
                                                 {user ? <VisitorChat/> : <SignIn/>}
                                             </div>
                                             {/* /End replace */}
@@ -128,14 +110,16 @@ function VisitorChat() {
                         <div className="text-2xl mt-1 flex items-center">
                             <span
                                 className="text-gray-700 mr-3">Justech</span>
+                            <SignOut/>
                         </div>
                     </div>
                 </div>
             </div>
-            {filteredMessages?.map((message) => {
+            <div className=" overflow-y-scroll">
+                {filteredMessages?.map((message) => {
                 if (message.from !== auth.currentUser.email) {
                     return (
-                        <div key={message.createdAt} className="flex items-end">
+                        <div key={message.createdAt} className="flex items-end py-1">
                             <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
                                 <div>
                                     <span
@@ -151,7 +135,7 @@ function VisitorChat() {
                     )
                 }
                 return (
-                    <div key={message.createdAt} className="flex items-end justify-end">
+                    <div key={message.createdAt} className="flex items-end justify-end py-1">
                         <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
                             <div>
                                     <span
@@ -164,12 +148,13 @@ function VisitorChat() {
                 )
 
             })}
+            </div>
             <span ref={dummy}/>
             <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
                 <div className="relative flex">
                     <form onSubmit={sendMessage}>
                         <input type="text" value={formValue}
-                               className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
+                               className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 bg-gray-200 rounded-md py-3"
                                placeholder="Write your message!"
                                onChange={(e) => setFormValue(e.target.value)}
                         />
