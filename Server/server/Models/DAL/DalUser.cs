@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using server.Extensions;
 using server.Models.Entity;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace server.Models.DAL;
 
@@ -38,7 +39,7 @@ public class DalUser
         return true;
     }
 
- 
+
     //add user
     public static JsonResponse AddUser(User user)
     {
@@ -73,7 +74,7 @@ public class DalUser
                 if (String.IsNullOrEmpty(user.Password))
                     command.Parameters.AddWithValue("@Password", DBNull.Value);
                 else
-                    command.Parameters.AddWithValue("@Password", user.Password);
+                    command.Parameters.AddWithValue("@Password", BCrypt.Net.BCrypt.HashPassword(user.Password));
 
                 long id = (long) command.ExecuteScalar();
 
