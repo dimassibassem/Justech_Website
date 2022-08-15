@@ -30,7 +30,8 @@ function ChatSidebar() {
                         aria-current={item.current ? 'page' : undefined}
                     >
                         <div className="grid grid-cols-2 gap-4 ml-3 text-sm">
-                            <img className="rounded-full shadow-xl w-16 h-16" src={item.photoURL} alt=""/>
+                            <img className="rounded-full shadow-xl w-16 h-16" src={item.photoURL} alt=""
+                                 loading="lazy"/>
                             <div className>
                                 <p className="font-medium text-blue-gray-900">{item.displayName}</p>
                                 <p className="mt-1 text-blue-gray-500">{item.text}</p>

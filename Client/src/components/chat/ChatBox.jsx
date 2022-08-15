@@ -29,18 +29,20 @@ function ChatBox({messages, receiver}) {
                 <div className="relative flex items-center space-x-4">
                     <div className="relative">
                         <img
-                            src={messages ? messages[0].photoURL : ""}
-                            alt="" className="w-10 sm:w-16 h-10 sm:h-16 rounded-full shadow-xl"/>
+                            src={messages ? messages[0]?.photoURL : ""}
+                            alt="" className="w-10 sm:w-16 h-10 sm:h-16 rounded-full shadow-xl"
+                            loading="lazy"
+                        />
                     </div>
                     <div className="flex flex-col leading-tight">
                         <div className="text-2xl mt-1 flex items-center">
                             <span
-                                className="text-gray-700 mr-3">{messages ? messages[0].displayName : ""}</span>
+                                className="text-gray-700 mr-3">{messages ? messages[0]?.displayName : ""}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className=" overflow-y-scroll">
+            <div className=" overflow-auto ">
                 {messages?.map((message) => {
                     if (message.from !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
                         return (

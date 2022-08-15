@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {useCollectionData} from "react-firebase-hooks/firestore";
@@ -35,7 +34,7 @@ export default function SlideOverChat({open, setOpen}) {
     const [user] = useAuthState(auth);
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="relative z-40" onClose={setOpen}>
+            <Dialog as="div" className="relative z-40 " onClose={setOpen}>
                 <div className="fixed inset-0"/>
 
                 <div className="fixed inset-0 overflow-hidden">
@@ -92,7 +91,7 @@ function VisitorChat() {
         setFormValue('');
     }
 
-    const query = messagesRef.orderBy('createdAt').limit(300);
+    const query = messagesRef.orderBy('createdAt')
 
     const [messages] = useCollectionData(query, {idField: 'id'});
 
@@ -119,7 +118,7 @@ function VisitorChat() {
                     </div>
                 </div>
             </div>
-            <div className=" overflow-y-scroll">
+            <div className="overflow-auto ">
                 {filteredMessages?.map((message) => {
                     if (message.from !== auth.currentUser.email) {
                         return (

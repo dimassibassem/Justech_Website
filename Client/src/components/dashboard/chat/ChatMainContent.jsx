@@ -10,7 +10,6 @@ function SignOut() {
                 className="bg-red-700 rounded-2xl shadow-2xl text-white hover:bg-red-800 p-2 hover:text-gray-300"
                 onClick={async () => {
                     await auth.signOut()
-
                 }}>Sign Out</button>
     )
 }
