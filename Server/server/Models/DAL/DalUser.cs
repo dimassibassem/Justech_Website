@@ -74,7 +74,7 @@ public class DalUser
                 if (String.IsNullOrEmpty(user.Password))
                     command.Parameters.AddWithValue("@Password", DBNull.Value);
                 else
-                    command.Parameters.AddWithValue("@Password", BCrypt.Net.BCrypt.HashPassword(user.Password));
+                    command.Parameters.AddWithValue("@Password", BCryptNet.HashPassword(user.Password));
 
                 long id = (long) command.ExecuteScalar();
 
