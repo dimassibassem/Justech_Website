@@ -2,8 +2,11 @@ import Image from "next/future/image";
 import {useState} from "react";
 import axios from "axios";
 import logo from '@/images/logos/logo.png';
+import ErrorModal from "@/components/login/ErrorModal";
 
 export default function Login() {
+    const [open, setOpen] = useState(false);
+    const [error, setError] = useState("");
     const [state, setState] = useState({});
     const handleChange = (e) => {
         setState({...state, [e.target.name]: e.target.value});
@@ -11,7 +14,10 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/auth?email=${state.email}&password=${state.password}`)
-        console.log(res.data);
+        if (!res.data.success) {
+            setOpen(true);
+            setError(res.data.message);
+        }
 
     }
     return (
@@ -71,7 +77,7 @@ export default function Login() {
                             </button>
                         </div>
                     </form>
-
+                    <ErrorModal open={open} setOpen={setOpen} error={error}/>
                 </div>
             </div>
         </div>

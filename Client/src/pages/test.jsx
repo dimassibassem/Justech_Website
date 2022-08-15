@@ -1,11 +1,11 @@
 import React from 'react'
-import Chat from "@/components/chat/Chat";
+import ErrorModal from "@/components/login/ErrorModal";
 
 
 function Test() {
     return (
 
-        <Chat/>
+        <ErrorModal/>
 
     )
 }
