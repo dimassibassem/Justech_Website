@@ -1,5 +1,10 @@
-﻿using server.Extensions;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using server.Extensions;
 using server.Models.DAL;
+using server.Models.Entity;
 using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace server.Models.BLL;
@@ -24,8 +29,9 @@ public class BllAuth
 
         if (verified)
         {
+            var token = GenerateJwtToken(user);
             jsonResponse.Success = true;
-            jsonResponse.Message = "User verified";
+            jsonResponse.Message = token;
         }
         else
         {
@@ -35,5 +41,21 @@ public class BllAuth
 
 
         return jsonResponse;
+    }
+
+    private static string GenerateJwtToken(User user)
+    {
+        // generate token that is valid for 7 days
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes("super secret key");
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(new[] {new Claim("id", user.Id.ToString())}),
+            Expires = DateTime.UtcNow.AddDays(7),
+            SigningCredentials =
+                new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+        };
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
     }
 }
