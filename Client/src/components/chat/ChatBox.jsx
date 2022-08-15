@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {firebase, firestore} from "@/config";
+import {firebase, firestore} from "@/utils/config";
 
 function ChatBox({messages, receiver}) {
     const [formValue, setFormValue] = useState('');

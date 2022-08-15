@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import Image from "next/future/image";
-import {firebase, firestore} from "@/config";
+import {firebase, firestore} from "@/utils/config";
 import logo from '@/images/logos/logo.png'
 
 function VisitorChat({messages, auth}) {

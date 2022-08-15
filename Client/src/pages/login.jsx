@@ -1,13 +1,17 @@
 import Image from "next/future/image";
-import {useState} from "react";
+import { useState} from "react";
 import axios from "axios";
+import {useRouter} from "next/router";
 import logo from '@/images/logos/logo.png';
 import ErrorModal from "@/components/login/ErrorModal";
+import {useLocalStorage} from "@/store";
 
 export default function Login() {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState("");
     const [state, setState] = useState({});
+    const setToken = useLocalStorage(store => store.setToken);
+    const router = useRouter();
     const handleChange = (e) => {
         setState({...state, [e.target.name]: e.target.value});
     }
@@ -17,9 +21,12 @@ export default function Login() {
         if (!res.data.success) {
             setOpen(true);
             setError(res.data.message);
+        } else {
+            setToken(res.data.message);
+            await router.push('/dashboard');
         }
-
     }
+
     return (
         <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">

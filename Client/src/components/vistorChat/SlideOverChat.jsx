@@ -3,7 +3,7 @@ import {Dialog, Transition} from '@headlessui/react'
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import {useAuthState} from "react-firebase-hooks/auth";
 import Image from "next/future/image";
-import {auth, firebase, firestore} from "@/config";
+import {auth, firebase, firestore} from "@/utils/config";
 import logo from "@/images/logos/logo.png";
 
 function SignIn() {

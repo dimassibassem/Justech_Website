@@ -1,7 +1,7 @@
 import React from "react";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {useRouter} from "next/router";
-import {auth, firebase} from "@/config";
+import {auth, firebase} from "@/utils/config";
 
 
 function SignOut() {

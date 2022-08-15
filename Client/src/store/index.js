@@ -72,16 +72,16 @@ const createStateSlice = (set, get) => ({
     setCurrentMessage: (message) => set({currentMessage: message}, null, "setCurrentMessage"),
 
 })
-// const createTokenSlice = (set, get) => ({
-//     token: null,
-//     setToken: (token) => set({token}, null, "setToken"),
-// });
+const createTokenSlice = (set, get) => ({
+    token: null,
+    setToken: (token) => set({token}, null, "setToken"),
+});
 
-// const createRootStorage = (set, get) => ({
-//     ...createTokenSlice(set, get)
-// })
-//
-// export const useLocalStorage = create(devtools(persist(createRootStorage, {name: "localStorage"})))
+const createRootStorage = (set, get) => ({
+    ...createTokenSlice(set, get)
+})
+
+export const useLocalStorage = create(devtools(persist(createRootStorage, {name: "localStorage"})))
 
 const createRootSlice = (set, get) => ({
     ...createStateSlice(set, get),

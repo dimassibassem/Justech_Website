@@ -45,8 +45,8 @@ export default function ErrorModal({open, setOpen, error}) {
                                             Invalid credentials
                                         </Dialog.Title>
                                         <div className="mt-2">
+                                            <h5>{error}</h5>
                                             <p className="text-sm text-gray-500">
-                                                <h4>{error}</h4>
                                                 Please check your credentials and try again.
                                             </p>
                                         </div>
