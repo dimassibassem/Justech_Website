@@ -1,7 +1,13 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Text;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Owin.Security.OAuth;
 using server.Extensions;
 using server.Models.DAL;
 using server.Models.Entity;
@@ -9,14 +15,14 @@ using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace server.Models.BLL;
 
-public class BllAuth
+public static class BllAuth
 {
     public static object Verify(string field, string fieldValue, string password)
     {
         JsonResponse jsonResponse = new JsonResponse();
         bool verified = false;
         var user = DalAuth.GetUserBy(field, fieldValue);
-        if (user.Id >= 0)
+        if (user.Id != 0)
         {
             verified = BCryptNet.Verify(password, user.Password);
         }
@@ -30,6 +36,7 @@ public class BllAuth
         if (verified)
         {
             var token = GenerateJwtToken(user);
+
             jsonResponse.Success = true;
             jsonResponse.Message = token;
         }
@@ -57,5 +64,33 @@ public class BllAuth
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
+    }
+
+    public static bool IsTokenValid(string token)
+    {
+        static string Base64UrlEncode(byte[] input)
+        {
+            var output = Convert.ToBase64String(input);
+            output = output.Split('=')[0]; // Remove any trailing '='s
+            output = output.Replace('+', '-'); // 62nd char of encoding
+            output = output.Replace('/', '_'); // 63rd char of encoding
+            return output;
+        }
+
+        try
+        {
+            int index = token.IndexOf('.', token.IndexOf('.') + 1);
+            string signature = token[(index + 1)..];
+            byte[] bytesToSign = Encoding.UTF8.GetBytes(token[..index]);
+            var key = Encoding.ASCII.GetBytes("super secret key");
+            var hash = new HMACSHA256(key).ComputeHash(bytesToSign);
+            var computedSignature = Base64UrlEncode(hash);
+            return computedSignature.Length == signature.Length
+                   && computedSignature.SequenceEqual(signature);
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

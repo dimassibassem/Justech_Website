@@ -1,4 +1,5 @@
 using Microsoft.Extensions.FileProviders;
+using server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

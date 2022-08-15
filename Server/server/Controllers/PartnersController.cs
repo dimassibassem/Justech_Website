@@ -1,4 +1,5 @@
-﻿using server.Extensions;
+﻿using Microsoft.AspNetCore.Authorization;
+using server.Extensions;
 using server.Models.BLL;
 using server.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,15 @@ namespace server.Controllers
         [HttpPost("UpsertPartner")]
         public async Task<IActionResult> UpsertPartner([FromForm] Partner partner)
         {
+            var jsonResponse = new JsonResponse();
+            jsonResponse.Success = false;
+            jsonResponse.Message = "unAuthorized";
+            if (!Request.Headers.ContainsKey("Authorization")) return Json(jsonResponse);
+
+            var token = Request.Headers["Authorization"];
+            token = token.ToString().Substring(7);
+            if (!BllAuth.IsTokenValid(token)) return Json(jsonResponse);
+
             if (partner.Thumbnail == null) return Json(BllPartner.UpsertApi(partner));
 
             if (!Directory.Exists(_environment.WebRootPath + "\\Uploads\\Partners"))
@@ -43,6 +53,7 @@ namespace server.Controllers
             return Json(BllPartner.UpsertApi(partner));
         }
 
+
         [HttpGet("all")]
         public List<Partner> GetAllPartners()
         {
@@ -60,7 +71,6 @@ namespace server.Controllers
 
             return BllPartner.GetAllPartnersBy(field, value);
         }
-
 
 
         [HttpDelete("DeletePartnerBy")]
