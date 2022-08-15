@@ -1,69 +1,79 @@
-import Head from 'next/head'
-import Link from 'next/link'
-
-import { AuthLayout } from '@/components/AuthLayout'
-import { Button } from '@/components/Button'
-import { TextField } from '@/components/Fields'
-import { Logo } from '@/components/Logo'
+import Image from "next/future/image";
+import {useState} from "react";
+import axios from "axios";
+import logo from '@/images/logos/logo.png';
 
 export default function Login() {
-  return (
-    <>
-      <Head>
-        <title>Sign In - TaxPal</title>
-      </Head>
-      <AuthLayout>
-        <div className='flex flex-col'>
-          <Link href='/' aria-label='Home'>
-            <Logo className='h-10 w-auto' />
-          </Link>
-          <div className='mt-20'>
-            <h2 className='text-lg font-semibold text-gray-900'>
-              Sign in to your account
-            </h2>
-            <p className='mt-2 text-sm text-gray-700'>
-              Don’t have an account?{' '}
-              <Link
-                href='/register'
-                className='font-medium text-blue-600 hover:underline'
-              >
-                Sign up
-              </Link>{' '}
-              for a free trial.
-            </p>
-          </div>
+    const [state, setState] = useState({});
+    const handleChange = (e) => {
+        setState({...state, [e.target.name]: e.target.value});
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/auth?email=${state.email}&password=${state.password}`)
+        console.log(res.data);
+
+    }
+    return (
+        <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                <Image
+                    className="mx-auto w-2/3 max-w-md"
+                    src={logo}
+                    alt="Workflow"
+                />
+                <h2 className="mt-6 text-center text-3xl tracking-tight font-bold text-gray-800">Sign in to your
+                    account</h2>
+            </div>
+
+            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md ">
+                <div className="bg-blue-gray-200 py-8 px-4 shadow-md sm:rounded-lg sm:px-10">
+                    <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
+                        <div>
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                Email address
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    autoComplete="email"
+                                    required
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                                Password
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    autoComplete="current-password"
+                                    required
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <button
+                                type="submit"
+                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#033888] hover:bg-[#002449] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+                                Sign in
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
         </div>
-        <form action='#' className='mt-10 grid grid-cols-1 gap-y-8'>
-          <TextField
-            label='Email address'
-            id='email'
-            name='email'
-            type='email'
-            autoComplete='email'
-            required
-          />
-          <TextField
-            label='Password'
-            id='password'
-            name='password'
-            type='password'
-            autoComplete='current-password'
-            required
-          />
-          <div>
-            <Button
-              type='submit'
-              variant='solid'
-              color='blue'
-              className='w-full'
-            >
-              <span>
-                Sign in <span aria-hidden='true'>&rarr;</span>
-              </span>
-            </Button>
-          </div>
-        </form>
-      </AuthLayout>
-    </>
-  )
+    )
 }
