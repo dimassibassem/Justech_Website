@@ -81,7 +81,7 @@ const createRootStorage = (set, get) => ({
     ...createTokenSlice(set, get)
 })
 
-export const useLocalStorage = create(devtools(persist(createRootStorage, {name: "localStorage"})))
+export const useLocalStorage = create(devtools(persist(createRootStorage, {name: "token"})))
 
 const createRootSlice = (set, get) => ({
     ...createStateSlice(set, get),

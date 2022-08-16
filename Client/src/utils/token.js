@@ -9,6 +9,7 @@ export function parseJwt(token) {
 }
 
 export function tokenValid(token) {
+
     if (token === null || token === undefined) {
         return false
     }

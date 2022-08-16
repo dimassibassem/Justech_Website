@@ -1,4 +1,5 @@
 import {useEffect} from "react";
+import {useRouter} from "next/router";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
@@ -6,12 +7,21 @@ import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import ForMobile from "@/components/dashboard/ForMobile";
 import {useStore} from "@/store";
 import ProfileIMainContent from "@/components/dashboard/ProfileIMainContent";
+import {tokenValid} from "@/utils/token";
 
 
 export default function Index() {
     const subNavigation = useStore(state => state.subNavigation);
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
+    const router = useRouter();
+    const {token} = JSON.parse(localStorage.getItem('token')).state
+    const checkAuth = async () => {
+        if (!tokenValid(token)) {
+            await router.push('/login');
+        }
+    }
     useEffect(() => {
+        checkAuth().catch(err => console.log(err))
         resetSubNavigation();
     }, []);
     return (
@@ -35,7 +45,7 @@ export default function Index() {
                             <SecondarySidebar subNavigation={subNavigation}/>
 
                             {/* Main content */}
-                            <ProfileIMainContent />
+                            <ProfileIMainContent/>
 
                         </div>
                     </div>
