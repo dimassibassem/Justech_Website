@@ -18,6 +18,7 @@ export default function Messages() {
     useEffect(() => {
         checkAuth2(setAuthenticated, router, token).catch(err => console.log(err))
     }, [authenticated]);
+
     if (authenticated === 'loading' || authenticated === 'false') {
         return <div/>
     }

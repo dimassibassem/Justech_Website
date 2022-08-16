@@ -60,7 +60,7 @@ function PartnersMainContent() {
 
     return (
 
-        <div className="flex-1 xl:overflow-y-auto">
+        <div className="flex-1 h-screen xl:overflow-y-auto">
             <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
                 <h1 className="text-3xl font-extrabold text-blue-gray-900">Partners</h1>
                 <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">

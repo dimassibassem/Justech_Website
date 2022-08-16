@@ -2,7 +2,7 @@ import React from 'react';
 
 function MainContent() {
     return (
-        <div className="flex-1 xl:overflow-y-auto">
+        <div className="flex-1 h-screen xl:overflow-y-auto">
             <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
                 <h1 className="text-3xl font-extrabold text-blue-gray-900">Account</h1>
 
