@@ -1,23 +1,30 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import {useRouter} from "next/router";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import MainContent from "@/components/dashboard/Account/MainContent";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import ForMobile from "@/components/dashboard/ForMobile";
-import {useStore} from "@/store";
-
+import {useLocalStorage, useStore} from "@/store";
+import checkAuth from "@/utils/checkAuthDashboard,js";
 
 export default function Account() {
-const resetSubNavigation = useStore(state => state.resetSubNavigation);
+    const resetSubNavigation = useStore(state => state.resetSubNavigation);
     const subNavigation = useStore(state => state.subNavigation);
     const index = subNavigation.findIndex(item => item.name === "Account");
+    const token = useLocalStorage(state => state.token);
+    const router = useRouter();
+    const [authenticated, setAuthenticated] = useState('loading');
+
 
     useEffect(() => {
-        resetSubNavigation();
-        subNavigation[index].current = true;
-    }, []);
+        checkAuth(setAuthenticated, token, router, resetSubNavigation, subNavigation, index).catch(err => console.log(err))
+    }, [authenticated]);
 
+    if (authenticated === 'loading' || authenticated === 'false') {
+        return <div/>
+    }
     return (
         <div className="h-full flex bg-blue-gray-50">
             {/* Adding this component ti simplify code */}

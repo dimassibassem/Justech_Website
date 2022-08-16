@@ -7,7 +7,7 @@ import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import PartnersMainContent from "@/components/dashboard/Partners/PartnersMainContent";
-import {tokenValid} from "@/utils/token";
+import checkAuth from "@/utils/checkAuthDashboard,js";
 
 function Partners() {
     const subNavigation = useStore(state => state.subNavigation);
@@ -16,21 +16,10 @@ function Partners() {
     subNavigation[index].current = true;
     const token = useLocalStorage(state => state.token);
     const router = useRouter();
-
     const [authenticated, setAuthenticated] = useState('loading');
-    const checkAuth = async () => {
-        if (!tokenValid(token)) {
-            setAuthenticated('false');
-            await router.push('/login');
-        } else {
-            setAuthenticated('true');
-            resetSubNavigation();
-            subNavigation[index].current = true;
-        }
-    }
 
     useEffect(() => {
-        checkAuth().catch(err => console.log(err))
+        checkAuth(setAuthenticated, token, router, resetSubNavigation, subNavigation, index).catch(err => console.log(err))
     }, [authenticated]);
     if (authenticated === 'loading' || authenticated === 'false') {
         return <div/>

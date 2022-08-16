@@ -1,21 +1,29 @@
-import React, {useEffect} from 'react';
-import {useStore} from "@/store";
+import React, {useEffect, useState} from 'react';
+import {useRouter} from "next/router";
+import {useLocalStorage, useStore} from "@/store";
 import ForMobile from "@/components/dashboard/ForMobile";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import EventsMainContent from "@/components/dashboard/Events/EventsMainContent";
+import checkAuth from "@/utils/checkAuthDashboard,js";
 
 function Events() {
     const subNavigation = useStore(state => state.subNavigation);
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
+    const token = useLocalStorage(state => state.token);
+    const router = useRouter();
+    const [authenticated, setAuthenticated] = useState('loading');
     const index = subNavigation.findIndex(item => item.name === "Events");
-    subNavigation[index].current = true;
+
+
     useEffect(() => {
-        resetSubNavigation();
-        subNavigation[index].current = true;
-    }, []);
+        checkAuth(setAuthenticated, token, router, resetSubNavigation, subNavigation, index).catch(err => console.log(err))
+    }, [authenticated]);
+    if (authenticated === 'loading' || authenticated === 'false') {
+        return <div/>
+    }
     return (
         <div className="h-full flex bg-blue-gray-50">
             {/* Adding this component ti simplify code */}
