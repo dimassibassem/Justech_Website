@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from "next/link";
 import {useCollectionData} from "react-firebase-hooks/firestore";
-import {firebase} from '@/../../../utils/config'
+import {firebase} from '@/utils/config'
 
 const firestore = firebase.firestore();
 

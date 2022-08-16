@@ -2,7 +2,7 @@ import React, {useId, useRef, useState} from 'react';
 
 import {useAuthState} from 'react-firebase-hooks/auth';
 import {useCollectionData} from 'react-firebase-hooks/firestore';
-import {firestore, auth, firebase} from '@/../../utils/config'
+import {firestore, auth, firebase} from '@/utils/config'
 
 function Chat() {
     const [user] = useAuthState(auth);
