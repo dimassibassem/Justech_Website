@@ -11,10 +11,17 @@ import {tokenValid} from "@/utils/token";
 
 
 export default function Index() {
+    // todo: fix this
     const subNavigation = useStore(state => state.subNavigation);
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
     const router = useRouter();
-    const {token} = JSON.parse(localStorage.getItem('token')).state
+    let token
+    try {
+        token = JSON.parse(localStorage.getItem('token')).state.token
+    } catch {
+        token = null
+    }
+
     const checkAuth = async () => {
         if (!tokenValid(token)) {
             await router.push('/login');
