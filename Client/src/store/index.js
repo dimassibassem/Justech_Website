@@ -4,7 +4,7 @@ import {
     AdjustmentsIcon,
     BookmarkAltIcon, CalendarIcon,
     CogIcon,
-   ChatIcon,
+    ChatIcon,
     HomeIcon,
     InboxInIcon, UserGroupIcon,
     UserIcon
