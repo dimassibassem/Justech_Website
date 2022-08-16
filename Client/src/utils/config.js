@@ -2,7 +2,6 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
-
 firebase.initializeApp({
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
     authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
@@ -14,4 +13,4 @@ firebase.initializeApp({
 const firestore = firebase.firestore();
 const auth = firebase.auth();
 
-export { firestore, auth,firebase };
+export {firestore, auth, firebase};

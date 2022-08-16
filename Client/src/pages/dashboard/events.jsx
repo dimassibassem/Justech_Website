@@ -7,7 +7,7 @@ import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import EventsMainContent from "@/components/dashboard/Events/EventsMainContent";
-import checkAuth from "@/utils/checkAuthDashboard,js";
+import checkAuth from "@/utils/checkAuthDashboard";
 
 function Events() {
     const subNavigation = useStore(state => state.subNavigation);
@@ -16,7 +16,6 @@ function Events() {
     const router = useRouter();
     const [authenticated, setAuthenticated] = useState('loading');
     const index = subNavigation.findIndex(item => item.name === "Events");
-
 
     useEffect(() => {
         checkAuth(setAuthenticated, token, router, resetSubNavigation, subNavigation, index).catch(err => console.log(err))

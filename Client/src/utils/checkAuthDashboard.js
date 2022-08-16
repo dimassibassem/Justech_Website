@@ -1,6 +1,6 @@
 import {tokenValid} from "@/utils/token";
 
-export default async function  checkAuth(setAuthenticated,token,router,resetSubNavigation,subNavigation,index) {
+export default async function checkAuth(setAuthenticated, token, router, resetSubNavigation, subNavigation, index) {
     if (!tokenValid(token)) {
         setAuthenticated('false');
         await router.push('/login');

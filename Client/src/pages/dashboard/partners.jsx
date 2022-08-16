@@ -7,7 +7,7 @@ import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import PartnersMainContent from "@/components/dashboard/Partners/PartnersMainContent";
-import checkAuth from "@/utils/checkAuthDashboard,js";
+import checkAuth from "@/utils/checkAuthDashboard";
 
 function Partners() {
     const subNavigation = useStore(state => state.subNavigation);
