@@ -1,18 +1,28 @@
 import React, {useEffect} from 'react';
-import {useStore} from "@/store";
+import {useRouter} from "next/router";
+import {useLocalStorage, useStore} from "@/store";
 import ForMobile from "@/components/dashboard/ForMobile";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import PartnersMainContent from "@/components/dashboard/Partners/PartnersMainContent";
+import {tokenValid} from "@/utils/token";
 
 function Partners() {
     const subNavigation = useStore(state => state.subNavigation);
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
     const index = subNavigation.findIndex(item => item.name === "Partners");
     subNavigation[index].current = true;
+    const token = useLocalStorage(state => state.token);
+    const router = useRouter();
+    const checkAuth = async () => {
+        if (!tokenValid(token)) {
+            await router.push('/login');
+        }
+    }
     useEffect(() => {
+        checkAuth().catch(err => console.log(err))
         resetSubNavigation();
         subNavigation[index].current = true;
     }, []);
@@ -38,7 +48,7 @@ function Partners() {
                             <SecondarySidebar subNavigation={subNavigation}/>
 
                             {/* Main content */}
-                            <PartnersMainContent />
+                            <PartnersMainContent/>
                         </div>
                     </div>
                 </main>

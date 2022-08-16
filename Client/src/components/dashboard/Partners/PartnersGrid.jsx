@@ -25,6 +25,7 @@ export default function PartnersGrid({partners, setPartners}) {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/all`)
         setPartners(res.data)
     }
+
     return (
         <Swiper
             spaceBetween={50}

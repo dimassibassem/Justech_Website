@@ -5,7 +5,7 @@ import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesk
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import ForMobile from "@/components/dashboard/ForMobile";
-import {useStore} from "@/store";
+import {useLocalStorage, useStore} from "@/store";
 import ProfileIMainContent from "@/components/dashboard/ProfileIMainContent";
 import {tokenValid} from "@/utils/token";
 
@@ -14,13 +14,7 @@ export default function Index() {
     const subNavigation = useStore(state => state.subNavigation);
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
     const router = useRouter();
-    let token
-    try {
-        token = JSON.parse(localStorage.getItem('token')).state.token
-    } catch {
-        token = null
-    }
-
+    const token = useLocalStorage(state => state.token);
     const checkAuth = async () => {
         if (!tokenValid(token)) {
             await router.push('/login');
