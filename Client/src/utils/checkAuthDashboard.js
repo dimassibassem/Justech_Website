@@ -1,6 +1,6 @@
 import {tokenValid} from "@/utils/token";
 
-export default async function checkAuth(setAuthenticated, token, router, resetSubNavigation, subNavigation, index) {
+export async function checkAuth(setAuthenticated, token, router, resetSubNavigation, subNavigation, index) {
     if (!tokenValid(token)) {
         setAuthenticated('false');
         await router.push('/login');
@@ -8,5 +8,15 @@ export default async function checkAuth(setAuthenticated, token, router, resetSu
         setAuthenticated('true');
         resetSubNavigation();
         subNavigation[index].current = true;
+    }
+}
+
+
+export async function checkAuth2(setAuthenticated, router, token) {
+    if (!tokenValid(token)) {
+        setAuthenticated('false');
+        await router.push('/login');
+    } else {
+        setAuthenticated('true');
     }
 }
