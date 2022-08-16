@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
@@ -15,15 +15,24 @@ export default function Index() {
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
     const router = useRouter();
     const token = useLocalStorage(state => state.token);
+    const [authenticated, setAuthenticated] = useState('loading');
     const checkAuth = async () => {
         if (!tokenValid(token)) {
+            setAuthenticated('false');
             await router.push('/login');
+        } else {
+            setAuthenticated('true');
+            resetSubNavigation();
         }
     }
     useEffect(() => {
         checkAuth().catch(err => console.log(err))
-        resetSubNavigation();
-    }, []);
+    }, [authenticated]);
+
+
+    if (authenticated === 'loading' || authenticated === 'false') {
+        return <div/>
+    }
     return (
         <div className="h-full flex bg-blue-gray-50">
             {/* Adding this component ti simplify code */}

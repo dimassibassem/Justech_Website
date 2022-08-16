@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import {useLocalStorage, useStore} from "@/store";
 import ForMobile from "@/components/dashboard/ForMobile";
@@ -16,16 +16,25 @@ function Partners() {
     subNavigation[index].current = true;
     const token = useLocalStorage(state => state.token);
     const router = useRouter();
+
+    const [authenticated, setAuthenticated] = useState('loading');
     const checkAuth = async () => {
         if (!tokenValid(token)) {
+            setAuthenticated('false');
             await router.push('/login');
+        } else {
+            setAuthenticated('true');
+            resetSubNavigation();
+            subNavigation[index].current = true;
         }
     }
+
     useEffect(() => {
         checkAuth().catch(err => console.log(err))
-        resetSubNavigation();
-        subNavigation[index].current = true;
-    }, []);
+    }, [authenticated]);
+    if (authenticated === 'loading' || authenticated === 'false') {
+        return <div/>
+    }
     return (
         <div className="h-full flex bg-blue-gray-50">
             {/* Adding this component ti simplify code */}
