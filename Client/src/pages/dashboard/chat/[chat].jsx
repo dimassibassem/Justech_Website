@@ -9,7 +9,7 @@ import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import ChatSidebar from "@/components/dashboard/chat/ChatSidebar";
 import ChatBox from "@/components/chat/ChatBox";
 import {useLocalStorage} from "@/store";
-import {tokenValid} from "@/utils/token";
+import {checkAuth2} from "@/utils/checkAuthDashboard";
 
 function PrivateChatRoom() {
     const router = useRouter();
@@ -18,18 +18,10 @@ function PrivateChatRoom() {
     const query = messagesRef.orderBy('createdAt')
     const [messages] = useCollectionData(query, {idField: 'id'});
     const filteredMessages = messages?.filter((msg) => msg.to === chat || msg.from === chat);
-    const token = useLocalStorage(state => state.token);
     const [authenticated, setAuthenticated] = useState('loading');
-    const checkAuth = async () => {
-        if (!tokenValid(token)) {
-            setAuthenticated('false');
-            await router.push('/login');
-        } else {
-            setAuthenticated('true');
-        }
-    }
+    const token = useLocalStorage(state => state.token);
     useEffect(() => {
-        checkAuth().catch(err => console.log(err))
+        checkAuth2(setAuthenticated, router, token).catch(err => console.log(err))
     }, [authenticated]);
     if (authenticated === 'loading' || authenticated === 'false') {
         return <div/>

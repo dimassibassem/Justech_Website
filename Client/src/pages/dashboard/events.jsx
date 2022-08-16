@@ -7,7 +7,7 @@ import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import EventsMainContent from "@/components/dashboard/Events/EventsMainContent";
-import checkAuth from "@/utils/checkAuthDashboard";
+import {checkAuth} from "@/utils/checkAuthDashboard";
 
 function Events() {
     const subNavigation = useStore(state => state.subNavigation);

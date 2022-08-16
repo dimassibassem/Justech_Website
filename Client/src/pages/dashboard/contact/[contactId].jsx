@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import axios from "axios";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
@@ -8,6 +8,7 @@ import ForMobile from "@/components/dashboard/ForMobile";
 import MessagesSidebar from "@/components/dashboard/Contact/MessagesSidebar";
 import MessageDetails from "@/components/dashboard/Contact/MessageDetails";
 import {useStore} from "@/store";
+import {checkAuth2} from "@/utils/checkAuthDashboard";
 
 
 export default function ContactId() {
@@ -15,16 +16,25 @@ export default function ContactId() {
     const currentMessage = useStore(state => state.currentMessage);
     const router = useRouter();
     const {contactId} = router.query;
-    const fetechMessage = async () => {
+    const token = useStore(state => state.token);
+    const fetchMessage = async () => {
         if (contactId) {
             const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Contact/GetContactBy?field=id&value=${contactId}`)
             setCurrentMessage(res.data)
         }
     }
+
     useEffect(() => {
-        fetechMessage().catch(err => console.log(err))
+        fetchMessage().catch(err => console.log(err))
     }, [router]);
 
+    const [authenticated, setAuthenticated] = useState('loading');
+    useEffect(() => {
+        checkAuth2(setAuthenticated, router, token).catch(err => console.log(err))
+    }, [authenticated]);
+    if (authenticated === 'loading' || authenticated === 'false') {
+        return <div/>
+    }
 
     return (
         <div className="h-full flex bg-blue-gray-50">

@@ -7,23 +7,15 @@ import ForMobile from "@/components/dashboard/ForMobile";
 import ChatMainContent from "@/components/dashboard/chat/ChatMainContent";
 import ChatSidebar from "@/components/dashboard/chat/ChatSidebar";
 import {useLocalStorage} from "@/store";
-import {tokenValid} from "@/utils/token";
+import {checkAuth2} from "@/utils/checkAuthDashboard";
 
 
 export default function Index() {
-    const router = useRouter();
     const token = useLocalStorage(state => state.token);
+    const router = useRouter();
     const [authenticated, setAuthenticated] = useState('loading');
-    const checkAuth = async () => {
-        if (!tokenValid(token)) {
-            setAuthenticated('false');
-            await router.push('/login');
-        } else {
-            setAuthenticated('true');
-        }
-    }
     useEffect(() => {
-        checkAuth().catch(err => console.log(err))
+        checkAuth2(setAuthenticated, router, token).catch(err => console.log(err))
     }, [authenticated]);
     if (authenticated === 'loading' || authenticated === 'false') {
         return <div/>

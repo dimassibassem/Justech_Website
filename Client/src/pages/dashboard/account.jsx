@@ -7,7 +7,7 @@ import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import ForMobile from "@/components/dashboard/ForMobile";
 import {useLocalStorage, useStore} from "@/store";
-import checkAuth from "@/utils/checkAuthDashboard";
+import {checkAuth} from "@/utils/checkAuthDashboard";
 
 export default function Account() {
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
