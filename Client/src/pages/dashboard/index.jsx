@@ -11,7 +11,6 @@ import {tokenValid} from "@/utils/token";
 
 
 export default function Index() {
-    // todo: fix this
     const subNavigation = useStore(state => state.subNavigation);
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
     const router = useRouter();

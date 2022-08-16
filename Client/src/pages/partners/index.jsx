@@ -17,7 +17,6 @@ function Index() {
     useEffect(() => {
         fetchPartners().catch(err => console.log(err))
     }, [])
-    console.log(partners);
     return (
         <div className='bg-white'>
             <Head>

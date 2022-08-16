@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import PartnersGrid from "@/components/dashboard/Partners/PartnersGrid";
-import {useStore} from "@/store";
+import {useLocalStorage, useStore} from "@/store";
 
 function PartnersMainContent() {
+    const token = useLocalStorage(store => store.token);
     const setPartners = useStore(store => store.setPartners);
     const partners = useStore(store => store.partners);
     const [state, setState] = useState({
@@ -27,8 +28,13 @@ function PartnersMainContent() {
         formData.append('ThumbnailName', " ");
         formData.append('Id', 0);
         try {
-            await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/UpsertPartner`, formData);
+            await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/UpsertPartner`, formData, {
+                headers: {
+                    'authorization': `Bearer ${token}`,
+                }
+            });
             await fetchData();
+
         } catch (err) {
             console.log(err);
         }

@@ -1,37 +1,41 @@
 import {useId} from "react";
 import 'swiper/css'
 import 'swiper/css/autoplay'
-import { Autoplay,Scrollbar } from 'swiper'
+import {Autoplay, Scrollbar} from 'swiper'
 import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import axios from "axios";
 import {Button} from "@/components/Button";
+import {useLocalStorage} from "@/store";
 
-export default function PartnersGrid({partners,setPartners}) {
+export default function PartnersGrid({partners, setPartners}) {
     const id = useId()
-
+    const token = useLocalStorage(store => store.token);
     const handleDelete = async (companyName) => {
         await axios.delete(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/DeletePartnerBy`, {
             params: {
                 field: "CompanyName",
                 value: companyName
+            }, headers: {
+                'authorization': `Bearer ${token}`,
             }
+
         })
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/all`)
         setPartners(res.data)
     }
     return (
-            <Swiper
-                spaceBetween={50}
-                slidesPerView={3}
-                modules={[Scrollbar,Autoplay]}
-                autoplay
-                scrollbar={{
-                    hide: false,
-                    draggable: true,
-                }}
-            >
+        <Swiper
+            spaceBetween={50}
+            slidesPerView={3}
+            modules={[Scrollbar, Autoplay]}
+            autoplay
+            scrollbar={{
+                hide: false,
+                draggable: true,
+            }}
+        >
             {partners?.map((partner, i) => (
                 <SwiperSlide key={`${i + id}`}>
 
@@ -50,10 +54,10 @@ export default function PartnersGrid({partners,setPartners}) {
                         Delete Partner
                     </Button>
 
-                    <div className="mb-8" />
+                    <div className="mb-8"/>
                 </SwiperSlide>
             ))}
-            </Swiper>
+        </Swiper>
         // </ul>
     )
 }
