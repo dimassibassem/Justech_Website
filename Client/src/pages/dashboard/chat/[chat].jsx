@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import {firestore} from "@/utils/config";
@@ -8,7 +8,8 @@ import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import ChatSidebar from "@/components/dashboard/chat/ChatSidebar";
 import ChatBox from "@/components/chat/ChatBox";
-
+import {useLocalStorage} from "@/store";
+import {tokenValid} from "@/utils/token";
 
 function PrivateChatRoom() {
     const router = useRouter();
@@ -17,7 +18,22 @@ function PrivateChatRoom() {
     const query = messagesRef.orderBy('createdAt')
     const [messages] = useCollectionData(query, {idField: 'id'});
     const filteredMessages = messages?.filter((msg) => msg.to === chat || msg.from === chat);
-
+    const token = useLocalStorage(state => state.token);
+    const [authenticated, setAuthenticated] = useState('loading');
+    const checkAuth = async () => {
+        if (!tokenValid(token)) {
+            setAuthenticated('false');
+            await router.push('/login');
+        } else {
+            setAuthenticated('true');
+        }
+    }
+    useEffect(() => {
+        checkAuth().catch(err => console.log(err))
+    }, [authenticated]);
+    if (authenticated === 'loading' || authenticated === 'false') {
+        return <div/>
+    }
     if (chat) {
         return (
             <div className="h-full flex bg-blue-gray-50">
