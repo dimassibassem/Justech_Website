@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import Link from "next/link";
 import EventsGrid from "@/components/dashboard/Events/EventsGrid";
 import {useStore} from "@/store";
-import Link from "next/link";
 
 function EventsMainContent() {
     const setEvents = useStore(store => store.setEvents);

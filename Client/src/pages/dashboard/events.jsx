@@ -4,7 +4,6 @@ import {useLocalStorage, useStore} from "@/store";
 import ForMobile from "@/components/dashboard/ForMobile";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
-import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
 import EventsMainContent from "@/components/dashboard/Events/EventsMainContent";
 import {checkAuth} from "@/utils/checkAuthDashboard";

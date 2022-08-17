@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import Link from "next/link";
 import PartnersGrid from "@/components/dashboard/Partners/PartnersGrid";
 import {useLocalStorage, useStore} from "@/store";
-import Link from "next/link";
 
 function PartnersMainContent() {
     const token = useLocalStorage(store => store.token);

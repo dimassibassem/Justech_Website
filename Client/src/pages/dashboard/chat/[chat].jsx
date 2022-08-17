@@ -5,7 +5,6 @@ import {firestore} from "@/utils/config";
 import ForMobile from "@/components/dashboard/ForMobile";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
-import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import ChatSidebar from "@/components/dashboard/chat/ChatSidebar";
 import ChatBox from "@/components/chat/ChatBox";
 import {useLocalStorage} from "@/store";

@@ -1,5 +1,4 @@
 import React from 'react';
-import UsersGrid from "@/components/dashboard/Users/UsersGrid";
 import Link from "next/link";
 import {useStore} from "@/store";
 

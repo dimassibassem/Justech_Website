@@ -1,7 +1,7 @@
 import Link from "next/link";
-import {useStore} from "@/store";
 import axios from "axios";
 import {useEffect, useState} from "react";
+import {useStore} from "@/store";
 
 export default function MessageDetails({contact}) {
     const messages = useStore(state => state.messages);
