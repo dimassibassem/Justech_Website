@@ -2,6 +2,7 @@ import Link from "next/link";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {useStore} from "@/store";
+import classNames from "@/utils/classNames";
 
 export default function MessageDetails({contact}) {
     const messages = useStore(state => state.messages);
@@ -34,9 +35,7 @@ export default function MessageDetails({contact}) {
         setMessages(messagesArr);
     }, [currentMessage]);
 
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
-    }
+
 
     return (
         <div className="w-full bg-blue-gray-50 overflow-y-auto ">

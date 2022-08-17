@@ -1,13 +1,12 @@
 import React from 'react';
 import Link from "next/link";
 import {useStore} from "@/store";
+import classNames from "@/utils/classNames";
 
 function MainContent() {
     const subNavigation = useStore(state => state.subNavigation);
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
-    }
+
     return (
         <div className="flex-1 h-screen xl:overflow-y-auto">
 

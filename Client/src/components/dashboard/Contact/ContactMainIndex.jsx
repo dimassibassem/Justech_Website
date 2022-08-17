@@ -2,6 +2,7 @@ import Link from "next/link";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {useStore} from "@/store";
+import classNames from "@/utils/classNames";
 
 export default function ContactMainIndex() {
     const messages = useStore(state => state.messages);
@@ -33,9 +34,7 @@ export default function ContactMainIndex() {
         }
         setMessages(messagesArr);
     }, [currentMessage]);
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
-    }
+
     return (
         <div className="relative h-screen w-full overflow-hidden bg-blue-gray-50">
 

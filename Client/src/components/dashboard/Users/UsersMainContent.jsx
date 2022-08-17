@@ -1,13 +1,11 @@
 import React from 'react';
 import Link from "next/link";
 import {useStore} from "@/store";
+import classNames from "@/utils/classNames";
 
 function UsersMainContent() {
 
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
-    }
-    const subNavigation= useStore(state => state.subNavigation);
+    const subNavigation = useStore(state => state.subNavigation);
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
 
     return (

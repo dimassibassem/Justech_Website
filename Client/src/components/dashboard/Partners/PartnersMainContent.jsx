@@ -3,6 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import PartnersGrid from "@/components/dashboard/Partners/PartnersGrid";
 import {useLocalStorage, useStore} from "@/store";
+import classNames from "@/utils/classNames";
 
 function PartnersMainContent() {
     const token = useLocalStorage(store => store.token);
@@ -61,9 +62,7 @@ function PartnersMainContent() {
 
 const subNavigation = useStore(store => store.subNavigation);
 const resetSubNavigation = useStore(store => store.resetSubNavigation);
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
-    }
+
     return (
 
         <div className="flex-1 h-screen xl:overflow-y-auto">

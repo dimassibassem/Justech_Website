@@ -3,6 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import EventsGrid from "@/components/dashboard/Events/EventsGrid";
 import {useStore} from "@/store";
+import classNames from "@/utils/classNames";
 
 function EventsMainContent() {
     const setEvents = useStore(store => store.setEvents);
@@ -60,9 +61,6 @@ function EventsMainContent() {
     const subNavigation = useStore(store => store.subNavigation);
     const resetSubNavigation = useStore(store => store.resetSubNavigation);
 
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
-    }
 
     return (
 
