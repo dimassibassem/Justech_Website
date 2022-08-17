@@ -12,7 +12,6 @@ import {useStore} from "@/store";
 import Events from "@/components/Events";
 import StickyButton from "@/components/vistorChat/StickyButton";
 
-// execute a listener once
 
 export default function Home() {
     const setPartners = useStore(state => state.setPartners)

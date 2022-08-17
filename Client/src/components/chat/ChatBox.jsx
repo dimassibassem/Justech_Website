@@ -1,4 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {useCollectionData} from "react-firebase-hooks/firestore";
+import Link from "next/link";
 import {firebase, firestore} from "@/utils/config";
 
 function ChatBox({messages, receiver}) {
@@ -23,10 +25,44 @@ function ChatBox({messages, receiver}) {
     useEffect(() => {
         dummy?.current?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
+
+    const query = messagesRef.orderBy('createdAt', 'desc')
+    const [allMessages] = useCollectionData(query, {idField: 'id'});
+    const filtredSender = allMessages?.filter((message, index) =>
+        allMessages.findIndex(m => (m.from === message.from && m.from !== process.env.NEXT_PUBLIC_ADMIN_EMAIL)) === index);
+
     return (
-        <div className=" relative flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen ">
-            <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
-                <div className="relative flex items-center space-x-4">
+        <div className=" relative flex-1  justify-between flex flex-col h-screen ">
+
+            <nav
+                aria-label="Sections"
+                className="lg:hidden bg-white border-r border-blue-gray-200 items-center"
+            >
+                <div
+                    className="h-16 px-6 border-b border-blue-gray-200 flex items-center">
+                    <p className="text-lg font-medium text-blue-gray-900">Messages</p>
+                </div>
+                <div className="flex bg-blue-gray-50 w-screen pb-4 flex-row overflow-y-auto">
+                    {filtredSender?.map((item) => (
+                        <Link
+                            key={item.uid}
+                            href={`/dashboard/chat/${item.from}`}
+                            className='hover:bg-blue-50 hover:bg-opacity-50 flex p-6 border-b border-blue-gray-200'
+                            aria-current={item.current ? 'page' : undefined}
+                        >
+                            <div className="grid grid-cols-1 gap-4 ml-3 text-sm">
+                                <img className="rounded-full justify-self-center shadow-xl w-12 h-12" src={item.photoURL} alt=""
+                                     loading="lazy"/>
+                                <div>
+                                    <p className="font-medium text-blue-gray-900">{item.displayName}</p>
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </nav>
+            <div className="flex sm:items-center sm:p-6 justify-between py-3 border-b-2 border-gray-200">
+                <div className="relative p-2 flex items-center space-x-4">
                     <div className="relative">
                         <img
                             src={messages ? messages[0]?.photoURL : ""}
@@ -87,7 +123,7 @@ function ChatBox({messages, receiver}) {
                                placeholder="Write your message!"
                                onChange={(e) => setFormValue(e.target.value)}
                         />
-                        <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
+                        <div className="absolute right-0 items-center inset-y-0 ">
                             <button type="submit"
                                     className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none">
                                 <span className="font-bold">Send</span>

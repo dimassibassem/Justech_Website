@@ -1,7 +1,9 @@
 import React from "react";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {useRouter} from "next/router";
-import {auth, firebase} from "@/utils/config";
+import {auth, firebase, firestore} from "@/utils/config";
+import Link from "next/link";
+import {useCollectionData} from "react-firebase-hooks/firestore";
 
 
 function SignOut() {
@@ -33,10 +35,45 @@ function SignIn() {
 }
 
 export default function ChatMainContent() {
+    const messagesRef = firestore.collection('messages');
+    const query = messagesRef.orderBy('createdAt', 'desc')
+    const [messages] = useCollectionData(query, {idField: 'id'});
+    const filtredSender = messages?.filter((message, index) =>
+        messages.findIndex(m => (m.from === message.from && m.from !== process.env.NEXT_PUBLIC_ADMIN_EMAIL)) === index);
     const [user] = useAuthState(auth);
 
     return (
         <div className="relative h-screen w-full py-16 overflow-hidden bg-blue-gray-50">
+
+            {user ? <nav
+                aria-label="Sections"
+                className="lg:hidden bg-white border-r border-blue-gray-200 items-center"
+            >
+                <div
+                    className="h-16 px-6 border-b border-blue-gray-200 flex items-center">
+                    <p className="text-lg font-medium text-blue-gray-900">Messages</p>
+                </div>
+                <div className="flex bg-blue-gray-50 w-screen pb-4 flex-row overflow-y-auto">
+                    {filtredSender?.map((item) => (
+                        <Link
+                            key={item.uid}
+                            href={`/dashboard/chat/${item.from}`}
+                            className='hover:bg-blue-50 hover:bg-opacity-50 flex p-6 border-b border-blue-gray-200'
+                            aria-current={item.current ? 'page' : undefined}
+                        >
+                            <div className="grid grid-cols-1 gap-4 ml-3 text-sm">
+                                <img className="rounded-full justify-self-center shadow-xl w-12 h-12"
+                                     src={item.photoURL} alt=""
+                                     loading="lazy"/>
+                                <div>
+                                    <p className="font-medium text-blue-gray-900">{item.displayName}</p>
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </nav> : null}
+
             <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
                 <div className="relative h-full text-lg max-w-prose mx-auto" aria-hidden="true">
                     <svg

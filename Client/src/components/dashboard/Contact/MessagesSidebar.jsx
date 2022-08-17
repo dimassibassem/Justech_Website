@@ -40,7 +40,7 @@ function MessagesSidebar() {
     return (
         <nav
             aria-label="Sections"
-            className="hidden flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col"
+            className="hidden flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 lg:flex lg:flex-col"
         >
             <div
                 className="flex-shrink-0 h-16 px-6 border-b border-blue-gray-200 flex items-center">

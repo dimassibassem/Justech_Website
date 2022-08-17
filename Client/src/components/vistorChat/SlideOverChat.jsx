@@ -14,7 +14,7 @@ function SignIn() {
     }
 
     return (
-        <div className=" relative flex-1 sm:p-6 justify-between flex flex-col lg:h-[60vh] md:h-[70vh] sm:h-[80vh]">
+        <div className=" relative flex-1 sm:p-6 justify-between flex flex-col h-screen">
             <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
                 <div className="relative flex items-center space-x-4">
                     <div className="relative">
@@ -42,7 +42,7 @@ function SignIn() {
 
 function SignOut() {
     return auth.currentUser && (
-        <button type="button" className="rounded-full hover:bg-red-700 p-1 hover:text-white"
+        <button type="button" className="rounded-full bg-red-500 hover:bg-red-700 p-2 hover:text-white"
                 onClick={() => auth.signOut()}>Sign Out</button>
     )
 }
@@ -55,7 +55,7 @@ export default function SlideOverChat({open, setOpen}) {
             <Dialog as="div" onClose={setOpen}>
                 <div className="fixed z-50 inset-0 overflow-hidden">
                     <div className="absolute inset-0 overflow-hidden">
-                        <div className="pointer-events-none fixed bottom-0 right-0 flex max-w-full pl-10">
+                        <div className="pointer-events-none fixed bottom-0 right-0 flex max-w-full pl-10 h-screen">
                             <Transition.Child
                                 as={Fragment}
                                 enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -116,7 +116,7 @@ function VisitorChat() {
         dummy?.current?.scrollIntoView({behavior: 'smooth'});
     }, [filteredMessages]);
     return (
-        <div className=" relative flex-1 p:2 sm:p-6 justify-between flex flex-col xl:h-[70vh] lg:h-[70vh] md:h-[80vh] sm:h-[80vh]">
+        <div className=" relative flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
             <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
                     <div className="flex flex-col leading-tight">
                 <div className="relative flex items-center space-x-4">
@@ -178,7 +178,7 @@ function VisitorChat() {
                                placeholder="Write your message!"
                                onChange={(e) => setFormValue(e.target.value)}
                         />
-                        <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
+                        <div className="absolute right-0 items-center inset-y-0 ">
                             <button type="submit"
                                     className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none">
                                 <span className="font-bold">Send</span>

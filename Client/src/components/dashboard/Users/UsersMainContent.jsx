@@ -1,10 +1,51 @@
 import React from 'react';
 import UsersGrid from "@/components/dashboard/Users/UsersGrid";
+import Link from "next/link";
+import {useStore} from "@/store";
 
 function UsersMainContent() {
+
+    function classNames(...classes) {
+        return classes.filter(Boolean).join(' ')
+    }
+    const subNavigation= useStore(state => state.subNavigation);
+    const resetSubNavigation = useStore(state => state.resetSubNavigation);
+
     return (
 
         <div className="flex-1 xl:overflow-y-auto">
+            <nav
+                aria-label="Sections"
+                className="lg:hidden bg-white border-r border-blue-gray-200 items-center"
+            >
+                <div
+                    className="h-16 px-6 border-b border-blue-gray-200 flex items-center">
+                    <p className="text-lg font-medium text-blue-gray-900">Settings</p>
+                </div>
+                <div className="flex w-screen flex-row overflow-y-auto">
+                    {subNavigation.map((item) => (
+                        <Link
+                            key={item.name}
+                            href={item.href}
+                            className={classNames(
+                                item.current ? 'bg-blue-50 bg-opacity-50' : 'hover:bg-blue-50 hover:bg-opacity-50',
+                                'flex p-6 border-b border-blue-gray-200'
+                            )}
+                            aria-current={item.current ? 'page' : undefined}
+                            onClick={() => {
+                                resetSubNavigation();
+                            }
+                            }
+                        >
+                            <item.icon className="flex-shrink-0 -mt-0.5 h-6 w-6 text-blue-gray-400"
+                                       aria-hidden="true"/>
+                            <div className="ml-3 text-sm">
+                                <p className="font-medium text-blue-gray-900">{item.name}</p>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </nav>
             <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
 
                 <h1 className="text-3xl font-extrabold text-blue-gray-900">Users</h1>
@@ -17,9 +58,7 @@ function UsersMainContent() {
                         </p>
                     </div>
                 </div>
-                <div className="py-4">
-                    <UsersGrid/>
-                </div>
+
 
                 <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200">
                     <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">

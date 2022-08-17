@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import EventsGrid from "@/components/dashboard/Events/EventsGrid";
 import {useStore} from "@/store";
+import Link from "next/link";
 
 function EventsMainContent() {
     const setEvents = useStore(store => store.setEvents);
@@ -56,9 +57,49 @@ function EventsMainContent() {
     useEffect(() => {
 
     }, [events]);
+    const subNavigation = useStore(store => store.subNavigation);
+    const resetSubNavigation = useStore(store => store.resetSubNavigation);
+
+    function classNames(...classes) {
+        return classes.filter(Boolean).join(' ')
+    }
+
     return (
 
         <div className="flex-1  h-screen xl:overflow-y-auto">
+
+            <nav
+                aria-label="Sections"
+                className="lg:hidden bg-white border-r border-blue-gray-200 items-center"
+            >
+                <div
+                    className="h-16 px-6 border-b border-blue-gray-200 flex items-center">
+                    <p className="text-lg font-medium text-blue-gray-900">Settings</p>
+                </div>
+                <div className="flex w-screen flex-row overflow-y-auto">
+                    {subNavigation.map((item) => (
+                        <Link
+                            key={item.name}
+                            href={item.href}
+                            className={classNames(
+                                item.current ? 'bg-blue-50 bg-opacity-50' : 'hover:bg-blue-50 hover:bg-opacity-50',
+                                'flex p-6 border-b border-blue-gray-200'
+                            )}
+                            aria-current={item.current ? 'page' : undefined}
+                            onClick={() => {
+                                resetSubNavigation();
+                            }
+                            }
+                        >
+                            <item.icon className="flex-shrink-0 -mt-0.5 h-6 w-6 text-blue-gray-400"
+                                       aria-hidden="true"/>
+                            <div className="ml-3 text-sm">
+                                <p className="font-medium text-blue-gray-900">{item.name}</p>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </nav>
             <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
                 <h1 className="text-3xl font-extrabold text-blue-gray-900">Events</h1>
                 <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">

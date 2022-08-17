@@ -46,7 +46,7 @@ function MobileNavigation() {
   return (
     <Popover>
       <Popover.Button
-        className='relative z-10 flex h-8 w-8 items-center justify-center [&:not(:focus-visible)]:focus:outline-none'
+        className='relative flex h-8 w-8 items-center justify-center [&:not(:focus-visible)]:focus:outline-none'
         aria-label='Toggle Navigation'
       >
         {({ open }) => <MobileNavIcon open={open} />}
@@ -97,10 +97,10 @@ export function Header() {
   return (
     <header className='py-10'>
       <Container>
-        <nav className='relative z-50 flex justify-between'>
+        <nav className='relative flex justify-between'>
           <div className='flex items-center md:gap-x-12'>
             <Logo className='h-10 w-auto' />
-            <div className='hidden md:flex md:gap-x-5'>
+            <div className='hidden md:flex md:gap-x-5 '>
               <NavLink href="/about">Justech</NavLink>
               <NavLink href='/educationSolution'>E-Education solutions</NavLink>
               <NavLink href='/businessSolution'>E-Business solutions</NavLink>
