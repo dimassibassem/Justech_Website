@@ -14,10 +14,28 @@ function SignIn() {
     }
 
     return (
-        <>
-            <button type="button" className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
-            <p>Do not violate the community guidelines or you will be banned for life!</p>
-        </>
+        <div className=" relative flex-1 sm:p-6 justify-between flex flex-col lg:h-[60vh] md:h-[70vh] sm:h-[80vh]">
+            <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
+                <div className="relative flex items-center space-x-4">
+                    <div className="relative">
+                        <Image
+                            src={logo}
+                            alt="" className="w-10 sm:w-16 h-10 sm:h-16 rounded-full shadow-xl"/>
+                    </div>
+                    <div className="flex flex-col leading-tight">
+                        <div className="text-2xl mt-1 flex items-center">
+                            <span
+                                className="text-gray-700 mr-3">Justech</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button
+                className="rounded-full bg-blue-500 hover:text-lg hover:bg-blue-700 p-1 hover:text-white"
+                type="button" onClick={signInWithGoogle}>Sign in with Google
+            </button>
+            <div/>
+        </div>
     )
 
 }
@@ -34,12 +52,10 @@ export default function SlideOverChat({open, setOpen}) {
     const [user] = useAuthState(auth);
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="relative z-40 " onClose={setOpen}>
-                <div className="fixed inset-0"/>
-
-                <div className="fixed inset-0 overflow-hidden">
+            <Dialog as="div" onClose={setOpen}>
+                <div className="fixed z-50 inset-0 overflow-hidden">
                     <div className="absolute inset-0 overflow-hidden">
-                        <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                        <div className="pointer-events-none fixed bottom-0 right-0 flex max-w-full pl-10">
                             <Transition.Child
                                 as={Fragment}
                                 enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -52,12 +68,11 @@ export default function SlideOverChat({open, setOpen}) {
                                 <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
                                     <div className="flex flex-col bg-white shadow-xl">
                                         <div className="relative flex-1 pl-2 sm:pl-2">
-                                            {/* Replace with your content */}
 
                                             <div>
                                                 {user ? <VisitorChat/> : <SignIn/>}
                                             </div>
-                                            {/* /End replace */}
+
                                         </div>
                                     </div>
                                 </Dialog.Panel>
@@ -101,15 +116,15 @@ function VisitorChat() {
         dummy?.current?.scrollIntoView({behavior: 'smooth'});
     }, [filteredMessages]);
     return (
-        <div className=" relative flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
+        <div className=" relative flex-1 p:2 sm:p-6 justify-between flex flex-col xl:h-[70vh] lg:h-[70vh] md:h-[80vh] sm:h-[80vh]">
             <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
+                    <div className="flex flex-col leading-tight">
                 <div className="relative flex items-center space-x-4">
                     <div className="relative">
                         <Image
                             src={logo}
                             alt="" className="w-10 sm:w-16 h-10 sm:h-16 rounded-full shadow-xl"/>
                     </div>
-                    <div className="flex flex-col leading-tight">
                         <div className="text-2xl mt-1 flex items-center">
                             <span
                                 className="text-gray-700 mr-3">Justech</span>
@@ -118,7 +133,7 @@ function VisitorChat() {
                     </div>
                 </div>
             </div>
-            <div className="overflow-auto ">
+            <div className="overflow-auto">
                 {filteredMessages?.map((message) => {
                     if (message.from !== auth.currentUser.email) {
                         return (

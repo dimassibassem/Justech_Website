@@ -12,8 +12,9 @@ import {useStore} from "@/store";
 import Events from "@/components/Events";
 import StickyButton from "@/components/vistorChat/StickyButton";
 
-export default function Home() {
+// execute a listener once
 
+export default function Home() {
     const setPartners = useStore(state => state.setPartners)
     const fetchPartners = async () => {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/all`)
@@ -22,9 +23,9 @@ export default function Home() {
     useEffect(() => {
         fetchPartners().catch(err => console.log(err))
     }, [])
+
     return (
         <div className='relative bg-gray-200'>
-
             <Head>
                 <title>Justech</title>
                 <meta
@@ -35,7 +36,7 @@ export default function Home() {
             <Header/>
             <main>
                 <Hero/>
-                <StickyButton />
+                <StickyButton/>
                 <PrimaryFeatures/>
                 <Partners/>
                 <Testimonials/>
