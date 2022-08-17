@@ -38,8 +38,7 @@ function Partners() {
 
                 <main className="flex-1 flex overflow-hidden">
                     <div className="flex-1 flex flex-col overflow-y-auto xl:overflow-hidden">
-                        {/* Breadcrumb */}
-                        <Breadcrumb/>
+
 
                         <div className="flex-1 flex xl:overflow-hidden">
                             {/* Secondary sidebar */}
