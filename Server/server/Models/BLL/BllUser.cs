@@ -28,15 +28,19 @@ namespace server.Models.BLL
 
         #region API Calls
 
-        public static JsonResponse UpsertApi(User user)
+        public static JsonResponse UpdateApi(User user)
         {
-            JsonResponse jr;
-
-            jr = user.Id == 0 ? DalUser.AddUser(user) : DalUser.UpdateUser(user);
+            var jr = DalUser.UpdateUser(user);
 
             return jr;
         }
 
+        public static JsonResponse InsertApi(User user)
+        {
+            JsonResponse jr = DalUser.AddUser(user);
+
+            return jr;
+        }
         public static JsonResponse DeleteApi(string field, string fieldValue)
         {
             JsonResponse jr = new JsonResponse();

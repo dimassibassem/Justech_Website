@@ -11,10 +11,19 @@ namespace server.Controllers
     public class UserController : Controller
     {
 
-        [HttpPost("UpsertUser")]
-        public JsonResult UpsertUser([FromForm] User user)
-        {
-            return Json(BllUser.UpsertApi(user));
+        [HttpPost("UpdateUser")]
+        public JsonResult UpdateUser([FromForm] User user)
+        {var jsonResponse = new JsonResponse
+            {
+                Success = false,
+                Message = "unAuthorized"
+            };
+            if (!Request.Headers.ContainsKey("Authorization")) return Json(jsonResponse);
+
+            var token = Request.Headers["Authorization"];
+            token = token.ToString().Substring(7);
+            if (!BllAuth.IsTokenValid(token)) return Json(jsonResponse);
+            return Json(BllUser.UpdateApi(user));
         }
 
         [HttpGet("all")]
@@ -36,26 +45,10 @@ namespace server.Controllers
         }
 
 
-        [HttpGet("GetUserBy")]
-        public User GetUserBy(string field, string value)
+        [HttpPost("InsertUser")]
+        public JsonResult InsertUser([FromForm] User user)
         {
-            if (!string.IsNullOrEmpty(field) && !string.IsNullOrEmpty(value))
-            {
-                User user = BllUser.GetUserBy(field, value);
-
-                if (user.Id != 0)
-                {
-                    return user;
-                }
-                else
-                {
-                    return new User();
-                }
-            }
-            else
-            {
-                return new User();
-            }
+            return Json(BllUser.InsertApi(user));
         }
 
 
