@@ -32,14 +32,7 @@ namespace server.Models.BLL
         {
             JsonResponse jr;
 
-            if (user.Id == 0)
-            {
-                jr = DalUser.AddUser(user);
-            }
-            else
-            {
-                jr = DalUser.UpdateUser(user);
-            }
+            jr = user.Id == 0 ? DalUser.AddUser(user) : DalUser.UpdateUser(user);
 
             return jr;
         }

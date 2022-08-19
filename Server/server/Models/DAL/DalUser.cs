@@ -114,7 +114,7 @@ public class DalUser
                                         FirstName=@FirstName,
                                         LastName=@LastName,
                                         Email=@Email,
-                                        Password=@Password,
+                                        Password=@Password
                                     WHERE Id=@Id";
 
             using (SqlCommand command = new SqlCommand(sql, connection))
@@ -140,7 +140,7 @@ public class DalUser
                 if (String.IsNullOrEmpty(user.Password))
                     command.Parameters.AddWithValue("@Password", DBNull.Value);
                 else
-                    command.Parameters.AddWithValue("@Password", user.Password);
+                    command.Parameters.AddWithValue("@Password",BCryptNet.HashPassword(user.Password));
                 command.Parameters.AddWithValue("@Id", user.Id);
 
                 if (command.ExecuteNonQuery() == 1)
