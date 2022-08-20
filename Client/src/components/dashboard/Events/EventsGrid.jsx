@@ -8,6 +8,7 @@ import {Autoplay, Scrollbar} from 'swiper'
 import "swiper/css/scrollbar";
 import axios from "axios";
 import {Button} from "@/components/Button";
+import {useLocalStorage} from "@/store";
 
 export default function EventsGrid({events, setEvents}) {
     const id = useId()
@@ -30,12 +31,15 @@ export default function EventsGrid({events, setEvents}) {
             }))
         })
     )
-
+    const token = useLocalStorage(state => state.token);
     const handleDelete = async (eventName) => {
         await axios.delete(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/DeleteEventBy`, {
             params: {
                 field: "eventName",
                 value: eventName
+            },
+            headers: {
+                Authorization: `Bearer ${token}`
             }
         })
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
@@ -67,7 +71,7 @@ export default function EventsGrid({events, setEvents}) {
                 <SwiperSlide key={`${id + i}`}>
 
                     <ImageGallery items={item.images} thumbnailPosition="bottom"
-                                  additionalClass={`h-[${maxHeight-50}px]`}/>
+                                  additionalClass={`h-[${maxHeight - 50}px]`}/>
                     <div className="grid grid-cols-2 gap-x-4">
                         <p
                             className="mt-2 block  text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.eventName}</p>
@@ -86,6 +90,5 @@ export default function EventsGrid({events, setEvents}) {
                 </SwiperSlide>
             ))}
         </Swiper>
-        // </ul>
     )
 }

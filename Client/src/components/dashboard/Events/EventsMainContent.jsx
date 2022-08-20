@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import Link from "next/link";
 import EventsGrid from "@/components/dashboard/Events/EventsGrid";
-import {useStore} from "@/store";
+import {useLocalStorage, useStore} from "@/store";
 import classNames from "@/utils/classNames";
 
 function EventsMainContent() {
@@ -19,6 +19,7 @@ function EventsMainContent() {
         const result = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
         setEvents(result.data);
     }
+    const token = useLocalStorage(store => store.token);
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData()
@@ -32,7 +33,11 @@ function EventsMainContent() {
         formData.append('Id', 0);
         formData.append('Date', state.date);
         try {
-            await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/UpsertEvent`, formData);
+            await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/UpsertEvent`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
             await fetchEvents();
         } catch (err) {
             console.log(err);
