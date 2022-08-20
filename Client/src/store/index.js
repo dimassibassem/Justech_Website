@@ -1,8 +1,7 @@
 import create from "zustand";
 import {devtools, persist} from "zustand/middleware";
 import {
-    AdjustmentsIcon,
-    BookmarkAltIcon, CalendarIcon,
+    CalendarIcon,
     CogIcon,
     ChatIcon,
     HomeIcon,
@@ -23,13 +22,6 @@ const subNavigation = [
         description: 'Ullamcorper id at suspendisse nec id volutpat vestibulum enim. Interdum blandit.',
         href: '/dashboard/account',
         icon: CogIcon,
-        current: false,
-    },
-    {
-        name: 'Users',
-        description: 'Enim, nullam mi vel et libero urna lectus enim. Et sed in maecenas tellus.',
-        href: '/dashboard/users',
-        icon: AdjustmentsIcon,
         current: false,
     },
     {
