@@ -5,7 +5,7 @@ using server.Models.Entity;
 namespace server.Models.BLL
 
 {
-    public class BllPartner
+    public static class BllPartner
     {
         public static Partner GetPartnerBy(string field, string fieldValue)
         {
@@ -17,19 +17,12 @@ namespace server.Models.BLL
         {
             return DalPartner.GetAllPartners();
         }
-
-        public static List<Partner> GetAllPartnersBy(string field, string value)
-        {
-            return DalPartner.GetAllPartnersBy(field, value);
-        }
-
+        
         #region API Calls
 
         public static JsonResponse UpsertApi(Partner partner)
         {
-            JsonResponse jr;
-
-            jr = partner.Id == 0 ? DalPartner.AddPartner(partner) : DalPartner.UpdatePartner(partner);
+            var jr = partner.Id == 0 ? DalPartner.AddPartner(partner) : DalPartner.UpdatePartner(partner);
 
             return jr;
         }

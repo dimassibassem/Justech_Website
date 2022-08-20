@@ -1,11 +1,10 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using server.Extensions;
 using server.Models.Entity;
 
 namespace server.Models.DAL;
 
-public class DalAuth
+public static class DalAuth
 {
     public static User GetUserBy(string field, string fieldValue)
     {

@@ -6,7 +6,7 @@ using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace server.Models.DAL;
 
-public class DalUser
+public static class DalUser
 {
     private static bool CheckUserUnicityBy(string field, string value)
     {
@@ -165,129 +165,7 @@ public class DalUser
 
         return jsonResponse;
     }
-
-    //get all users 
-    public static List<User> GetAllUsers()
-    {
-        List<User> lstUser = new List<User>();
-        try
-        {
-            using SqlConnection connection = DbConnection.GetConnection();
-            connection.Open();
-            string sql = @" SELECT * 
-                                    FROM [User] 
-                                    ORDER BY Id DESC";
-
-            using (SqlCommand command = new SqlCommand(sql, connection))
-            {
-                command.CommandType = CommandType.Text;
-                using (SqlDataReader dataReader = command.ExecuteReader())
-                {
-                    while (dataReader.Read())
-                    {
-                        User user = new User
-                        {
-                            Id = long.Parse(dataReader["Id"].ToString()!),
-                            FirstName = dataReader["FirstName"].ToString()!,
-                            LastName = dataReader["LastName"].ToString()!,
-                            Email = dataReader["Email"].ToString()!,
-                        };
-
-                        lstUser.Add(user);
-                    }
-                }
-            }
-
-            connection.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-
-        return lstUser;
-    }
-
-    //get user by
-    public static User GetUserBy(string field, string fieldValue)
-    {
-        User user = new User();
-        try
-        {
-            using SqlConnection connection = DbConnection.GetConnection();
-            connection.Open();
-            string sql = @" SELECT TOP 1 * 
-                                    FROM [User] 
-                                    WHERE [User].[" + field + @"]=@Value";
-
-            using (SqlCommand command = new SqlCommand(sql, connection))
-            {
-                command.CommandType = CommandType.Text;
-                command.Parameters.AddWithValue("@Value", fieldValue);
-
-                using (SqlDataReader dataReader = command.ExecuteReader())
-                {
-                    if (dataReader.Read())
-                    {
-                        user.Id = long.Parse(dataReader["Id"].ToString()!);
-                        user.FirstName = dataReader["FirstName"].ToString()!;
-                        user.LastName = dataReader["LastName"].ToString()!;
-                        user.Email = dataReader["Email"].ToString()!;
-                    }
-                }
-            }
-
-            connection.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-
-        return user;
-    }
-
-    //get all users by
-    public static List<User> GetAllUsersBy(string field, string value)
-    {
-        List<User> lstUser = new List<User>();
-        try
-        {
-            using SqlConnection connection = DbConnection.GetConnection();
-            connection.Open();
-            string sql = @" SELECT * 
-                                    FROM [User] 
-                                    WHERE [User].[" + field + @"]=@Field";
-
-            using (SqlCommand command = new SqlCommand(sql, connection))
-            {
-                command.CommandType = CommandType.Text;
-                command.Parameters.AddWithValue("@Field", value);
-
-                using (SqlDataReader dataReader = command.ExecuteReader())
-                {
-                    while (dataReader.Read())
-                    {
-                        User user = new User();
-
-                        user.Id = long.Parse(dataReader["Id"].ToString()!);
-                        user.FirstName = dataReader["FirstName"].ToString();
-                        user.LastName = dataReader["LastName"].ToString()!;
-                        user.Email = dataReader["Email"].ToString()!;
-                        lstUser.Add(user);
-                    }
-                }
-            }
-
-            connection.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-
-        return lstUser;
-    }
+    
 
     //delete user by 
     public static JsonResponse DeleteUserBy(string field, string fieldValue)

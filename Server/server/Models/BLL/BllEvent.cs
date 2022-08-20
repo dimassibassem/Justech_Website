@@ -4,27 +4,18 @@ using server.Models.Entity;
 
 namespace server.Models.BLL;
 
-public class BllEvent
+public static class BllEvent
 {
     public static Event GetEventBy(string field, string fieldValue)
     {
         return DalEvent.GetEventBy(field, fieldValue);
     }
 
-    public static JsonResponse AddEvent(Event even)
-    {
-        return DalEvent.AddEvent(even);
-    }
-
     public static object GetAllEvents()
     {
         return DalEvent.GetEventsWithImages();
     }
-
-    public static List<Event> GetAllEventsBy(string field, string value)
-    {
-        return DalEvent.GetAllEventsBy(field, value);
-    }
+    
 
     #region API Calls
 

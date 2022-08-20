@@ -9,10 +9,10 @@ namespace server.Controllers
     [ApiController]
     public class ContactController : Controller
     {
-        [HttpPost("UpsertContact")]
+        [HttpPost("AddContact")]
         public JsonResult UpsertContact([FromForm] Contact contact)
         {
-            return Json(BllContact.UpsertApi(contact));
+            return Json(BllContact.AddContact(contact));
         }
 
         [HttpGet("all")]
@@ -20,41 +20,7 @@ namespace server.Controllers
         {
             return BllContact.GetAllContacts();
         }
-
-
-        [HttpGet("GetAllContactsBy")]
-        public List<Contact> GetAllContactsBy(string field, string value)
-        {
-            if (string.IsNullOrEmpty(field) || string.IsNullOrEmpty(value))
-            {
-                return new List<Contact>();
-            }
-
-            return BllContact.GetAllContactsBy(field, value);
-        }
-
-
-        [HttpGet("GetContactBy")]
-        public Contact GetContactBy(string field, string value)
-        {
-            if (!string.IsNullOrEmpty(field) && !string.IsNullOrEmpty(value))
-            {
-                Contact contact = BllContact.GetContactBy(field, value);
-
-                if (contact.Id != 0)
-                {
-                    return contact;
-                }
-                else
-                {
-                    return new Contact();
-                }
-            }
-            else
-            {
-                return new Contact();
-            }
-        }
+        
 
 
         [HttpDelete("DeleteContactBy")]

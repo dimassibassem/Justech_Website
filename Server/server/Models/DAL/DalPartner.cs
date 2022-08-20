@@ -1,11 +1,10 @@
 ﻿namespace server.Models.DAL;
-
 using System.Data;
 using System.Data.SqlClient;
 using Extensions;
 using Entity;
 
-public class DalPartner
+public static class DalPartner
 {
     private static bool CheckPartnerUnicityBy(string field, string value)
     {
@@ -250,51 +249,6 @@ public class DalPartner
         }
 
         return partner;
-    }
-
-    //get all partners by
-    public static List<Partner> GetAllPartnersBy(string field, string value)
-    {
-        List<Partner> lstPartner = new List<Partner>();
-        try
-        {
-            using SqlConnection connection = DbConnection.GetConnection();
-            connection.Open();
-            string sql = @" SELECT * 
-                                    FROM [Partner] 
-                                    WHERE [Partner].[" + field + @"]=@Field";
-
-            using (SqlCommand command = new SqlCommand(sql, connection))
-            {
-                command.CommandType = CommandType.Text;
-                command.Parameters.AddWithValue("@Field", value);
-
-                using (SqlDataReader dataReader = command.ExecuteReader())
-                {
-                    while (dataReader.Read())
-                    {
-                        Partner partner = new Partner
-                        {
-                            Id = long.Parse(dataReader["Id"].ToString()!),
-                            CompanyName = dataReader["CompanyName"].ToString()!,
-                            Description = dataReader["Description"].ToString()!,
-                            ThumbnailName = dataReader["Thumbnail"].ToString()!,
-                            Link = dataReader["Link"].ToString()!
-                        };
-
-                        lstPartner.Add(partner);
-                    }
-                }
-            }
-
-            connection.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-
-        return lstPartner;
     }
 
     //delete partner by 

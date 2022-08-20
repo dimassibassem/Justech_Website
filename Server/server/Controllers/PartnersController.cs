@@ -62,19 +62,7 @@ namespace server.Controllers
             return BllPartner.GetAllPartners();
         }
 
-
-        [HttpGet("GetAllPartnersBy")]
-        public List<Partner> GetAllPartnersBy(string field, string value)
-        {
-            if (string.IsNullOrEmpty(field) || string.IsNullOrEmpty(value))
-            {
-                return new List<Partner>();
-            }
-
-            return BllPartner.GetAllPartnersBy(field, value);
-        }
-
-
+        
         [HttpDelete("DeletePartnerBy")]
         public JsonResult DeletePartnerBy(string field, string value)
         {

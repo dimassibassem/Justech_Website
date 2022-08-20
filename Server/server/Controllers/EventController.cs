@@ -63,43 +63,8 @@ namespace server.Controllers
         {
             return BllEvent.GetAllEvents();
         }
-
-
-        [HttpGet("GetAllEventsBy")]
-        public List<Event> GetAllEventsBy(string field, string value)
-        {
-            if (string.IsNullOrEmpty(field) || string.IsNullOrEmpty(value))
-            {
-                return new List<Event>();
-            }
-
-            return BllEvent.GetAllEventsBy(field, value);
-        }
-
-
-        [HttpGet("GetEventBy")]
-        public Event GetEventBy(string field, string value)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                Event even = BllEvent.GetEventBy(field, value);
-
-                if (even.Id != 0)
-                {
-                    return even;
-                }
-                else
-                {
-                    return new Event();
-                }
-            }
-            else
-            {
-                return new Event();
-            }
-        }
-
-
+        
+      
         [HttpDelete("DeleteEventBy")]
         public JsonResult DeleteEventBy(string field, string value)
         {

@@ -1,5 +1,4 @@
-﻿
-using server.Extensions;
+﻿using server.Extensions;
 using server.Models.DAL;
 using server.Models.Entity;
 
@@ -21,29 +20,10 @@ namespace server.Models.BLL
         {
             return DalContact.GetAllContacts();
         }
-
-        public static List<Contact> GetAllContactsBy(string field, string value)
-        {
-            return DalContact.GetAllContactsBy(field, value);
-        }
+        
 
         #region API Calls
-
-        public static JsonResponse UpsertApi(Contact contact)
-        {
-            JsonResponse jr;
-
-            if (contact.Id == 0)
-            {
-                jr = DalContact.AddContact(contact);
-            }
-            else
-            {
-                jr = DalContact.UpdateContact(contact);
-            }
-
-            return jr;
-        }
+        
 
         public static JsonResponse DeleteApi(string field, string fieldValue)
         {

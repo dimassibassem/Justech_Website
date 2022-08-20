@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace server.Models.DAL;
+﻿namespace server.Models.DAL;
 
 using System.Data;
 using System.Data.SqlClient;
 using Extensions;
 using Entity;
 
-public class DalEvent
+public static class DalEvent
 {
     private static bool CheckEventUnicityBy(string field, string value)
     {
@@ -117,7 +115,6 @@ public class DalEvent
                                         Date=@Date,
                                         Location=@Location
                                     WHERE Id=@Id";
-            // Thumbnail=@Thumbnail,
 
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
@@ -132,12 +129,6 @@ public class DalEvent
                     command.Parameters.AddWithValue("@Description", DBNull.Value);
                 else
                     command.Parameters.AddWithValue("@Description", even.Description);
-
-                //
-                // if (String.IsNullOrEmpty(even.Thumbnail))
-                //     command.Parameters.AddWithValue("@Thumbnail", DBNull.Value);
-                // else
-                //     command.Parameters.AddWithValue("@Thumbnail", even.Thumbnail);
 
                 if (String.IsNullOrEmpty(even.Date))
                     command.Parameters.AddWithValue("@Date", DBNull.Value);
@@ -259,52 +250,6 @@ public class DalEvent
         return even;
     }
 
-    //get all events by
-    public static List<Event> GetAllEventsBy(string field, string value)
-    {
-        List<Event> lstEvent = new List<Event>();
-        try
-        {
-            using SqlConnection connection = DbConnection.GetConnection();
-            connection.Open();
-            string sql = @" SELECT * 
-                                    FROM [Event] 
-                                    WHERE [Event].[" + field + @"]=@Field";
-
-            using (SqlCommand command = new SqlCommand(sql, connection))
-            {
-                command.CommandType = CommandType.Text;
-                command.Parameters.AddWithValue("@Field", value);
-
-                using (SqlDataReader dataReader = command.ExecuteReader())
-                {
-                    while (dataReader.Read())
-                    {
-                        Event even = new Event
-                        {
-                            Id = long.Parse(dataReader["Id"].ToString()!),
-                            EventName = dataReader["EventName"].ToString()!,
-                            Description = dataReader["Description"].ToString()!,
-                            // Thumbnail = dataReader["Thumbnail"].ToString()!,
-                            Date = dataReader["Date"].ToString()!,
-                            Location = dataReader["Location"].ToString()!
-                        };
-
-                        lstEvent.Add(even);
-                    }
-                }
-            }
-
-            connection.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-
-        return lstEvent;
-    }
-
     //delete event by 
     public static JsonResponse DeleteEventBy(string field, string fieldValue)
     {
@@ -349,7 +294,6 @@ public class DalEvent
 
     public static void AddImageToRelationshipTable(string? eventName, string imageName)
     {
-        JsonResponse jsonResponse = new JsonResponse();
         try
         {
             using SqlConnection connection = DbConnection.GetConnection();
@@ -371,20 +315,18 @@ public class DalEvent
             else
                 command.Parameters.AddWithValue("@ImageName", imageName);
 
-            
-       
+
             command.ExecuteNonQuery();
-            
-            
-            
-                connection.Close();
+
+
+            connection.Close();
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
         }
     }
-    
+
 
     public static List<string> GetAllImageByEventName(string? value)
     {
@@ -443,10 +385,9 @@ public class DalEvent
 
         return eventsWithImages;
     }
-    
-    
-    
-    public static JsonResponse DeleteEventImagesBy(string field, string fieldValue)
+
+
+    public static void DeleteEventImagesBy(string field, string fieldValue)
     {
         JsonResponse jsonResponse = new JsonResponse();
 
@@ -482,9 +423,5 @@ public class DalEvent
             jsonResponse.Success = false;
             jsonResponse.Message = e.Message;
         }
-
-        return jsonResponse;
     }
-
-    
 }

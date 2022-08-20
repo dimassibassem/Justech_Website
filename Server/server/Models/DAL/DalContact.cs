@@ -5,7 +5,7 @@ using server.Models.Entity;
 
 namespace server.Models.DAL;
 
-public class DalContact
+public static class DalContact
 {
     public static JsonResponse AddContact(Contact contact)
     {
@@ -256,52 +256,6 @@ public class DalContact
         return contact;
     }
 
-    //get all contacts by
-    public static List<Contact> GetAllContactsBy(string field, string value)
-    {
-        List<Contact> lstContact = new List<Contact>();
-        try
-        {
-            using SqlConnection connection = DbConnection.GetConnection();
-            connection.Open();
-            string sql = @" SELECT * 
-                                    FROM [Contact] 
-                                    WHERE [Contact].[" + field + @"]=@Field";
-
-            using (SqlCommand command = new SqlCommand(sql, connection))
-            {
-                command.CommandType = CommandType.Text;
-                command.Parameters.AddWithValue("@Field", value);
-
-                using (SqlDataReader dataReader = command.ExecuteReader())
-                {
-                    while (dataReader.Read())
-                    {
-                        Contact contact = new Contact();
-
-                        contact.Id = long.Parse(dataReader["Id"].ToString()!);
-                        contact.FirstName = dataReader["FirstName"].ToString();
-                        contact.LastName = dataReader["LastName"].ToString()!;
-                        contact.Email = dataReader["Email"].ToString()!;
-                        contact.Phone = dataReader["Phone"].ToString()!;
-                        contact.Company = dataReader["Company"].ToString()!;
-                        contact.Subject = dataReader["Subject"].ToString()!;
-                        contact.Message = dataReader["Message"].ToString()!;
-                        contact.Address = dataReader["Address"].ToString()!;
-                        lstContact.Add(contact);
-                    }
-                }
-            }
-
-            connection.Close();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-
-        return lstContact;
-    }
 
     //delete contact by 
     public static JsonResponse DeleteContactBy(string field, string fieldValue)
