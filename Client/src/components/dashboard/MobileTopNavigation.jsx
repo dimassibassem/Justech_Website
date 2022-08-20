@@ -6,14 +6,7 @@ function MobileTopNavigation() {
     const setMobileMenuOpen = useStore(state => state.setMobileMenuOpen);
     return (
         <div className="lg:hidden">
-            <div className="bg-[#05358c] py-2 px-4 flex items-center justify-between sm:px-6">
-                <div>
-                    <img
-                        className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
-                        alt="Workflow"
-                    />
-                </div>
+            <div className="bg-[#05358c] py-2 px-4 flex flex-row-reverse sm:px-6">
                 <div>
                     <button
                         type="button"
