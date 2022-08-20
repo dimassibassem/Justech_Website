@@ -140,7 +140,7 @@ public class DalUser
                 if (String.IsNullOrEmpty(user.Password))
                     command.Parameters.AddWithValue("@Password", DBNull.Value);
                 else
-                    command.Parameters.AddWithValue("@Password",BCryptNet.HashPassword(user.Password));
+                    command.Parameters.AddWithValue("@Password", BCryptNet.HashPassword(user.Password));
                 command.Parameters.AddWithValue("@Id", user.Id);
 
                 if (command.ExecuteNonQuery() == 1)

@@ -50,6 +50,31 @@ public static class BllAuth
         return jsonResponse;
     }
 
+    public static object VerifyPassword(string field, string fieldValue, string password)
+    {
+        JsonResponse jsonResponse = new JsonResponse();
+        bool verified = false;
+        var user = DalAuth.GetUserBy(field, fieldValue);
+        if (user.Id != 0)
+        {
+            verified = BCryptNet.Verify(password, user.Password);
+        }
+
+        if (verified)
+        {
+            jsonResponse.Success = true;
+            jsonResponse.Message = "Verified Password";
+        }
+        else
+        {
+            jsonResponse.Success = false;
+            jsonResponse.Message = "Incorrect password";
+        }
+
+
+        return jsonResponse;
+    }
+    
     private static string GenerateJwtToken(User user)
     {
         // generate token that is valid for 7 days
