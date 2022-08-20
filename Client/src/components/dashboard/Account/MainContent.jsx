@@ -1,11 +1,66 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Link from "next/link";
-import {useStore} from "@/store";
+import axios from "axios";
+import {useLocalStorage, useStore} from "@/store";
 import classNames from "@/utils/classNames";
+import Modal from "@/components/dashboard/Account/Modal";
 
 function MainContent() {
     const subNavigation = useStore(state => state.subNavigation);
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
+    const [state, setState] = useState({});
+    const token = useLocalStorage(store => store.token);
+    const handleChange = (e) => {
+        setState({...state, [e.target.name]: e.target.value});
+    }
+    const verifyPassword = async (password) => {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Auth/verify?password=${password}`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return res.data.success;
+    }
+    const [open, setOpen] = useState(false);
+    const [error, setError] = useState(false);
+    const [message, setMessage] = useState('');
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const verify = await verifyPassword(state.currentPassword)
+
+        if (verify) {
+            if (state.newPassword === state.newPassword2) {
+                const formData = new FormData();
+                formData.append('Password', state.newPassword);
+                formData.append('Id', 1);
+                formData.append('Email', state.email);
+                formData.append('FirstName', state.firstName);
+                formData.append('LastName', state.lastName);
+
+                const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/user/UpdateUser`, formData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                });
+                if (res.data.success) {
+                    setOpen(true);
+                    setMessage("update success")
+                } else {
+                    setError(true);
+                    setOpen(true);
+                    setMessage("update failed")
+                }
+            } else {
+                setError(true);
+                setOpen(true);
+                setMessage("password not match")
+            }
+        } else {
+            setError(true);
+            setOpen(true);
+            setMessage("incorrect password")
+        }
+    }
 
     return (
         <div className="flex-1 h-screen xl:overflow-y-auto">
@@ -45,7 +100,7 @@ function MainContent() {
             <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
                 <h1 className="text-3xl font-extrabold text-blue-gray-900">Account</h1>
 
-                <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200">
+                <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
                         <div className="sm:col-span-6">
                             <h2 className="text-xl font-medium text-blue-gray-900">Profile</h2>
@@ -62,10 +117,11 @@ function MainContent() {
                             </label>
                             <input
                                 type="text"
-                                name="first-name"
+                                name="firstName"
                                 id="first-name"
                                 autoComplete="given-name"
                                 className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -76,10 +132,24 @@ function MainContent() {
                             </label>
                             <input
                                 type="text"
-                                name="last-name"
+                                name="lastName"
                                 id="last-name"
                                 autoComplete="family-name"
                                 className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="sm:col-span-6">
+                            <label htmlFor="Email"
+                                   className="block text-sm font-medium text-blue-gray-900">
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                name="email"
+                                id="Email"
+                                className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -89,10 +159,12 @@ function MainContent() {
                                 Current password
                             </label>
                             <input
-                                type="text"
-                                name="Current_password"
+                                type="password"
+                                name="currentPassword"
                                 id="Current_password"
                                 className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                onChange={handleChange}
+                                autoComplete="currentPassword"
                             />
                         </div>
                         <div className="sm:col-span-6">
@@ -101,10 +173,12 @@ function MainContent() {
                                 New password
                             </label>
                             <input
-                                type="text"
+                                type="password"
                                 name="newPassword"
                                 id="newPassword"
                                 className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                onChange={handleChange}
+                                autoComplete="new-password"
                             />
                         </div>
                         <div className="sm:col-span-6">
@@ -113,10 +187,12 @@ function MainContent() {
                                 Confirm new password
                             </label>
                             <input
-                                type="text"
+                                type="password"
                                 name="newPassword2"
                                 id="newPassword2"
                                 className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                autoComplete="new-password"
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -138,6 +214,8 @@ function MainContent() {
                         </button>
                     </div>
                 </form>
+                <Modal error={error} setOpen={setOpen} setError={setError} setMessage={setMessage} message={message}
+                       open={open}/>
             </div>
         </div>
     );
