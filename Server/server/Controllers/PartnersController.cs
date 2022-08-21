@@ -62,7 +62,13 @@ namespace server.Controllers
             return BllPartner.GetAllPartners();
         }
 
-        
+        [HttpGet("PartnerBy")]
+        public Partner GetPartnerBy(string field, string value)
+        {
+            return BllPartner.GetPartnerBy(field, value);
+        }
+
+
         [HttpDelete("DeletePartnerBy")]
         public JsonResult DeletePartnerBy(string field, string value)
         {

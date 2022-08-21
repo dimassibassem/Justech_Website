@@ -35,6 +35,29 @@ namespace server.Controllers
                 });
             return BllContact.GetAllContacts();
         }
+        
+        [HttpGet("ContactBy")]
+        public object GetcontactBy(string field , string value)
+        {
+            if (!Request.Headers.ContainsKey("Authorization"))
+                return new JsonResult(new JsonResponse
+                {
+                    Success = false,
+                    Message = "unAuthorized"
+                });
+
+            var token = Request.Headers["Authorization"];
+            token = token.ToString().Substring(7);
+            if (!BllAuth.IsTokenValid(token))
+                return new JsonResult(new JsonResponse
+                {
+                    Success = false,
+                    Message = "unAuthorized"
+                });
+            return BllContact.GetContactBy(field, value);
+        }
+        
+        
 
 
         [HttpDelete("DeleteContactBy")]
