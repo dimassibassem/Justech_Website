@@ -1,7 +1,7 @@
 import Link from "next/link";
 import axios from "axios";
 import {useEffect, useState} from "react";
-import {useStore} from "@/store";
+import {useLocalStorage, useStore} from "@/store";
 import classNames from "@/utils/classNames";
 
 export default function ContactMainIndex() {
@@ -9,9 +9,14 @@ export default function ContactMainIndex() {
     const setMessages = useStore(state => state.setMessages);
     const currentMessage = useStore(state => state.currentMessage);
     const [messagesArr, setMessagesArr] = useState([]);
+    const token = useLocalStorage(state => state.token);
     const fetchMessages = async () => {
 
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Contact/all`);
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Contact/all`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
 
         setMessagesArr(res.data.map(message => {
             message.current = false;

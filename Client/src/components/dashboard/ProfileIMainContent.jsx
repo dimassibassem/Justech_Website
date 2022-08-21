@@ -1,6 +1,35 @@
+import Link from "next/link";
+import classNames from "@/utils/classNames";
+import {useStore} from "@/store";
+
 export default function ProfileIMainContent() {
+    const subNavigation = useStore(state => state.subNavigation);
+    const resetSubNavigation = useStore(state => state.resetSubNavigation);
     return (
-        <div className="relative w-full h-screen py-16 overflow-hidden bg-blue-gray-50 ">
+        <div className="relative w-full h-screen overflow-hidden bg-blue-gray-50 ">
+            <div className="lg:hidden flex w-screen flex-row overflow-y-auto">
+                {subNavigation.map((item) => (
+                    <Link
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                            item.current ? 'bg-blue-50 bg-opacity-50' : 'hover:bg-blue-50 hover:bg-opacity-50',
+                            'flex p-6 border-b border-blue-gray-200'
+                        )}
+                        aria-current={item.current ? 'page' : undefined}
+                        onClick={() => {
+                            resetSubNavigation();
+                        }
+                        }
+                    >
+                        <item.icon className="flex-shrink-0 -mt-0.5 h-6 w-6 text-blue-gray-400"
+                                   aria-hidden="true"/>
+                        <div className="ml-3 text-sm">
+                            <p className="font-medium text-blue-gray-900">{item.name}</p>
+                        </div>
+                    </Link>
+                ))}
+            </div>
             <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
                 <div className="relative h-full text-lg max-w-prose mx-auto" aria-hidden="true">
                     <svg
@@ -72,7 +101,7 @@ export default function ProfileIMainContent() {
                 <div className="text-lg max-w-prose mx-auto">
                     <h1>
                         <span
-                            className="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                            className="mt-2 block pt-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
              Settings
             </span>
                     </h1>

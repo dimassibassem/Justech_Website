@@ -23,7 +23,7 @@ const partner = () => {
     return (
         <div className='bg-white'>
             <Head>
-                <title>Justech - Partners</title>
+                <title>Justech - {name} partner</title>
                 <meta
                     name='description'
                     content='Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and hope you don’t get audited.'

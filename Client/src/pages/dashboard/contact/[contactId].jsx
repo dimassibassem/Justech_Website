@@ -19,7 +19,11 @@ export default function ContactId() {
     const [authenticated, setAuthenticated] = useState('loading');
     const fetchMessage = async () => {
         if (contactId) {
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Contact/GetContactBy?field=id&value=${contactId}`)
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Contact/ContactBy?field=id&value=${contactId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             setCurrentMessage(res.data)
         }
     }

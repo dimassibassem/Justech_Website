@@ -1,7 +1,6 @@
 import React from 'react'
 import clsx from 'clsx'
 
-
 function Feature({ partner, isActive, className, ...props }) {
   return (
     <div
@@ -16,8 +15,6 @@ function Feature({ partner, isActive, className, ...props }) {
       </p>
     </div>
   )
-
-
 }
 
 export default Feature
