@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import Breadcrumb from "@/components/dashboard/Breadcrumb";
 import StaticSidebarForDesktop from "@/components/dashboard/StaticSidebarForDesktop";
 import MobileTopNavigation from "@/components/dashboard/MobileTopNavigation";
 import SecondarySidebar from "@/components/dashboard/SecondarySidebar";
