@@ -22,8 +22,7 @@ function MainContent() {
         return res.data.success;
     }
     const [open, setOpen] = useState(false);
-    const [error, setError] = useState(false);
-    const [message, setMessage] = useState('');
+    const [modalState, setModalState] = useState({message: '', error: false});
     const handleSubmit = async (e) => {
         e.preventDefault();
         const verify = await verifyPassword(state.currentPassword)
@@ -43,22 +42,20 @@ function MainContent() {
                     }
                 });
                 if (res.data.success) {
+                    setModalState({message: 'Update success', error: false});
                     setOpen(true);
-                    setMessage("update success")
+
                 } else {
-                    setError(true);
+                    setModalState({message: 'Update failed', error: true});
                     setOpen(true);
-                    setMessage("update failed")
                 }
             } else {
-                setError(true);
+                setModalState({message: 'Password not match', error: true});
                 setOpen(true);
-                setMessage("password not match")
             }
         } else {
-            setError(true);
+            setModalState({message: 'Incorrect password', error: true});
             setOpen(true);
-            setMessage("incorrect password")
         }
     }
 
@@ -150,6 +147,7 @@ function MainContent() {
                                 id="Email"
                                 className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
                                 onChange={handleChange}
+                                autoComplete="email"
                             />
                         </div>
 
@@ -214,8 +212,7 @@ function MainContent() {
                         </button>
                     </div>
                 </form>
-                <Modal error={error} setOpen={setOpen} setError={setError} setMessage={setMessage} message={message}
-                       open={open}/>
+                <Modal modalState={modalState} setModalState={setModalState} open={open} setOpen={setOpen}/>
             </div>
         </div>
     );
