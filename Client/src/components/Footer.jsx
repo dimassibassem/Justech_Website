@@ -17,8 +17,7 @@ export function Footer() {
                 <NavLink href='/businessSolution'>E-Business solutions</NavLink>
                 <NavLink href='/partners'>Partners</NavLink>
                 <NavLink href='/references'>References</NavLink>
-                <NavLink href='#pricing'>News</NavLink>
-                <NavLink href='#pricing'>Gallery</NavLink>
+                <NavLink href='/events'>Events</NavLink>
                 <NavLink href='/contact'>Contact</NavLink>
               </div>
             </div>
