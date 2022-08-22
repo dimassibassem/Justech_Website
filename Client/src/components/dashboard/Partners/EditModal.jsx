@@ -45,6 +45,7 @@ export default function EditModal({openEditModal, setOpenEditModal, partnerToEdi
         } catch (err) {
             console.log(err);
         }
+        setOpenEditModal(false);
     }
     const fileSelectedHandler = (event) => {
         setFormState({...formState, CompanyLogo: event.target.files[0]});

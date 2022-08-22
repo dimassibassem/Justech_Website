@@ -62,10 +62,7 @@ function PartnersMainContent() {
     }, []);
 
     useEffect(() => {
-    }, [partners]);
-
-    useEffect(() => {
-    }, [partnerToEdit]);
+    }, [partners,partnerToEdit]);
 
 
     const subNavigation = useStore(store => store.subNavigation);
