@@ -21,16 +21,16 @@ namespace server.Controllers
         [HttpPost("UpsertPartner")]
         public async Task<IActionResult> UpsertPartner([FromForm] Partner partner)
         {
-            // var jsonResponse = new JsonResponse
-            // {
-            //     Success = false,
-            //     Message = "unAuthorized"
-            // };
-            // if (!Request.Headers.ContainsKey("Authorization")) return Json(jsonResponse);
-            //
-            // var token = Request.Headers["Authorization"];
-            // token = token.ToString().Substring(7);
-            // if (!BllAuth.IsTokenValid(token)) return Json(jsonResponse);
+            var jsonResponse = new JsonResponse
+            {
+                Success = false,
+                Message = "unAuthorized"
+            };
+            if (!Request.Headers.ContainsKey("Authorization")) return Json(jsonResponse);
+            
+            var token = Request.Headers["Authorization"];
+            token = token.ToString().Substring(7);
+            if (!BllAuth.IsTokenValid(token)) return Json(jsonResponse);
 
             var empty = partner.Thumbnail == null;
             if (empty) return Json(BllPartner.UpsertApi(partner));

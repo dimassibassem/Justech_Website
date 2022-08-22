@@ -115,7 +115,7 @@ public static class DalPartner
                                         CompanyName=@CompanyName,
                                         Description=@Description,
                                         Thumbnail=@Thumbnail,
-                                        Link=@Link,
+                                        Link=@Link
                                     WHERE Id=@Id";
 
             using (SqlCommand command = new SqlCommand(sql, connection))
