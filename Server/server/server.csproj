@@ -7,10 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+        <PackageReference Include="JWTCookieAuthentication" Version="2.4.2" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.9" />
         <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.22.0" />
+        <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.2.2" />
+        <PackageReference Include="Microsoft.Owin.Security.OAuth" Version="4.2.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
         <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.0" />
     </ItemGroup>
 
     <ItemGroup>
