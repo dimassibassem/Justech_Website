@@ -19,9 +19,7 @@ export default function ProfileIMainContent() {
                         aria-current={item.current ? 'page' : undefined}
                         onClick={() => {
                             resetSubNavigation();
-                        }
-                        }
-                    >
+                        }}>
                         <item.icon className="flex-shrink-0 -mt-0.5 h-6 w-6 text-blue-gray-400"
                                    aria-hidden="true"/>
                         <div className="ml-3 text-sm">
