@@ -35,7 +35,7 @@ function ContactForm() {
         formData.append('Address', state.Address);
         formData.append('Subject', state.Subject);
         formData.append('Message', state.Message);
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Contact/UpsertContact`, formData)
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Contact/AddContact`, formData)
         if (res.data.success) {
             setShowModal(true)
         }
