@@ -4,6 +4,7 @@ import Link from "next/link";
 import PartnersGrid from "@/components/dashboard/Partners/PartnersGrid";
 import {useLocalStorage, useStore} from "@/store";
 import classNames from "@/utils/classNames";
+import EditModal from "@/components/dashboard/Partners/EditModal";
 
 function PartnersMainContent() {
     const token = useLocalStorage(store => store.token);
@@ -15,6 +16,9 @@ function PartnersMainContent() {
         Description: "",
         Link: "",
     });
+
+    const [openEditModal, setOpenEditModal] = useState(false);
+    const [partnerToEdit, setPartnerToEdit] = useState({});
 
     const fetchData = async () => {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/all`);
@@ -60,11 +64,13 @@ function PartnersMainContent() {
     useEffect(() => {
     }, [partners]);
 
-const subNavigation = useStore(store => store.subNavigation);
-const resetSubNavigation = useStore(store => store.resetSubNavigation);
+    useEffect(() => {
+    }, [partnerToEdit]);
 
+
+    const subNavigation = useStore(store => store.subNavigation);
+    const resetSubNavigation = useStore(store => store.resetSubNavigation);
     return (
-
         <div className="flex-1 h-screen xl:overflow-y-auto">
             <nav
                 aria-label="Sections"
@@ -86,9 +92,7 @@ const resetSubNavigation = useStore(store => store.resetSubNavigation);
                             aria-current={item.current ? 'page' : undefined}
                             onClick={() => {
                                 resetSubNavigation();
-                            }
-                            }
-                        >
+                            }}>
                             <item.icon className="flex-shrink-0 -mt-0.5 h-6 w-6 text-blue-gray-400"
                                        aria-hidden="true"/>
                             <div className="ml-3 text-sm">
@@ -110,7 +114,8 @@ const resetSubNavigation = useStore(store => store.resetSubNavigation);
                     </div>
                 </div>
                 <div className="pb-4">
-                    <PartnersGrid partners={partners} setPartners={setPartners}/>
+                    <PartnersGrid partners={partners} setPartners={setPartners} setOpenEditModal={setOpenEditModal}
+                                  setPartnerToEdit={setPartnerToEdit}/>
                 </div>
 
                 <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200" onSubmit={handleSubmit}>
@@ -142,15 +147,15 @@ const resetSubNavigation = useStore(store => store.resetSubNavigation);
                             <label htmlFor="CompanyLogo"
                                    className="block text-sm font-medium text-blue-gray-900">
                                 Company Logo
-                                <input
-                                    type="file"
-                                    name="CompanyLogo"
-                                    id="CompanyLogo"
-                                    autoComplete="given-name"
-                                    className="mt-1 p-1 block w-full bg-white z-30 shadow-sm border-2 border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
-                                    onChange={fileSelectedHandler}
-                                />
                             </label>
+                            <input
+                                type="file"
+                                name="CompanyLogo"
+                                id="CompanyLogo"
+                                autoComplete="given-name"
+                                className="mt-1 p-1 block w-full bg-white z-30 shadow-sm border-2 border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                onChange={fileSelectedHandler}
+                            />
 
                         </div>
 
@@ -199,8 +204,9 @@ const resetSubNavigation = useStore(store => store.resetSubNavigation);
                         </button>
                     </div>
                 </form>
-
             </div>
+             <EditModal openEditModal={openEditModal} setOpenEditModal={setOpenEditModal}
+                        partnerToEdit={partnerToEdit} setPartners={setPartners}/>
         </div>
 
     );

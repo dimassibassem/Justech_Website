@@ -1,15 +1,16 @@
-import {useId} from "react";
+import {useId,} from "react";
 import 'swiper/css'
 import 'swiper/css/autoplay'
-import {Autoplay, Scrollbar} from 'swiper'
+import {Scrollbar} from 'swiper'
 import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import axios from "axios";
+import {PencilAltIcon, TrashIcon} from "@heroicons/react/solid";
 import {Button} from "@/components/Button";
 import {useLocalStorage} from "@/store";
 
-export default function PartnersGrid({partners, setPartners}) {
+export default function PartnersGrid({partners, setPartners, setOpenEditModal, setPartnerToEdit}) {
     const id = useId()
     const token = useLocalStorage(store => store.token);
     const handleDelete = async (companyName) => {
@@ -26,11 +27,16 @@ export default function PartnersGrid({partners, setPartners}) {
         setPartners(res.data)
     }
 
+    const handleEdit = (partner) => {
+        setOpenEditModal(true);
+        setPartnerToEdit(partner);
+    }
+
     return (
         <Swiper
             spaceBetween={50}
             slidesPerView={3}
-            modules={[Scrollbar, Autoplay]}
+            modules={[Scrollbar]}
             autoplay
             scrollbar={{
                 hide: false,
@@ -49,16 +55,22 @@ export default function PartnersGrid({partners, setPartners}) {
 
                     </div>
                     <p className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{partner.companyName}</p>
-                    <Button
-                        className="mt-5 text-gray-100 bg-red-600 w-full hover:bg-red-900 hover:text-white hover:text-lg"
-                        onClick={() => handleDelete(partner.companyName)}>
-                        Delete Partner
-                    </Button>
+                    <div className="grid grid-cols-2">
+                        <Button
+                            className="mt-5 text-gray-100 bg-green-600 w-full hover:bg-green-900 hover:text-white"
+                            onClick={() => handleEdit(partner)}>
+                            <PencilAltIcon className="h-6 w-6"/>
+                        </Button>
+                        <Button
+                            className="mt-5 text-gray-100 bg-red-600 w-full hover:bg-red-900 hover:text-white"
+                            onClick={() => handleDelete(partner.companyName)}>
+                            <TrashIcon className="h-6 w-6"/>
+                        </Button>
+                    </div>
 
                     <div className="mb-8"/>
                 </SwiperSlide>
             ))}
         </Swiper>
-        // </ul>
     )
 }
