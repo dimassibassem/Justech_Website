@@ -79,13 +79,13 @@ export default function EventsGrid({events, setEvents, setOpenEditModal, setEven
 
                     <div className="grid grid-cols-2">
                         <Button
-                        className="mt-5 text-gray-100 bg-green-600 w-full hover:bg-green-900 hover:text-white"
-                        onClick={() => {
-                            setOpenEditModal(true)
-                            setEventToEdit(item.event)
-                        }}>
+                            className="mt-5 text-gray-100 bg-green-600 w-full hover:bg-green-900 hover:text-white"
+                            onClick={() => {
+                                setOpenEditModal(true)
+                                setEventToEdit(item.event)
+                            }}>
                             <PencilAltIcon className="h-6 w-6"/>
-                    </Button>
+                        </Button>
                         <Button
                             className="mt-5 text-gray-100 bg-red-600 w-full hover:bg-red-900 hover:text-white "
                             onClick={() => handleDelete(item.event.eventName)}>

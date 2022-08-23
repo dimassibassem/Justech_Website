@@ -134,7 +134,7 @@ export function PrimaryFeatures() {
                                     ))}
                                 </Tab.List>
                             </div>
-                            <Tab.Panels className='lg:col-span-7'>
+                            <Tab.Panels className='pl-5 lg:col-span-7'>
                                 {features.map((feature) => (
                                     <Tab.Panel key={feature.title} unmount={false}>
                                         <div className='relative sm:px-6 lg:hidden'>
@@ -145,21 +145,20 @@ export function PrimaryFeatures() {
                                             </p>
                                         </div>
                                         <div
-                                            className='mt-10 w-[45rem] bg-auto overflow-hidden rounded-xl 0 sm:w-auto lg:mt-0 lg:w-[67.8125rem]'>
+                                            className='mt-10 bg-auto overflow-hidden sm:w-auto lg:mt-0 w-full lg:w-[35rem] xl:w-[44rem]'>
                                             {feature.hasVideo ?
                                                 <
                                                     iframe
-                                                    className="w-4/5 h-[80vh] px-5 rounded-xl"
+                                                    className="w-full h-[70vh] lg:h-screen max-h-[35.5rem] rounded-xl"
                                                     src = "https://www.youtube.com/embed/Pur-viGH2Kw"
                                                     title = "YouTube video player"
                                                     allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                     allowFullScreen > < /iframe>  :
                                                 <Image
-                                                    className='w-full h-[36rem]'
+                                                    className='w-full h-[70vh] lg:h-screen max-h-[35.5rem] rounded-xl'
                                                     src={feature.image}
                                                     alt=''
                                                     priority
-                                                    sizes='(min-width: 1024px) 67.8125rem, (min-width: 640px) 100vw, 45rem'
                                                 />}
                                         </div>
                                     </Tab.Panel>
