@@ -17,12 +17,11 @@ export default function EventEditModal({setOpenEditModal, openEditModal, eventTo
         const result = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
         setEvents(result.data);
     }
-    // todo: need to check handleDelete function
     const handleDelete = async (event) => {
        await axios.delete(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/DeleteEventBy`, {
             params: {
-                field: "Id",
-                value: event.id
+                field: "EventName",
+                value: event.eventName
             },
             headers: {
                 Authorization: `Bearer ${token}`
