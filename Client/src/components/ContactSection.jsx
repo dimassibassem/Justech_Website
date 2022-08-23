@@ -10,7 +10,6 @@ export default function ContactSection() {
 
           <div className='grid grid-cols-1 lg:grid-cols-3'>
             <ContactInfo />
-
             <ContactForm />
           </div>
         </div>

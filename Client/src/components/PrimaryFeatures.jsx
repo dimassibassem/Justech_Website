@@ -22,7 +22,7 @@ const features = [
     {
         title: 'Al-Fikr Publish',
         description:
-            'All of your receipts organized into one place, as long as you don\'t mind typing in the data by hand.',
+            'Al-Fikr is a full-text reference and search portal specializing in academic resources.',
         image: slide1,
         hasVideo: true,
         video: 'https://www.youtube.com/embed/Pur-viGH2Kw',
