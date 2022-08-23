@@ -21,6 +21,7 @@
 
     <ItemGroup>
       <Folder Include="wwwroot\Uploads" />
+      <Folder Include="wwwroot\Uploads\Events" />
       <Folder Include="wwwroot\Uploads\Partners" />
     </ItemGroup>
 
