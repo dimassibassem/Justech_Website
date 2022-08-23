@@ -30,7 +30,6 @@ export default function EventEditModal({setOpenEditModal, openEditModal, eventTo
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
         setEvents(res.data)
     }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData()

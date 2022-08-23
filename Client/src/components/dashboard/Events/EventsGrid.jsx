@@ -12,7 +12,6 @@ import {Button} from "@/components/Button";
 import {useLocalStorage} from "@/store";
 
 export default function EventsGrid({events, setEvents, setOpenEditModal, setEventToEdit}) {
-    console.log(events);
     const id = useId()
     for (let i = 0; i < events.length; i += 1) {
         for (let j = 0; j < events[i].images.length; j += 1) {

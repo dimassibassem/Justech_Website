@@ -5,6 +5,7 @@ import EventsGrid from "@/components/dashboard/Events/EventsGrid";
 import {useLocalStorage, useStore} from "@/store";
 import classNames from "@/utils/classNames";
 import EventEditModal from "@/components/dashboard/Events/EventEditModal";
+import ExistModal from "@/components/dashboard/Events/ExistModal";
 
 function EventsMainContent() {
     const setEvents = useStore(store => store.setEvents);
@@ -18,6 +19,7 @@ function EventsMainContent() {
     });
     const [openEditModal, setOpenEditModal] = useState(false);
     const [eventToEdit, setEventToEdit] = useState({});
+    const [existError, setExistError] = useState(false);
     const fetchEvents = async () => {
         const result = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
         setEvents(result.data);
@@ -35,12 +37,16 @@ function EventsMainContent() {
         formData.append('Id', 0);
         formData.append('Date', state.date);
         try {
-            await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/UpsertEvent`, formData, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/UpsertEvent`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
             });
-            await fetchEvents();
+            if (!response.data.message) {
+                setExistError(true)
+            } else {
+                await fetchEvents()
+            }
         } catch (err) {
             console.log(err);
         }
@@ -116,7 +122,8 @@ function EventsMainContent() {
                     </div>
                 </div>
                 <div className="pb-4">
-                    <EventsGrid events={events} setEvents={setEvents} setOpenEditModal={setOpenEditModal} setEventToEdit={setEventToEdit} />
+                    <EventsGrid events={events} setEvents={setEvents} setOpenEditModal={setOpenEditModal}
+                                setEventToEdit={setEventToEdit}/>
                 </div>
 
                 <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200" onSubmit={handleSubmit}>
@@ -222,6 +229,7 @@ function EventsMainContent() {
                     </div>
                 </form>
             </div>
+            <ExistModal open={existError} setOpen={setExistError}/>
             <EventEditModal eventToEdit={eventToEdit} setOpenEditModal={setOpenEditModal}
                             openEditModal={openEditModal}/>
         </div>
