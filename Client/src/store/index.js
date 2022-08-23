@@ -6,7 +6,8 @@ import {
     ChatIcon,
     HomeIcon,
     InboxInIcon, UserGroupIcon,
-    UserIcon
+    UserIcon,
+    ViewGridAddIcon
 } from "@heroicons/react/outline";
 
 const navigation = [
@@ -38,6 +39,12 @@ const subNavigation = [
         icon: CalendarIcon,
         current: false,
     },
+    {
+        name: 'References',
+        description: 'Sed nisi lacus sed viverra tellus in hac habitasse. Mattis nunc sed blandit.',
+        href: '/dashboard/references',
+        icon: ViewGridAddIcon,
+    }
 
 ]
 
@@ -55,6 +62,8 @@ const createStateSlice = (set, get) => ({
     }, null, "resetSubNavigation"),
     partners: [],
     setPartners: (partners) => set({partners}, null, "setPartners"),
+    references: [],
+    setReferences: (references) => set({references}, null, "setReferences"),
     events: [],
     setEvents: (events) => set({events}, null, "setEvents"),
     messages: [],
