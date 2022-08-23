@@ -25,7 +25,7 @@ const features = [
             'All of your receipts organized into one place, as long as you don\'t mind typing in the data by hand.',
         image: slide1,
         hasVideo: true,
-        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+        video: 'https://www.youtube.com/embed/Pur-viGH2Kw',
     },
     {
         title: 'Sci-zone',
@@ -33,7 +33,7 @@ const features = [
             'Sci-zone gives you access to books or scientific journals through individual subscriptions. A solution that brings together all the subscriptions that interest you on the same platform.',
         image: slide2,
         hasVideo: true,
-        video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+        video: 'https://www.youtube.com/embed/RYlH5OZqFrk',
     },
     {
         title: 'PMA',
@@ -150,7 +150,7 @@ export function PrimaryFeatures() {
                                                 <
                                                     iframe
                                                     className="w-full h-[70vh] lg:h-screen max-h-[35.5rem] rounded-xl"
-                                                    src = "https://www.youtube.com/embed/Pur-viGH2Kw"
+                                                    src = {feature.video}
                                                     title = "YouTube video player"
                                                     allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                     allowFullScreen > < /iframe>  :
