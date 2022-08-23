@@ -2,8 +2,6 @@ import {useEffect, useState} from 'react'
 import Image from 'next/future/image'
 import {Tab} from '@headlessui/react'
 import clsx from 'clsx'
-
-import ReactPlayer from 'react-player/youtube'
 import {Container} from '@/components/Container'
 import backgroundImage from '@/images/background.webp'
 import welcome from '@/images/welcome.jpg'
