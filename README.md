@@ -14,7 +14,7 @@ dynamic and qualified team.
 - ⚡ Next.js
 - 🐻 Zustand
 - 🎨 TailwindCSS
-- 🌐 ASP.NET
+- 🌐 .NET
 - 🗃️ MSSQL
 
 
