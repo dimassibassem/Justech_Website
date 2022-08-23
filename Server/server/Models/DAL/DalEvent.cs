@@ -304,7 +304,7 @@ public static class DalEvent
                                         VALUES (@EventName, @ImageName) ";
 
             using SqlCommand command = new SqlCommand(sql, connection);
-Event
+            
             if (String.IsNullOrEmpty(eventName))
                 command.Parameters.AddWithValue("@EventName", DBNull.Value);
             else
