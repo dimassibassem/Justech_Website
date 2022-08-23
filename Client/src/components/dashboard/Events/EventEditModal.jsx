@@ -1,62 +1,76 @@
-import {Fragment, useState} from 'react'
+import React, {Fragment, useState} from 'react'
 import {Transition} from '@headlessui/react'
 import axios from "axios";
-import {useLocalStorage} from "@/store";
+import {useLocalStorage, useStore} from "@/store";
 
-export default function EditModal({openEditModal, setOpenEditModal, partnerToEdit, setPartners}) {
-    const fetchData = async () => {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/all`);
-        setPartners(res.data);
-    }
-    const [formState, setFormState] = useState({
-        CompanyName: "",
-        CompanyLogo: "",
-        Description: "",
-        Link: "",
-    });
+export default function EventEditModal({setOpenEditModal, openEditModal, eventToEdit}) {
+    const setEvents = useStore(store => store.setEvents);
     const token = useLocalStorage(store => store.token);
+    const [state, setState] = useState({
+        eventName: "",
+        description: "",
+        images: [],
+        link: "",
+        location: "",
+    });
+    const fetchEvents = async () => {
+        const result = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
+        setEvents(result.data);
+    }
+    // todo: need to check handleDelete function
+    const handleDelete = async (event) => {
+       await axios.delete(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/DeleteEventBy`, {
+            params: {
+                field: "Id",
+                value: event.id
+            },
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
+        setEvents(res.data)
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData()
-        formData.append('CompanyName', formState.CompanyName ? formState.CompanyName : partnerToEdit.companyName);
-        formData.append('Description', formState.Description ? formState.Description : partnerToEdit.description);
-        formData.append('Thumbnail', formState.CompanyLogo !== "" ? formState.CompanyLogo : partnerToEdit.thumbnailName);
-        formData.append('Link', formState.Link ? formState.Link : partnerToEdit.link);
-        formData.append('ThumbnailName', " ");
+        formData.append('EventName', state.eventName ? state.eventName : eventToEdit.eventName);
+        formData.append('Description', state.description ? state.description : eventToEdit.description);
+        for (let i = 0; i < state.images.length; i += 1) {
+            formData.append("Images", state.images[i]);
+        }
+        formData.append('Location', state.location ? state.location : eventToEdit.location);
         formData.append('Id', 0);
-        try {
-            await axios.delete(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/DeletePartnerBy`, {
-                params: {
-                    field: "Id",
-                    value: partnerToEdit.id
-                }, headers: {
-                    'authorization': `Bearer ${token}`,
-                }
-            })
+        formData.append('Date', state.date ? state.date : eventToEdit.date);
 
-            await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Partners/UpsertPartner`, formData, {
+        try {
+            await handleDelete(eventToEdit);
+            await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/UpsertEvent`, formData, {
                 headers: {
-                    'authorization': `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 }
             });
-            await fetchData();
-
+            await fetchEvents();
         } catch (err) {
             console.log(err);
         }
         setOpenEditModal(false);
     }
+
+
     const fileSelectedHandler = (event) => {
-        setFormState({...formState, CompanyLogo: event.target.files[0]});
+        setState({...state, images: event.target.files});
     }
 
     const handleChange = e => {
         e.preventDefault();
-        setFormState({
-            ...formState,
+        setState({
+            ...state,
             [e.target.name]: e.target.value,
         })
     }
+
     return (
         <Transition.Root show={openEditModal} as={Fragment}>
             <div className="relative z-10" onClose={setOpenEditModal}>
@@ -86,73 +100,95 @@ export default function EditModal({openEditModal, setOpenEditModal, partnerToEdi
                             <div
                                 className="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full sm:p-6">
                                 <div>
+
                                     <div className="mt-3 text-center sm:mt-5">
                                         <h3 className="text-lg leading-6 font-medium text-gray-900">
-                                            Edit {partnerToEdit.companyName}
+                                            Edit {eventToEdit.eventName}
                                         </h3>
                                         <div className="mt-2">
                                             <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200"
                                                   onSubmit={handleSubmit}>
                                                 <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
                                                     <div className="sm:col-span-6">
-                                                        <p
-                                                            className="block text-sm font-medium text-blue-gray-900">
-                                                            Company Name
-                                                        </p>
+                                                        <label htmlFor="eventName"
+                                                               className="block text-sm font-medium text-blue-gray-900">
+                                                            Event Name
+                                                        </label>
                                                         <input
                                                             type="text"
-                                                            name="CompanyName"
-                                                            id="CompanyName"
+                                                            name="eventName"
+                                                            id="eventName"
                                                             autoComplete="given-name"
                                                             className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
-                                                            defaultValue={partnerToEdit.companyName}
                                                             onChange={handleChange}
+                                                            defaultValue={eventToEdit.eventName}
                                                         />
                                                     </div>
 
                                                     <div className="sm:col-span-6">
-                                                        <p
-                                                            className="block text-sm font-medium text-blue-gray-900">
-                                                            Company Logo
-                                                        </p>
-                                                        <input
-                                                            required
-                                                            type="file"
-                                                            name="CompanyLogo"
-                                                            id="CompanyLogo"
-                                                            autoComplete="given-name"
-                                                            className="mt-1 p-1 block w-full bg-white z-30 shadow-sm border-2 border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
-                                                            onChange={fileSelectedHandler}
-                                                        />
+                                                        <label htmlFor="images"
+                                                               className="block text-sm font-medium text-blue-gray-900">
+                                                            Images
+                                                            <input
+                                                                required
+                                                                type="file"
+                                                                name="images"
+                                                                id="images"
+                                                                autoComplete="given-name"
+                                                                className="mt-1 p-1 block w-full bg-white z-30 shadow-sm border-2  rounded-md text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                                                multiple
+                                                                onChange={fileSelectedHandler}
+                                                            />
+                                                        </label>
+
                                                     </div>
+
+
                                                     <div className="sm:col-span-6">
-                                                        <p
-                                                            className="block text-sm font-medium text-blue-gray-900">
+                                                        <label htmlFor="description"
+                                                               className="block text-sm font-medium text-blue-gray-900">
                                                             Description
-                                                        </p>
+                                                        </label>
                                                         <textarea
-                                                            rows={5}
-                                                            name="Description"
-                                                            id="Description"
+                                                            rows={4}
+                                                            name="description"
+                                                            id="description"
                                                             className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                                            defaultValue={partnerToEdit.description}
+                                                            defaultValue={eventToEdit.description}
                                                             onChange={handleChange}
-
                                                         />
                                                     </div>
                                                     <div className="sm:col-span-6">
-                                                        <p className="block text-sm font-medium text-blue-gray-900">
-                                                            Website Link
-                                                        </p>
+                                                        <label htmlFor="location"
+                                                               className="block text-sm font-medium text-blue-gray-900">
+                                                            Location
+                                                        </label>
                                                         <input
                                                             type="text"
-                                                            name="Link"
-                                                            id="Link"
+                                                            name="location"
+                                                            id="location"
                                                             className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
-                                                            defaultValue={partnerToEdit.link}
                                                             onChange={handleChange}
+                                                            defaultValue={eventToEdit.location}
                                                         />
                                                     </div>
+
+                                                    <div className="sm:col-span-6">
+                                                        <label htmlFor="date"
+                                                               className="block text-sm font-medium text-blue-gray-900">
+                                                            Date
+                                                        </label>
+                                                        <input
+                                                            type="date"
+                                                            name="date"
+                                                            id="date"
+                                                            className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                                            onChange={handleChange}
+                                                            defaultValue={eventToEdit.date}
+                                                        />
+
+                                                    </div>
+
                                                 </div>
                                                 <div
                                                     className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">

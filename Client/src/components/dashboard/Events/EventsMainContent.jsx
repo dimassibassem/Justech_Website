@@ -4,6 +4,7 @@ import Link from "next/link";
 import EventsGrid from "@/components/dashboard/Events/EventsGrid";
 import {useLocalStorage, useStore} from "@/store";
 import classNames from "@/utils/classNames";
+import EventEditModal from "@/components/dashboard/Events/EventEditModal";
 
 function EventsMainContent() {
     const setEvents = useStore(store => store.setEvents);
@@ -15,6 +16,8 @@ function EventsMainContent() {
         link: "",
         location: "",
     });
+    const [openEditModal, setOpenEditModal] = useState(false);
+    const [eventToEdit, setEventToEdit] = useState({});
     const fetchEvents = async () => {
         const result = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
         setEvents(result.data);
@@ -28,7 +31,6 @@ function EventsMainContent() {
         for (let i = 0; i < state.images.length; i += 1) {
             formData.append("Images", state.images[i]);
         }
-        formData.append('Link', state.link);
         formData.append('Location', state.location);
         formData.append('Id', 0);
         formData.append('Date', state.date);
@@ -65,7 +67,6 @@ function EventsMainContent() {
     }, [events]);
     const subNavigation = useStore(store => store.subNavigation);
     const resetSubNavigation = useStore(store => store.resetSubNavigation);
-
 
     return (
 
@@ -115,7 +116,7 @@ function EventsMainContent() {
                     </div>
                 </div>
                 <div className="pb-4">
-                    <EventsGrid events={events} setEvents={setEvents}/>
+                    <EventsGrid events={events} setEvents={setEvents} setOpenEditModal={setOpenEditModal} setEventToEdit={setEventToEdit} />
                 </div>
 
                 <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200" onSubmit={handleSubmit}>
@@ -220,8 +221,9 @@ function EventsMainContent() {
                         </button>
                     </div>
                 </form>
-
             </div>
+            <EventEditModal eventToEdit={eventToEdit} setOpenEditModal={setOpenEditModal}
+                            openEditModal={openEditModal}/>
         </div>
 
     );
