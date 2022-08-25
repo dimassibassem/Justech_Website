@@ -86,7 +86,7 @@ function EventsMainContent() {
                     className="h-16 px-6 border-b border-blue-gray-200 flex items-center">
                     <p className="text-lg font-medium text-blue-gray-900">Settings</p>
                 </div>
-                <div className="flex w-screen flex-row overflow-y-auto">
+                <div className="flex px-4 w-screen flex-row overflow-y-auto">
                     {subNavigation.map((item) => (
                         <Link
                             key={item.name}

@@ -77,7 +77,7 @@ function PartnersMainContent() {
                     className="h-16 px-6 border-b border-blue-gray-200 flex items-center">
                     <p className="text-lg font-medium text-blue-gray-900">Settings</p>
                 </div>
-                <div className="flex w-screen flex-row overflow-y-auto">
+                <div className="flex px-4 w-screen flex-row overflow-y-auto">
                     {subNavigation.map((item) => (
                         <Link
                             key={item.name}
@@ -100,7 +100,7 @@ function PartnersMainContent() {
                 </div>
             </nav>
             <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
-                <h1 className="text-3xl font-extrabold text-blue-gray-900">Partners</h1>
+                <h1 className="text-3xl mb-4 font-extrabold text-blue-gray-900">Partners</h1>
                 <div className="pb-4">
                     <PartnersGrid partners={partners} setPartners={setPartners} setOpenEditModal={setOpenEditModal}
                                   setPartnerToEdit={setPartnerToEdit}/>
