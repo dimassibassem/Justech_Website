@@ -11,7 +11,6 @@ export default function EditReferenceModal({openEditModal, setOpenEditModal, ref
     const [formState, setFormState] = useState({
         ReferenceName: "",
         referenceLogo: "",
-
     });
     const token = useLocalStorage(store => store.token);
     const handleSubmit = async (e) => {

@@ -1,59 +1,23 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Head from 'next/head'
-import Image from 'next/future/image'
+import axios from "axios";
 import {Header} from '@/components/Header'
 import {Footer} from '@/components/Footer'
-import bnt from '@/images/references/BNT.jpg'
-import eniso from '@/images/references/eniso.jpg'
-import FAC from '@/images/references/FAC.jpg'
-import FMM from '@/images/references/FMM.jpg'
-import FMT from '@/images/references/FMT.jpg'
-import FSEGM from '@/images/references/FSEGM.jpg'
-import ministryOfEducation from '@/images/references/ministryOfEducation.jpg'
-import MinistryOfReaserches from '@/images/references/MinistryOfReaserches.jpg'
-import theAfricanDevelopmentBank from '@/images/references/The African Development Bank.jpg'
-
-const references = [
-    {
-        name: 'The African Development Bank',
-        image: theAfricanDevelopmentBank
-    },
-    {
-        name: 'Tunisia’s National Library',
-        image: bnt
-    },
-    {
-        name: 'The Tunis Faculty of Medicine',
-        image: FMT
-    },
-    {
-        name: 'Faculty of Medicine of Monastir',
-        image: FMM
-    },
-    {
-        name: 'National School of Engineers of Sousse'
-        , image: eniso
-    },
-    {
-        name: 'Faculty of Economics and Management of Mahdia'
-        , image: FSEGM
-    },
-    {
-        name: 'Faculty of Arts and Humanities of Sousse',
-        image: FAC
-    },
-    {
-        name: 'The Ministry of Education',
-        image: ministryOfEducation
-    },
-    {
-        name: 'Ministry of Higher Education and Scientific Research',
-        image: MinistryOfReaserches
-    }
-]
-
+import {useStore} from "@/store";
 
 function References() {
+    const references = useStore(store => store.references);
+    const setReferences = useStore(store => store.setReferences);
+
+    const fetchData = async () => {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/References/all`);
+        setReferences(res.data);
+    }
+
+    useEffect(() => {
+        fetchData().catch(err => console.log(err));
+    }, []);
+    console.log(references);
     return (
         <div className='bg-white'>
             <Head>
@@ -67,15 +31,20 @@ function References() {
             <div className='bg-gray-100'><Header/></div>
 
             <main>
-                <div className='grid grid-cols-3 py-20 gap-20 px-10'>
-                    {references.map(({name, image}) => (
-                        <div key={name} className='flex flex-col items-center justify-center'>
-                            <Image priority src={image} alt={name}/>
-                            <h2 className='text-center pt-3 font-semibold'>{name}</h2>
-                        </div>
+                <ul role="list"
+                    className="px-8 lg:px-[5rem] lg:px-[8rem] py-20 grid grid-cols-2 gap-x-[3rem] gap-y-8 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 md:gap-x-[10rem] md:gap-y-[4rem]  xl:gap-x-[13rem] xl:gap-y-[6rem]">
+                    {references.map((ref) => (
+                        <li key={ref.id} className="grid grid-cols-1 justify-items-center  relative">
+                            <div
+                                className="block w-full aspect-w-4 aspect-h-3 bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                                <img className=" group-hover:opacity-75"
+                                     src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}/wwwroot/Uploads/References/${ref.thumbnailName}`}
+                                     alt={ref.referenceName}/>
+                            </div>
+                            <p className="mt-2 text-sm font-medium text-gray-900">{ref.referenceName}</p>
+                        </li>
                     ))}
-                </div>
-
+                </ul>
             </main>
             <div className='bg-gray-100'><Footer/></div>
 
