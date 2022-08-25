@@ -11,7 +11,7 @@ import ReferencesMainContent from "@/components/dashboard/References/ReferencesM
 function Partners() {
     const subNavigation = useStore(state => state.subNavigation);
     const resetSubNavigation = useStore(state => state.resetSubNavigation);
-    const index = subNavigation.findIndex(item => item.name === "Partners");
+    const index = subNavigation.findIndex(item => item.name === "References");
     subNavigation[index].current = true;
     const token = useLocalStorage(state => state.token);
     const router = useRouter();

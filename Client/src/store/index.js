@@ -43,6 +43,7 @@ const subNavigation = [
         name: 'References',
         description: 'Sed nisi lacus sed viverra tellus in hac habitasse. Mattis nunc sed blandit.',
         href: '/dashboard/references',
+        current: false,
         icon: ViewGridAddIcon,
     }
 

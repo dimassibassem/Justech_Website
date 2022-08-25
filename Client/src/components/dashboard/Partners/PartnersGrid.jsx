@@ -1,4 +1,4 @@
-import {useId,} from "react";
+import {useId} from "react";
 import 'swiper/css'
 import 'swiper/css/autoplay'
 import {Scrollbar} from 'swiper'

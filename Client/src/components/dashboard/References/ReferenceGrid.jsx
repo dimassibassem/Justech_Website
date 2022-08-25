@@ -5,6 +5,11 @@ import {PencilAltIcon, TrashIcon} from "@heroicons/react/solid";
 import axios from "axios";
 import {Button} from "@/components/Button";
 import {useLocalStorage} from "@/store";
+import 'swiper/css'
+import 'swiper/css/autoplay'
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+
 
 function ReferenceGrid({references, setReferences, setOpenEditModal, setReferenceToEdit}) {
     const id = useId()
