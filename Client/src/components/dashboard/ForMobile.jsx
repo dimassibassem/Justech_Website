@@ -2,7 +2,6 @@ import {Fragment} from 'react'
 import {Dialog, Transition} from "@headlessui/react";
 import {XIcon} from "@heroicons/react/outline";
 import Image from "next/future/image";
-import Link from "next/link";
 import justech from "@/images/logos/logo.png";
 import {useStore} from "@/store";
 
@@ -82,21 +81,6 @@ function ForMobile() {
                                         ))}
                                     </div>
                                 </nav>
-                            </div>
-                            <div className="flex-shrink-0 flex border-t border-blue-gray-200 p-4">
-                                <Link href="/dashboard/account" className="flex-shrink-0 group block">
-                                    <div className="flex items-center">
-                                        <div/>
-                                        <div className="ml-3">
-                                            <p className="text-base font-medium text-blue-gray-700 group-hover:text-blue-gray-900">
-                                                Lisa Marie
-                                            </p>
-                                            <p className="text-sm font-medium text-blue-gray-500 group-hover:text-blue-gray-700">
-                                                Account Settings
-                                            </p>
-                                        </div>
-                                    </div>
-                                </Link>
                             </div>
                         </Dialog.Panel>
                     </Transition.Child>
