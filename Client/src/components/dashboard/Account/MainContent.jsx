@@ -100,10 +100,9 @@ function MainContent() {
                 <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
                         <div className="sm:col-span-6">
-                            <h2 className="text-xl font-medium text-blue-gray-900">Profile</h2>
+                            <h2 className="text-xl font-medium text-blue-gray-900">Update Profile</h2>
                             <p className="mt-1 text-sm text-blue-gray-500">
-                                This information will be displayed publicly so be careful what
-                                you share.
+                               By filling out this form you will be able to update your profile.
                             </p>
                         </div>
 

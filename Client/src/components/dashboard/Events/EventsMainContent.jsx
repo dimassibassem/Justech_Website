@@ -112,15 +112,6 @@ function EventsMainContent() {
             </nav>
             <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
                 <h1 className="text-3xl font-extrabold text-blue-gray-900">Events</h1>
-                <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
-                    <div className="sm:col-span-6 py-6">
-                        <h2 className="text-xl font-medium text-blue-gray-900">Profile</h2>
-                        <p className="mt-1 text-sm text-blue-gray-500">
-                            This information will be displayed publicly so be careful what
-                            you share.
-                        </p>
-                    </div>
-                </div>
                 <div className="pb-4">
                     <EventsGrid events={events} setEvents={setEvents} setOpenEditModal={setOpenEditModal}
                                 setEventToEdit={setEventToEdit}/>
@@ -131,8 +122,7 @@ function EventsMainContent() {
                         <div className="sm:col-span-6">
                             <h2 className="text-xl font-medium text-blue-gray-900">Add New Event</h2>
                             <p className="mt-1 text-sm text-blue-gray-500">
-                                This information will be displayed publicly so be careful what
-                                you share.
+                               By adding an event you will be able to add a new event to the website.
                             </p>
                         </div>
 

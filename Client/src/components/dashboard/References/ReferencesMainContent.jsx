@@ -99,10 +99,9 @@ function PartnersMainContent() {
                 <h1 className="text-3xl font-extrabold text-blue-gray-900">References</h1>
                 <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
                     <div className="sm:col-span-6 py-6">
-                        <h2 className="text-xl font-medium text-blue-gray-900">Profile</h2>
+                        <h2 className="text-xl font-medium text-blue-gray-900">Add New Reference</h2>
                         <p className="mt-1 text-sm text-blue-gray-500">
-                            This information will be displayed publicly so be careful what
-                            you share.
+                            By adding a reference you can add a reference to your website.
                         </p>
                     </div>
                 </div>
