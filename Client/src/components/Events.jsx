@@ -106,7 +106,7 @@ function Events() {
                             </div>
                             <div className="pt-5 grid grid-cols-1 place-items-center">
 
-                                <p className="mt-2 block align-middle text-md font-medium text-gray-700 truncate pointer-events-none">
+                                <p className="pl-16 pr-8 mt-2 block align-middle text-md font-medium text-gray-700">
                                     {item.event.description}
                                 </p>
                             </div>
