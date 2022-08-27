@@ -40,6 +40,7 @@ function Events() {
         fetchEvents().catch(err => console.log(err))
     }, [])
     const [maxHeight, setMaxHeight] = useState(0);
+
     useEffect(() => {
         if (arr.length > 0) {
             const mHeight = arr.reduce((acc, curr) => acc > curr.images.length ? acc : curr.images.length

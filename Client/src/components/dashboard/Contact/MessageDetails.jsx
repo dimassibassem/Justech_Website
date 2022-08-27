@@ -76,7 +76,7 @@ export default function MessageDetails({contact}) {
                     ))}
                 </div>
             </nav>
-            <div className=" px-4  pt-8 lg:pt-16  sm:px-6 lg:px-8">
+            <div className=" px-4 pt-8 lg:pt-16  sm:px-6 lg:px-8">
                 <div className="text-lg max-w-prose mx-auto">
                     <h1>
 

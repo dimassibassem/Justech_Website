@@ -60,7 +60,7 @@ function MainContent() {
     }
 
     return (
-        <div className="flex-1 h-screen xl:overflow-y-auto">
+        <div className="flex-1 w-[20vh] xl:overflow-y-auto">
 
             <nav
                 aria-label="Sections"
@@ -70,14 +70,14 @@ function MainContent() {
                     className="h-16 px-6 border-b border-blue-gray-200 flex items-center">
                     <p className="text-lg font-medium text-blue-gray-900">Settings</p>
                 </div>
-                <div className="flex px-4 w-screen flex-row overflow-y-auto">
+                <div className="flex items-center justify-between px-4 overflow-x-auto border-b border-blue-gray-200">
                     {subNavigation.map((item) => (
                         <Link
                             key={item.name}
                             href={item.href}
                             className={classNames(
                                 item.current ? 'bg-blue-50 bg-opacity-50' : 'hover:bg-blue-50 hover:bg-opacity-50',
-                                'flex p-6 border-b border-blue-gray-200'
+                                'flex p-6 '
                             )}
                             aria-current={item.current ? 'page' : undefined}
                             onClick={() => {
