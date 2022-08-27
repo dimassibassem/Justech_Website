@@ -20,12 +20,14 @@ function Events() {
 
     const fetchEvents = async () => {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
-        setEvents(res.data)
+        const sorted = res.data
+        sorted.sort((a, b) => new Date(b.date) - new Date(a.date))
+        setEvents(sorted)
     }
 
     const arr = [];
-    events.map(event =>
 
+    events.map(event =>
         arr?.push({
             event,
             images: event.images.map(img => ({
@@ -110,7 +112,6 @@ function Events() {
                                     {item.event.description}
                                 </p>
                             </div>
-
 
                             <div className="mb-8"/>
                         </SwiperSlide>

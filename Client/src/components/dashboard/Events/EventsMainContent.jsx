@@ -22,7 +22,9 @@ function EventsMainContent() {
     const [existError, setExistError] = useState(false);
     const fetchEvents = async () => {
         const result = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
-        setEvents(result.data);
+        const sorted = result.data
+        sorted.sort((a, b) => new Date(b.date) - new Date(a.date))
+        setEvents(sorted);
     }
     const token = useLocalStorage(store => store.token);
     const handleSubmit = async (e) => {
@@ -122,7 +124,7 @@ function EventsMainContent() {
                         <div className="sm:col-span-6">
                             <h2 className="text-xl font-medium text-blue-gray-900">Add New Event</h2>
                             <p className="mt-1 text-sm text-blue-gray-500">
-                               By adding an event you will be able to add a new event to the website.
+                                By adding an event you will be able to add a new event to the website.
                             </p>
                         </div>
 
