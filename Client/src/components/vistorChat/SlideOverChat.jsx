@@ -31,7 +31,7 @@ function SignIn() {
                 </div>
             </div>
             <button
-                className="rounded-full bg-blue-500 hover:text-lg hover:bg-blue-700 p-1 hover:text-white"
+                className="rounded-full bg-blue-500 hover:bg-blue-700 p-1 text-white"
                 type="button" onClick={signInWithGoogle}>Sign in with Google
             </button>
             <div/>
@@ -42,7 +42,7 @@ function SignIn() {
 
 function SignOut() {
     return auth.currentUser && (
-        <button type="button" className="rounded-full bg-red-500 hover:bg-red-700 p-2 hover:text-white"
+        <button type="button" className="rounded-full bg-red-500 hover:bg-red-700 p-2 text-white"
                 onClick={() => auth.signOut()}>Sign Out</button>
     )
 }
