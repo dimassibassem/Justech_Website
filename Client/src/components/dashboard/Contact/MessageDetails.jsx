@@ -96,19 +96,19 @@ export default function MessageDetails({contact}) {
                         <dl className="grid grid-cols-2 gap-x-4 gap-y-8">
                             <div className="border-t-2 border-gray-100 pt-6">
                                 <dt className="text-base font-medium text-gray-500">Phone:</dt>
-                                <dd className="text-3xl font-extrabold tracking-tight text-gray-900">{contact.phone}</dd>
+                                <dd className="text-base font-extrabold tracking-tight text-gray-900">{contact.phone}</dd>
                             </div>
                             <div className="border-t-2 border-gray-100 pt-6">
                                 <dt className="text-base font-medium text-gray-500">Email:</dt>
-                                <dd className="text-3xl font-extrabold tracking-tight text-gray-900">{contact.email}</dd>
+                                <dd className="text-base font-extrabold tracking-tight text-gray-900">{contact.email}</dd>
                             </div>
                             <div className="border-t-2 border-gray-100 pt-6">
                                 <dt className="text-base font-medium text-gray-500">Address:</dt>
-                                <dd className="text-3xl font-extrabold tracking-tight text-gray-900">{contact.address}</dd>
+                                <dd className="text-base font-extrabold tracking-tight text-gray-900">{contact.address}</dd>
                             </div>
                             <div className="border-t-2 border-gray-100 pt-6">
                                 <dt className="text-base font-medium text-gray-500">Company:</dt>
-                                <dd className="text-3xl font-extrabold tracking-tight text-gray-900">{contact.company}</dd>
+                                <dd className="text-base font-extrabold tracking-tight text-gray-900">{contact.company}</dd>
                             </div>
                         </dl>
                     </div>
