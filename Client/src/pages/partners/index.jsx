@@ -5,6 +5,7 @@ import {Header} from '@/components/Header'
 import {Footer} from '@/components/Footer'
 import {useStore} from "@/store";
 import Blog from "@/components/partners/Blog";
+import StickyButton from "@/components/vistorChat/StickyButton";
 
 
 function Index() {
@@ -26,7 +27,7 @@ function Index() {
                     content='Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and hope you don’t get audited.'
                 />
             </Head>
-
+            <StickyButton/>
             <div className='bg-gray-100'>
                 <Header/>
             </div>

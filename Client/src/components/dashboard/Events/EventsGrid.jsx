@@ -1,15 +1,15 @@
-import {useEffect, useId, useState} from "react";
-import ImageGallery from "react-image-gallery";
-import "node_modules/react-image-gallery/styles/css/image-gallery.css";
-import {Swiper, SwiperSlide} from "swiper/react";
-import 'swiper/css'
+import {useId} from "react";
 import 'swiper/css/autoplay'
-import {Scrollbar} from 'swiper'
-import "swiper/css/scrollbar";
 import axios from "axios";
 import {PencilAltIcon, TrashIcon} from "@heroicons/react/solid";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Scrollbar, Navigation, Pagination, Autoplay} from 'swiper'
 import {Button} from "@/components/Button";
 import {useLocalStorage} from "@/store";
+import 'swiper/css'
+import 'swiper/css/pagination'
+import "swiper/css/scrollbar";
+import "swiper/css/navigation";
 
 export default function EventsGrid({events, setEvents, setOpenEditModal, setEventToEdit}) {
     const id = useId()
@@ -42,41 +42,55 @@ export default function EventsGrid({events, setEvents, setOpenEditModal, setEven
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/Event/all`)
         setEvents(res.data)
     }
-    const [maxHeight, setMaxHeight] = useState(0);
-    useEffect(() => {
-        if (arr.length > 0) {
-            const mHeight = arr.reduce((acc, curr) => acc > curr.images.length ? acc : curr.images.length
-                , 0)
-            setMaxHeight(mHeight * 100)
-        }
-    }, [events]);
 
     return (
         <Swiper
-            spaceBetween={60}
             slidesPerView={2}
+            spaceBetween={50}
             modules={[Scrollbar]}
-            autoplay
             scrollbar={{
                 hide: false,
                 draggable: true,
             }}
         >
-
-            {arr?.map((item, i) => (
-
+            {arr.map((item, i) => (
                 <SwiperSlide key={`${id + i}`}>
+                    <Swiper
+                        slidesPerView={1}
+                        navigation
+                        loop
+                        autoplay={{
+                            delay: 2500,
+                            disableOnInteraction: false,
+                        }}
+                        pagination={{
+                            clickable: true,
+                        }}
+                        modules={[Navigation, Pagination, Autoplay]}
+                        spaceBetween={10}
+                        allowTouchMove={false}
+                        className="mySwiper2"
+                    >
+                        {item.images.map((elem, j) => (
+                            <SwiperSlide key={`${id + j + i * arr.length}`}>
+                                <div
+                                    className="shadow-md group block w-full aspect-w-10 aspect-h-4 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                                    <img
+                                        src={item.images[j].original}
+                                        alt=""
+                                        className=" pointer-events-none group-hover:opacity-75"/>
 
-                    <ImageGallery items={item.images} thumbnailPosition="bottom"
-                                  additionalClass={`h-[${maxHeight - 50}px]`}/>
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
                     <div className="grid grid-cols-2 gap-x-4">
                         <p
-                            className="mt-2 block  text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.eventName}</p>
+                            className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.eventName}</p>
                         <p
-                            className="mt-2 block  text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.date}</p>
+                            className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{item.event.date}</p>
 
                     </div>
-
                     <div className="grid grid-cols-2">
                         <Button
                             className="mt-5 text-gray-100 bg-green-600 w-full hover:bg-green-900 hover:text-white"

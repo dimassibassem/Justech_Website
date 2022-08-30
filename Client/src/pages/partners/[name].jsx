@@ -5,6 +5,7 @@ import Head from "next/head";
 import {Header} from "@/components/Header";
 import {Footer} from "@/components/Footer";
 import SinglePartner from "@/components/dashboard/Partners/SinglePartner";
+import StickyButton from "@/components/vistorChat/StickyButton";
 
 
 const partner = () => {
@@ -33,7 +34,7 @@ const partner = () => {
             <div className='bg-gray-100'>
                 <Header/>
             </div>
-
+            <StickyButton/>
             {desiredPartner ?
                 <>
                     <main>

@@ -3,6 +3,7 @@ import Head from 'next/head'
 import {Header} from '@/components/Header'
 import {Footer} from '@/components/Footer'
 import JustechInfo from "@/components/JustechInfo";
+import StickyButton from "@/components/vistorChat/StickyButton";
 
 function About() {
     return (
@@ -22,6 +23,7 @@ function About() {
             </div>
             <main>
                 <JustechInfo/>
+                <StickyButton/>
             </main>
             <div className='bg-gray-100'><Footer/></div>
         </div>

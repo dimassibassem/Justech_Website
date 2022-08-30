@@ -4,6 +4,7 @@ import axios from "axios";
 import {Header} from '@/components/Header'
 import {Footer} from '@/components/Footer'
 import {useStore} from "@/store";
+import StickyButton from "@/components/vistorChat/StickyButton";
 
 function References() {
     const references = useStore(store => store.references);
@@ -29,7 +30,7 @@ function References() {
             </Head>
 
             <div className='bg-gray-100'><Header/></div>
-
+            <StickyButton/>
             <main>
                 <ul role="list"
                     className="px-8 lg:px-[5rem] lg:px-[8rem] py-20 grid grid-cols-2 gap-x-[3rem] gap-y-8 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 md:gap-x-[10rem] md:gap-y-[4rem]  xl:gap-x-[13rem] xl:gap-y-[6rem]">

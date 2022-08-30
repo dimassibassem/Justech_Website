@@ -3,6 +3,7 @@ import Head from "next/head";
 import {Header} from "@/components/Header";
 import BusinessSolutions from "@/components/e-business solutions/BusinessSolutions";
 import {Footer} from "@/components/Footer";
+import StickyButton from "@/components/vistorChat/StickyButton";
 
 function businessSolution() {
     return (
@@ -17,6 +18,7 @@ function businessSolution() {
             <div className='bg-gray-100'><Header/></div>
             <main>
                 <BusinessSolutions/>
+                <StickyButton/>
             </main>
             <Footer/>
         </div>

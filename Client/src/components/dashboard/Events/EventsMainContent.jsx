@@ -17,6 +17,7 @@ function EventsMainContent() {
         link: "",
         location: "",
     });
+
     const [openEditModal, setOpenEditModal] = useState(false);
     const [eventToEdit, setEventToEdit] = useState({});
     const [existError, setExistError] = useState(false);

@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import ContactSection from '@/components/ContactSection'
+import StickyButton from "@/components/vistorChat/StickyButton";
 
 
 function Contact() {
@@ -20,6 +21,7 @@ function Contact() {
       </div>
       <main>
         <ContactSection />
+        <StickyButton/>
       </main>
       <div className='bg-gray-100'><Footer /></div>
 

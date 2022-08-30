@@ -3,6 +3,7 @@ import Head from "next/head";
 import {Header} from "@/components/Header";
 import {Footer} from "@/components/Footer";
 import EventsPageContent from "@/components/Events/EventsPageContent";
+import StickyButton from "@/components/vistorChat/StickyButton";
 
 function EventsPage() {
     return (
@@ -16,6 +17,7 @@ function EventsPage() {
                 />
             </Head>
             <div className='bg-gray-100'><Header/></div>
+            <StickyButton/>
             <main>
                 <EventsPageContent/>
             </main>

@@ -1,4 +1,3 @@
-
 import { GlobeAltIcon } from '@heroicons/react/solid'
 
 
@@ -52,7 +51,7 @@ export default function SinglePartner({partner}) {
                                 </div>
                                 <figcaption className="mt-3 flex text-sm text-gray-500">
                                     <GlobeAltIcon className="ml-1 flex-none w-6 h-6 text-gray-400" aria-hidden="true" />
-                                    <a href={`${partner.link}`} className="ml-2 text-base text-blue-600 hover:text-blue-800">Company website</a>
+                                    <a href={`${partner.link}`} className="ml-2 text-base text-blue-600 hover:text-blue-800">{partner.link}</a>
                                 </figcaption>
                             </figure>
                         </div>

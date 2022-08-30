@@ -1,18 +1,15 @@
-import React, {useEffect, useId, useState} from 'react';
+import React, {useEffect, useId} from 'react';
 import Image from "next/future/image";
 import axios from "axios";
-import {Autoplay, Scrollbar} from 'swiper'
+import {Scrollbar, Navigation, Pagination, Autoplay} from 'swiper'
 import {Swiper, SwiperSlide} from "swiper/react";
-import ImageGallery from "react-image-gallery";
 import background from "@/images/background-faqs.webp";
 import {Container} from "@/components/Container";
 import {useStore} from "@/store";
-
-import "node_modules/react-image-gallery/styles/css/image-gallery.css";
 import 'swiper/css'
-import 'swiper/css/autoplay'
+import 'swiper/css/pagination'
 import "swiper/css/scrollbar";
-
+import "swiper/css/navigation";
 
 function Events() {
     const events = useStore(state => state.events)
@@ -24,7 +21,6 @@ function Events() {
         sorted.sort((a, b) => new Date(b.date) - new Date(a.date))
         setEvents(sorted)
     }
-
     const arr = [];
 
     events.map(event =>
@@ -39,24 +35,14 @@ function Events() {
     useEffect(() => {
         fetchEvents().catch(err => console.log(err))
     }, [])
-    const [maxHeight, setMaxHeight] = useState(0);
 
-    useEffect(() => {
-        if (arr.length > 0) {
-            const mHeight = arr.reduce((acc, curr) => acc > curr.images.length ? acc : curr.images.length
-                , 0)
-            setMaxHeight(mHeight * 100)
-        }
-    }, [events]);
 
     for (let i = 0; i < events.length; i += 1) {
         for (let j = 0; j < events[i].images.length; j += 1) {
             events[i].images[j] = `${events[i].images[j]}`.indexOf(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/wwwroot/Uploads/Events/`) === -1 ? `${process.env.NEXT_PUBLIC_API_ENDPOINT}/wwwroot/Uploads/Events/${events[i].images[j]}` : events[i].images[j];
         }
     }
-
     const id = useId()
-
     return (
         <section
             id='get-started-today'
@@ -71,10 +57,10 @@ function Events() {
                 alt=''
                 unoptimized
             />
-            <Container className='relative'>
+            <Container className="relative">
 
                 <div className='mx-auto max-w-xl text-center pb-10'>
-                    <h2 className='font-display text-3xl tracking-tight text-gray-700  sm:text-4xl'>
+                    <h2 className='font-display text-3xl tracking-tight text-gray-700 sm:text-4xl'>
                         Events
                     </h2>
                     <p className='mt-4 text-lg tracking-tight text-black '>
@@ -82,15 +68,10 @@ function Events() {
                         ipsum dolor sit amet consectetur adipisicing elit.
                         ipsum dolor sit amet consectetur adipisicing elit.
                     </p>
-
                 </div>
-
-
                 <Swiper
-                    spaceBetween={40}
                     slidesPerView={1}
-                    modules={[Autoplay, Scrollbar]}
-                    autoplay
+                    modules={[Scrollbar]}
                     scrollbar={{
                         hide: false,
                         draggable: true,
@@ -98,9 +79,35 @@ function Events() {
                 >
                     {arr.map((item, i) => (
                         <SwiperSlide key={`${id + i}`}>
+                            <Swiper
+                                slidesPerView={1}
+                                navigation
+                                loop
+                                autoplay={{
+                                    delay: 2500,
+                                    disableOnInteraction: false,
+                                }}
+                                pagination={{
+                                    clickable: true,
+                                }}
+                                modules={[Navigation, Pagination, Autoplay]}
+                                spaceBetween={10}
+                                allowTouchMove={false}
+                                className="mySwiper2"
+                            >
+                                {item.images.map((elem, j) => (
+                                    <SwiperSlide key={`${id + j + i * arr.length}`}>
+                                        <div
+                                            className="shadow-md group block w-full aspect-w-10 aspect-h-4 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                                            <img
+                                                src={item.images[j].original}
+                                                alt=""
+                                                className=" pointer-events-none group-hover:opacity-75"/>
 
-                            <ImageGallery items={item.images} thumbnailPosition="left"
-                                          additionalClass={`h-[${maxHeight - 50}px]`}/>
+                                        </div>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
                             <div className="pt-5 grid grid-cols-2 gap-x-4 place-items-center ">
                                 <p
                                     className=" mt-2 block text-md font-medium text-gray-700 truncate pointer-events-none">{item.event.eventName}</p>
