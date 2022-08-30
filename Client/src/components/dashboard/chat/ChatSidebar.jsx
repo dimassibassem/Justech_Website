@@ -27,11 +27,10 @@ function ChatSidebar() {
                         key={item.uid}
                         href={`/dashboard/chat/${item.from}`}
                         className='hover:bg-blue-50 hover:bg-opacity-50 flex p-6 border-b border-blue-gray-200'
-                        aria-current={item.current ? 'page' : undefined}
                     >
                         <div className="grid grid-cols-2 gap-4 ml-3 text-sm">
                             <img className="rounded-full shadow-xl w-16 h-16" src={item.photoURL} alt=""
-                                 loading="lazy"/>
+                                 referrerPolicy="no-referrer"/>
                             <div className>
                                 <p className="font-medium text-blue-gray-900">{item.displayName}</p>
                                 <p className="mt-1 text-blue-gray-500">{item.text}</p>
